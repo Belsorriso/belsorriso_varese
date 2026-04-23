@@ -37,21 +37,25 @@ function Footer() {
               <EditableText page="footer" section="company1" field="city" tag="p" defaultValue="21100 Varese" />
               <EditableText page="footer" section="company1" field="piva" tag="p" defaultValue="P.IVA 02087850125" />
 
-              {/* Codici CIN */}
-              <p className="company-name" style={{ marginTop: '20px' }}>Codici CIN delle Strutture</p>
-              <EditableText page="footer" section="cin" field="cin1name" tag="p" defaultValue="• Foresteria Belsorriso Happi" />
-              <EditableText page="footer" section="cin" field="cin1" tag="p" defaultValue="CIN: IT012133B4I9KHS63N" />
-              <EditableText page="footer" section="cin" field="cin2name" tag="p" defaultValue="• Casa e Appartamenti per Vacanze Belsorriso" />
-              <EditableText page="footer" section="cin" field="cin2" tag="p" defaultValue="CIN: IT012133B4ZUUYL2CK" />
-              <EditableText page="footer" section="cin" field="cin3name" tag="p" defaultValue="• Belsorriso Foresteria Lombarda" />
-              <EditableText page="footer" section="cin" field="cin3" tag="p" defaultValue="CIN: IT012133B45H2APG6U" />
-
               {/* Happi Day SRL */}
               <EditableText page="footer" section="company2" field="name" tag="p" className="company-name" style={{ marginTop: '20px' }} defaultValue="HAPPI DAY SRL" />
               <EditableText page="footer" section="company2" field="address1" tag="p" defaultValue="Sede Legale: P.za Motta, 6" />
               <EditableText page="footer" section="company2" field="address2" tag="p" defaultValue="Sede Operativa: P.za Biroldi, 7" />
               <EditableText page="footer" section="company2" field="city" tag="p" defaultValue="21100 Varese" />
               <EditableText page="footer" section="company2" field="piva" tag="p" defaultValue="Partita IVA 03645460126" />
+            </div>
+          </EditableSection>
+
+          <EditableSection label="Codici CIN">
+            <div className="footer-col">
+              <h4>Codici CIN delle Strutture</h4>
+              <div className="footer-divider"></div>
+              <EditableText page="footer" section="cin" field="cin1name" tag="p" defaultValue="• Foresteria Belsorriso Happi" />
+              <EditableText page="footer" section="cin" field="cin1" tag="p" defaultValue="CIN: IT012133B4I9KHS63N" />
+              <EditableText page="footer" section="cin" field="cin2name" tag="p" style={{ marginTop: '10px' }} defaultValue="• Casa e Appartamenti per Vacanze Belsorriso" />
+              <EditableText page="footer" section="cin" field="cin2" tag="p" defaultValue="CIN: IT012133B4ZUUYL2CK" />
+              <EditableText page="footer" section="cin" field="cin3name" tag="p" style={{ marginTop: '10px' }} defaultValue="• Belsorriso Foresteria Lombarda" />
+              <EditableText page="footer" section="cin" field="cin3" tag="p" defaultValue="CIN: IT012133B45H2APG6U" />
             </div>
           </EditableSection>
 
