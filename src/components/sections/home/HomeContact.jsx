@@ -28,7 +28,6 @@ function HomeContact() {
               <EditableText page="home" section="contactCta" field="label1" tag="h3" defaultValue="Telefono" />
               <EditableText page="home" section="contact" field="phone1" tag="p" defaultValue="+39 0332 830744" />
               <EditableText page="home" section="contact" field="phone2" tag="p" defaultValue="+39 342 1895829" />
-              <EditableText page="home" section="contact" field="phone3" tag="p" defaultValue="+39 342 1818610" />
             </div>
 
             <div className="contact-card">
