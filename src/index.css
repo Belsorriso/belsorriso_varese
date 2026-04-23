@@ -154,7 +154,7 @@ img {
   height: 70vh;
   min-height: 500px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   text-align: center;
   color: var(--white);
@@ -178,6 +178,7 @@ img {
   z-index: 1;
   max-width: 800px;
   padding: 20px;
+  padding-bottom: 60px;
 }
 
 .hero h1 {
