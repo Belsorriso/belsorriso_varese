@@ -1,4 +1,39 @@
+import { useState } from 'react';
 import { EditableText, EditableSection, EditableList } from '../../editable';
+
+const areaRelaxImages = [
+  '/images/area-relax/1-IMG_6626.jpg',
+  '/images/area-relax/2-IMG_6625.jpg',
+  '/images/area-relax/3-IMG_6624.jpg',
+  '/images/area-relax/4-IMG_6622.jpg',
+];
+
+function AreaRelaxGallery() {
+  const [current, setCurrent] = useState(0);
+  return (
+    <div style={{ position: 'relative', marginBottom: '20px', borderRadius: '8px', overflow: 'hidden' }}>
+      <img
+        src={areaRelaxImages[current]}
+        alt={`Area Relax ${current + 1}`}
+        style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }}
+      />
+      {areaRelaxImages.length > 1 && (
+        <>
+          <button onClick={() => setCurrent((p) => (p - 1 + areaRelaxImages.length) % areaRelaxImages.length)}
+            style={{ position: 'absolute', left: 8, top: '50%', transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.4)', color: '#fff', border: 'none', borderRadius: '50%', width: 32, height: 32, cursor: 'pointer', fontSize: 16 }}>‹</button>
+          <button onClick={() => setCurrent((p) => (p + 1) % areaRelaxImages.length)}
+            style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.4)', color: '#fff', border: 'none', borderRadius: '50%', width: 32, height: 32, cursor: 'pointer', fontSize: 16 }}>›</button>
+          <div style={{ position: 'absolute', bottom: 8, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 6 }}>
+            {areaRelaxImages.map((_, i) => (
+              <span key={i} onClick={() => setCurrent(i)}
+                style={{ width: 8, height: 8, borderRadius: '50%', background: i === current ? '#fff' : 'rgba(255,255,255,0.5)', cursor: 'pointer', display: 'block' }} />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
 const defaultDotazioni = [
   { text: 'Riscaldamento autonomo (termosifoni + split condizionatore)' },
@@ -165,6 +200,7 @@ function StrutturaMain() {
           <div className="content-relax">
             <EditableSection label="Area Relax">
               <h2>Area Relax</h2>
+              <AreaRelaxGallery />
               <p style={{ color: 'var(--text-light)', marginBottom: '12px' }}>
                 Area comune a disposizione degli ospiti delle camere, pensata per offrire comfort e praticità durante il soggiorno. L'area dispone di:
               </p>
