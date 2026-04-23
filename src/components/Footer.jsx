@@ -29,111 +29,29 @@ function Footer() {
               />
               <div className="footer-divider"></div>
 
-              <EditableText
-                page="footer"
-                section="company1"
-                field="name"
-                tag="p"
-                className="company-name"
-                defaultValue="Select di Pecchio Nicolo"
-              />
-              <EditableText
-                page="footer"
-                section="company1"
-                field="address1"
-                tag="p"
-                defaultValue="Piazza Biroldi, 8"
-              />
-              <EditableText
-                page="footer"
-                section="company1"
-                field="address2"
-                tag="p"
-                defaultValue="21100 – Varese (VA) – Italia"
-              />
-              <EditableText
-                page="footer"
-                section="company1"
-                field="piva"
-                tag="p"
-                defaultValue="P. IVA 02087850125"
-              />
-              <EditableText
-                page="footer"
-                section="company1"
-                field="cin"
-                tag="p"
-                defaultValue="CIN IT012133B45H2APG6U"
-              />
+              {/* Select di Pecchio Nicolò */}
+              <EditableText page="footer" section="company1" field="name" tag="p" className="company-name" defaultValue="Select di Pecchio Nicolò" />
+              <EditableText page="footer" section="company1" field="brand" tag="p" defaultValue="BelSorrisoVarese" />
+              <EditableText page="footer" section="company1" field="address1" tag="p" defaultValue="Sede Legale: Piazza Biroldi, 8" />
+              <EditableText page="footer" section="company1" field="address2" tag="p" defaultValue="Sede Operativa: Piazza Biroldi, 20" />
+              <EditableText page="footer" section="company1" field="city" tag="p" defaultValue="21100 Varese" />
+              <EditableText page="footer" section="company1" field="piva" tag="p" defaultValue="P.IVA 02087850125" />
 
-              <EditableText
-                page="footer"
-                section="company2"
-                field="name"
-                tag="p"
-                className="company-name"
-                style={{ marginTop: '20px' }}
-                defaultValue="Happi Day srl"
-              />
-              <EditableText
-                page="footer"
-                section="company2"
-                field="address1"
-                tag="p"
-                defaultValue="Piazza Biroldi, 8"
-              />
-              <EditableText
-                page="footer"
-                section="company2"
-                field="address2"
-                tag="p"
-                defaultValue="21100 – Varese (VA) – Italia"
-              />
-              <EditableText
-                page="footer"
-                section="company2"
-                field="piva"
-                tag="p"
-                defaultValue="P. IVA 02964020123"
-              />
-              <EditableText
-                page="footer"
-                section="company2"
-                field="cin"
-                tag="p"
-                defaultValue="CIN IT012133B4I9KHS63N"
-              />
+              {/* Codici CIN */}
+              <p className="company-name" style={{ marginTop: '20px' }}>Codici CIN delle Strutture</p>
+              <EditableText page="footer" section="cin" field="cin1name" tag="p" defaultValue="• Foresteria Belsorriso Happi" />
+              <EditableText page="footer" section="cin" field="cin1" tag="p" defaultValue="CIN: IT012133B4I9KHS63N" />
+              <EditableText page="footer" section="cin" field="cin2name" tag="p" defaultValue="• Casa e Appartamenti per Vacanze Belsorriso" />
+              <EditableText page="footer" section="cin" field="cin2" tag="p" defaultValue="CIN: IT012133B4ZUUYL2CK" />
+              <EditableText page="footer" section="cin" field="cin3name" tag="p" defaultValue="• Belsorriso Foresteria Lombarda" />
+              <EditableText page="footer" section="cin" field="cin3" tag="p" defaultValue="CIN: IT012133B45H2APG6U" />
 
-              <EditableText
-                page="footer"
-                section="company3"
-                field="name"
-                tag="p"
-                className="company-name"
-                style={{ marginTop: '20px' }}
-                defaultValue="Happi Cav"
-              />
-              <EditableText
-                page="footer"
-                section="company3"
-                field="cin"
-                tag="p"
-                defaultValue="CIN IT012133B4ZUUYL2CK"
-              />
-              <EditableText
-                page="footer"
-                section="company3"
-                field="code1"
-                tag="p"
-                defaultValue="012133-CIM-00013"
-              />
-              <EditableText
-                page="footer"
-                section="company3"
-                field="code2"
-                tag="p"
-                defaultValue="012133-CIM-00011"
-              />
+              {/* Happi Day SRL */}
+              <EditableText page="footer" section="company2" field="name" tag="p" className="company-name" style={{ marginTop: '20px' }} defaultValue="HAPPI DAY SRL" />
+              <EditableText page="footer" section="company2" field="address1" tag="p" defaultValue="Sede Legale: P.za Motta, 6" />
+              <EditableText page="footer" section="company2" field="address2" tag="p" defaultValue="Sede Operativa: P.za Biroldi, 7" />
+              <EditableText page="footer" section="company2" field="city" tag="p" defaultValue="21100 Varese" />
+              <EditableText page="footer" section="company2" field="piva" tag="p" defaultValue="Partita IVA 03645460126" />
             </div>
           </EditableSection>
 
