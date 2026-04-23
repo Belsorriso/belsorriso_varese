@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { EditableText, EditableSection, EditableList } from '../../editable';
 import { RoomGallery, getSlug } from './stanzeHelpers';
 
-const DEFAULT_APT_FEATURES = 'Bagno privato\nAngolo cottura\nAria condizionata\nWi-Fi gratuito';
+const DEFAULT_APT_FEATURES = 'Bagno privato\nAngolo cottura\nRiscaldamento (termosifoni + split condizionatore)\nTV Smart 32"\nLavatrice\nWi-Fi gratuito';
+const SUITE_MONO8_FEATURES = 'Bagno privato\nAngolo cottura\nRiscaldamento (termosifoni + split condizionatore)\nTV Smart 32"\nWi-Fi gratuito';
 
 const defaultAppartamenti = [
   { nome: 'Bilo 1B Comfort', tipo: 'Bilocale', descrizione: 'Quarto piano', mq: '58 m²', features: DEFAULT_APT_FEATURES },
@@ -13,7 +14,7 @@ const defaultAppartamenti = [
   { nome: 'Mono 3', tipo: 'Monolocale', descrizione: 'Piano terra', mq: '45 m²', features: DEFAULT_APT_FEATURES },
   { nome: 'Mono 4', tipo: 'Monolocale', descrizione: 'Primo piano', mq: '45 m²', features: DEFAULT_APT_FEATURES },
   { nome: 'Mono 7', tipo: 'Monolocale', descrizione: 'Secondo piano', mq: '45 m²', features: DEFAULT_APT_FEATURES },
-  { nome: 'Suite Mono 8', tipo: 'Monolocale', descrizione: 'Primo piano', mq: '33 m²', features: DEFAULT_APT_FEATURES },
+  { nome: 'Suite Mono 8', tipo: 'Monolocale', descrizione: 'Primo piano', mq: '33 m²', features: SUITE_MONO8_FEATURES },
   { nome: 'Trilocale Superior 9', tipo: 'Trilocale', descrizione: 'Secondo piano', mq: '', features: DEFAULT_APT_FEATURES },
 ];
 

@@ -1,8 +1,8 @@
 import { EditableText, EditableSection, EditableList } from '../../editable';
 
 const defaultDotazioni = [
-  { text: 'Riscaldamento autonomo e aria condizionata' },
-  { text: 'Televisore LCD 24" a parete' },
+  { text: 'Riscaldamento autonomo (termosifoni + split condizionatore)' },
+  { text: 'TV Smart 32" a parete' },
   { text: 'Connessione wireless ADSL gratuita' },
   { text: 'Cassaforte e frigorifero' },
   { text: 'Bagno privato con set asciugamani, asciugacapelli, bagno schiuma e shampoo' },
@@ -11,16 +11,15 @@ const defaultDotazioni = [
 ];
 
 const defaultServizi = [
-  { text: 'Servizio navetta aeroporto/stazioni fino a 100 km da Varese' },
-  { text: 'Angolo relax con bevande e biscotti' },
   { text: 'Accoglienza animali di piccola taglia' },
-  { text: 'Connessione wireless sempre attiva' }
 ];
 
 const defaultPagamenti = [
   { text: 'Contanti' },
   { text: 'Bonifico Bancario' },
   { text: 'Carte di Credito' },
+  { text: 'Satispay' },
+  { text: 'PayPal' },
 ];
 
 const defaultContatti = [
@@ -96,15 +95,6 @@ function StrutturaMain() {
 
               <EditableText
                 page="struttura"
-                section="capacita"
-                field="text"
-                tag="p"
-                defaultValue="Capacita: 2 persone adulte (family room disponibile su richiesta)"
-                style={{ marginTop: '20px' }}
-              />
-
-              <EditableText
-                page="struttura"
                 section="serviziAggiuntivi"
                 field="title"
                 tag="h3"
@@ -141,8 +131,8 @@ function StrutturaMain() {
                 tag="h3"
                 defaultValue="Supplementi e Condizioni"
               />
-              <EditableText page="struttura" section="supplementi" field="bambini" tag="p" defaultValue="Bambini fino a 3 anni: soggiorno gratuito con lettini disponibili" />
-              <EditableText page="struttura" section="supplementi" field="tassa" tag="p" defaultValue="Tassa di soggiorno: 1 euro a notte per persona (dal 2018)" />
+              <EditableText page="struttura" section="supplementi" field="bambini" tag="p" defaultValue="Bambini fino a 3 anni: soggiorno gratuito con lettini e culle disponibili" />
+              <EditableText page="struttura" section="supplementi" field="tassa" tag="p" defaultValue="Tassa di soggiorno: 1 euro a notte per adulti" />
               <EditableText page="struttura" section="supplementi" field="soggiorni" tag="p" defaultValue="Soggiorni lunghi: offerte speciali disponibili su richiesta" />
 
               <EditableText

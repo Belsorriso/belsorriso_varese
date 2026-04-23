@@ -3,15 +3,19 @@ import { EditableText, EditableSection, EditableList } from '../../editable';
 const defaultRegole = [
   {
     title: 'Divieto di Fumo',
-    text: "E' vietato fumare in tutte le camere e negli spazi comuni interni. E' consentito fumare nel cortile o sul balcone del primo piano."
+    text: "È vietato fumare in tutte le camere e negli spazi comuni interni. È consentito fumare nel cortile o sui balconi delle camere e degli appartamenti."
   },
   {
     title: 'Colazione',
-    text: 'La colazione e disponibile in convenzione con il Bar della Corte con due opzioni: colazione italiana tradizionale (bevanda calda, cornetto, succo) oppure continentale (bevanda calda, toast, succo).'
+    text: 'La colazione è disponibile in convenzione con il Bar della Corte con due opzioni: colazione italiana tradizionale (bevanda calda, cornetto, succo) oppure continentale (bevanda calda, toast, succo).'
+  },
+  {
+    title: 'Pulizia',
+    text: 'Nelle camere la pulizia viene effettuata ogni giorno. Negli appartamenti la pulizia viene effettuata una volta a settimana per soggiorni più lunghi di 1 settimana.'
   },
   {
     title: 'Camere e Servizi',
-    text: 'Le stanze includono bagno privato, asciugamani e biancheria rinnovati ogni tre giorni, asciugacapelli e prodotti per la doccia. Ogni camera dispone di una cassaforte.'
+    text: 'Le stanze includono bagno privato, asciugamani e biancheria rinnovati periodicamente, asciugacapelli e prodotti per la doccia. Ogni camera dispone di una cassaforte.'
   },
   {
     title: 'Custodia Effetti Personali',
@@ -19,11 +23,11 @@ const defaultRegole = [
   },
   {
     title: 'Check-in',
-    text: 'Il check-in e previsto dalle 8:00 alle 13:00. Orari diversi possono essere concordati preventivamente contattandoci.'
+    text: "Il check-in è previsto dalle 14:00 alle 19:00. È possibile eseguire il check-in fuori dagli orari previsti, fino alla mezzanotte, contattandoci preventivamente."
   },
   {
     title: 'Check-out',
-    text: 'Il check-out deve essere effettuato entro le 10:30. Per la pulizia giornaliera, la camera deve restare libera entro le 11:00.'
+    text: 'Il check-out deve essere effettuato entro le 10:30. Per la pulizia, la camera deve restare libera entro le 11:00.'
   }
 ];
 
@@ -75,7 +79,7 @@ function RegolamentoContent() {
               section="pagamenti"
               field="text"
               tag="p"
-              defaultValue="Contanti (entro i limiti di legge) - Bonifici bancari anticipati - Carte di credito"
+              defaultValue="Contanti (entro i limiti di legge) - Bonifici bancari anticipati - Carte di credito - Satispay - PayPal"
             />
           </div>
         </EditableSection>
@@ -100,7 +104,6 @@ function RegolamentoContent() {
                 <EditableText page="regolamento" section="contattiSection" field="icon2" tag="div" className="icon" defaultValue="📱" />
                 <EditableText page="regolamento" section="contattiSection" field="label2" tag="h3" defaultValue="Cellulari" />
                 <EditableText page="regolamento" section="contatti" field="cell1" tag="p" defaultValue="+39 342 1895829" />
-                <EditableText page="regolamento" section="contatti" field="cell2" tag="p" defaultValue="+39 342 1818610" />
               </div>
               <div className="contact-card">
                 <EditableText page="regolamento" section="contattiSection" field="icon3" tag="div" className="icon" defaultValue="📧" />

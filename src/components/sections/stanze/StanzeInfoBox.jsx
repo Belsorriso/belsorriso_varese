@@ -2,9 +2,9 @@ import { EditableText, EditableSection, EditableList } from '../../editable';
 
 const defaultInfoItems = [
   { icon: '📶', title: 'ADSL Gratuito', description: 'Connessione Wi-Fi in tutte le stanze' },
-  { icon: '🚗', title: 'Parcheggio', description: 'Parcheggio pubblico disponibile nelle vicinanze' },
-  { icon: '🐶', title: 'Animali', description: 'Accettiamo animali di piccola taglia' },
-  { icon: '🚭', title: 'No Fumo', description: 'Vietato fumare nelle camere' },
+  { icon: '🚗', title: 'Parcheggio', description: 'Parcheggio privato a pagamento disponibile' },
+  { icon: '🐶', title: 'Accoglienza animali', description: 'Accettiamo animali di piccola taglia' },
+  { icon: '🚭', title: 'No Fumo', description: 'Vietato fumare nelle camere e negli spazi comuni. È consentito fumare nei balconi delle camere e degli appartamenti.' },
 ];
 
 function StanzeInfoBox() {

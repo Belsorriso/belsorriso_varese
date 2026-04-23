@@ -11,6 +11,8 @@ const defaultPagamenti = [
   { text: 'Contanti' },
   { text: 'Bonifico Bancario' },
   { text: 'Carte di Credito' },
+  { text: 'Satispay' },
+  { text: 'PayPal' },
 ];
 
 function ContattiDetails() {
@@ -43,7 +45,6 @@ function ContattiDetails() {
                 <div>
                   <EditableText page="contatti" section="main" field="label3" tag="h3" defaultValue="Cellulari" />
                   <EditableText page="contatti" section="info" field="cell1" tag="p" defaultValue="+39 342 18 95 829" />
-                  <EditableText page="contatti" section="info" field="cell2" tag="p" defaultValue="+39 342 18 18 610" />
                 </div>
               </div>
 
@@ -111,7 +112,7 @@ function ContattiDetails() {
                 field="text"
                 tag="p"
                 multiline
-                defaultValue="Nella zona sono disponibili parcheggio pubblico a 2,00 euro al giorno e numerosi servizi come bar, farmacia, supermercato e banca."
+                defaultValue="Nella zona sono disponibili numerosi servizi come bar, farmacia, supermercato e banca."
                 style={{ marginTop: '15px', color: '#666' }}
               />
             </EditableSection>

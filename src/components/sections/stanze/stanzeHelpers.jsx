@@ -26,14 +26,14 @@ export function getSlug(nome) {
 }
 
 export const roomImageMap = {
-  'Bordeaux': { folder: 'bordeaux', count: 6 },
+  'Bordeaux': { folder: 'lilla', count: 9 },
   'Azzurra': { folder: 'azzura', count: 8 },
   'Rossa': { folder: 'rosso', count: 6 },
   'Arancio': { folder: 'arancio', count: 8 },
   'Blu': { folder: 'blu', count: 8 },
   'Avorio': { folder: 'avorio', count: 6 },
   'Verde': { folder: 'verde', count: 7 },
-  'Lilla A': { folder: 'lilla', count: 9 },
+  'Lilla A': { folder: 'bordeaux', count: 6 },
   'Lilla B': { folder: 'lillab', count: 7 },
   'Bilo 1B Comfort': { folder: 'bilo1b', count: 5 },
   'Bilo 2': { folder: 'bilo2', count: 7 },
