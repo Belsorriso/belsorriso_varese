@@ -155,7 +155,7 @@ function ContattiDetails() {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Mappa BelSorriso Varese"
+              title="Mappa BelSorrisoVarese"
             ></iframe>
           </div>
         </div>

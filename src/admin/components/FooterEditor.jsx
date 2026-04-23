@@ -139,7 +139,7 @@ function FooterEditor() {
                 ...content,
                 azienda: { ...content.azienda, nome: e.target.value }
               })}
-              placeholder="Es: BelSorriso Varese S.r.l."
+              placeholder="Es: BelSorrisoVarese S.r.l."
             />
           </div>
 
@@ -255,7 +255,7 @@ function FooterEditor() {
               type="text"
               value={content.copyright || ''}
               onChange={(e) => setContent({ ...content, copyright: e.target.value })}
-              placeholder="Es: © 2024 BelSorriso Varese. Tutti i diritti riservati."
+              placeholder="Es: © 2024 BelSorrisoVarese. Tutti i diritti riservati."
             />
             <small className="field-help">
               Usa {'{year}'} per inserire l'anno corrente automaticamente.

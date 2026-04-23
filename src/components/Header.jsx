@@ -11,7 +11,7 @@ function Header() {
     <header className="header">
       <div className="header-container">
         <Link to="/" className="logo">
-          <img src="/images/main_logo-178x100.png" alt="BelSorriso Varese - Home" />
+          <img src="/images/main_logo-178x100.png" alt="BelSorrisoVarese - Home" />
         </Link>
 
         <button

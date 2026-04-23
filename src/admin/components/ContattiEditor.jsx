@@ -118,7 +118,7 @@ function ContattiEditor() {
                 ...content,
                 info: { ...content.info, nome: e.target.value }
               })}
-              placeholder="Es: BelSorriso Varese"
+              placeholder="Es: BelSorrisoVarese"
             />
           </div>
 

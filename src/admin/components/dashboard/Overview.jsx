@@ -29,7 +29,7 @@ function Overview() {
     <div className="overview-container">
       <div className="welcome-section">
         <h2>Benvenuto nel Pannello di Controllo</h2>
-        <p>Gestisci i contenuti del sito BelSorriso Varese da qui.</p>
+        <p>Gestisci i contenuti del sito BelSorrisoVarese da qui.</p>
       </div>
 
       <div className="stats-grid">

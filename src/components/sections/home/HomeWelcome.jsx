@@ -11,7 +11,7 @@ function HomeWelcome() {
                 page="home"
                 section="welcome"
                 field="image"
-                alt="BelSorriso Varese - La struttura"
+                alt="BelSorrisoVarese - La struttura"
                 defaultValue="/images/belsorriso_house_1.png"
               />
             </div>
@@ -21,7 +21,7 @@ function HomeWelcome() {
                 section="welcome"
                 field="title"
                 tag="h2"
-                defaultValue="Benvenuti a BelSorriso Varese"
+                defaultValue="Benvenuti a BelSorrisoVarese"
               />
               <EditableText
                 page="home"
