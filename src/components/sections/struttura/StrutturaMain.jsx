@@ -164,7 +164,7 @@ function StrutturaMain() {
 
           <div className="content-relax">
             <EditableSection label="Area Relax">
-              <h3>Area Relax</h3>
+              <h2>Area Relax</h2>
               <p style={{ color: 'var(--text-light)', marginBottom: '12px' }}>
                 Area comune a disposizione degli ospiti delle camere, pensata per offrire comfort e praticità durante il soggiorno. L'area dispone di:
               </p>
