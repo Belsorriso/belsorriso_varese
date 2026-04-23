@@ -57,13 +57,13 @@ export const imageFiles = {
   verde: ['1-IMG_4012.jpg', '2-IMG_4017.jpg', '3-IMG_4045.jpg', '4-IMG_4049.jpg', '5-IMG_4053.jpg', '6-IMG_4059.jpg', '7-IMG_4063.jpg'],
   lilla: ['1-IMG_9378.jpg', '2-IMG_9379.jpg', '3-IMG_9386.jpg', '4-IMG_9390.jpg', '5-IMG_9392.jpg', '6-IMG_9393.jpg', '7-IMG_9394.jpg', '8-IMG_9397.jpg', '9-IMG_9412.jpg'],
   lillab: ['1-IMG_0831.jpg', '2-IMG_0833.jpg', '3-IMG_0836.jpg', '4-IMG_0838.jpg', '5-IMG_0839.jpg', '6-IMG_0841.jpg', '7-IMG_0850.jpg'],
-  bilo1b: ['592029791.jpg', '592029793.jpg', '592029794.jpg', 'bf9b3d58-e5e7-4fa4-a2ea-70470d047810.avif', 'e36bbf53-cc85-43be-8bec-a17a3c9d9983.avif'],
-  mono4e7: ['1-IMG_0167.jpg', '2-IMG_0171.jpg', '3-IMG_0175.jpg', '4-IMG_0176.jpg', '5-IMG_0178.jpg', '6-IMG_0180.jpg', '7-IMG_0182.jpg', '8-IMG_0184.jpg'],
+  bilo1b: ['592029793.jpg', '592029791.jpg', '592029794.jpg', 'bf9b3d58-e5e7-4fa4-a2ea-70470d047810.avif', 'e36bbf53-cc85-43be-8bec-a17a3c9d9983.avif'],
+  mono4e7: ['3-IMG_0175.jpg', '1-IMG_0167.jpg', '2-IMG_0171.jpg', '4-IMG_0176.jpg', '5-IMG_0178.jpg', '6-IMG_0180.jpg', '7-IMG_0182.jpg', '8-IMG_0184.jpg'],
   suitemono8: ['1-IMG_5169.jpg', '2-IMG_5172.jpg', '3-IMG_5174.jpg', '4-IMG_5175.jpg', '5-IMG_5190.jpg', '6-IMG_5192.jpg', '7-IMG_5193.jpg', '8-IMG_5199.jpg'],
-  bilo2: ['1-IMG_0739.jpg', '2-IMG_0740.jpg', '3-IMG_0745.jpg', '4-IMG_0749.jpg', '5-IMG_0750.jpg', '6-IMG_0753.jpg', '7-IMG_0754.jpg'],
+  bilo2: ['3-IMG_0745.jpg', '1-IMG_0739.jpg', '2-IMG_0740.jpg', '4-IMG_0749.jpg', '5-IMG_0750.jpg', '6-IMG_0753.jpg', '7-IMG_0754.jpg'],
   bilo5: ['1-IMG_4739.jpg', '2-IMG_4752.jpg', '3-IMG_5230.jpg', '4-IMG_5232.jpg', '5-IMG_5235.jpg', '6-IMG_5240.jpg', '7-IMG_5241.jpg', '8-IMG_5243.jpg'],
-  bilo6: ['1-IMG_1935.jpg', '2-IMG_1937.jpg', '3-IMG_1943.jpg', '4-IMG_1944.jpg', '5-IMG_1948.jpg', '6-IMG_1949.jpg'],
-  bilo8: ['1-IMG_0784.jpg', '2-IMG_0786.jpg', '3-IMG_0787.jpg', '4-IMG_0788.jpg', '5-IMG_0790.jpg', '6-IMG_0792.jpg', '7-IMG_0794.jpg', '8-IMG_0802.jpg', '9-IMG_0803.jpg', '10-IMG_0809.jpg'],
+  bilo6: ['2-IMG_1937.jpg', '1-IMG_1935.jpg', '3-IMG_1943.jpg', '4-IMG_1944.jpg', '5-IMG_1948.jpg', '6-IMG_1949.jpg'],
+  bilo8: ['3-IMG_0787.jpg', '1-IMG_0784.jpg', '2-IMG_0786.jpg', '4-IMG_0788.jpg', '5-IMG_0790.jpg', '6-IMG_0792.jpg', '7-IMG_0794.jpg', '8-IMG_0802.jpg', '9-IMG_0803.jpg', '10-IMG_0809.jpg'],
   trilo9: ['1-IMG_5150.jpg', '2-IMG_5154.jpg', '3-IMG_5156.jpg', '4-IMG_5158.jpg', '5-IMG_5160.jpg', '6-IMG_5163.jpg', '7-IMG_5164.jpg', '8-IMG_5165.jpg', '9-IMG_5166.jpg'],
 };
 
