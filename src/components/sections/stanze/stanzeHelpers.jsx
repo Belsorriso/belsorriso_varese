@@ -26,7 +26,7 @@ export function getSlug(nome) {
 }
 
 export const roomImageMap = {
-  'Bordeaux': { folder: 'lilla', count: 9 },
+  'Bordeaux': { folder: 'bordeaux', count: 6 },
   'Azzurra': { folder: 'azzura', count: 8 },
   'Rossa': { folder: 'rosso', count: 6 },
   'Arancio': { folder: 'arancio', count: 8 },
