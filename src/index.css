@@ -409,8 +409,12 @@ img {
 
 .content-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 60px;
+  grid-template-columns: 2fr 1.5fr 1fr;
+  gap: 40px;
+}
+
+.content-relax {
+  height: fit-content;
 }
 
 .content-main h2 {
