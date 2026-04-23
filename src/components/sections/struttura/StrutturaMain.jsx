@@ -11,7 +11,7 @@ const defaultDotazioni = [
 ];
 
 const defaultServizi = [
-  { text: 'Accoglienza animali di piccola taglia' },
+  { text: 'Accoglienza animali' },
 ];
 
 const defaultPagamenti = [
