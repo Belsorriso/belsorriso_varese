@@ -1,5 +1,9 @@
 import { EditableText, EditableSection, EditableList } from '../../editable';
 
+const linkStyle = { color: 'var(--primary-color)', textDecoration: 'underline' };
+const listItemStyle = { padding: '6px 0', paddingLeft: '20px', position: 'relative', color: 'var(--text-light)' };
+const dotStyle = { position: 'absolute', left: 0, color: 'var(--primary-color)' };
+
 const defaultCategorie = [
   {
     title: 'Natura e Spiritualita',
@@ -47,6 +51,38 @@ function TerritorioContent() {
               tag="p"
               defaultValue="Varese offre numerose opportunita per cultura, natura e sport"
             />
+          </div>
+        </EditableSection>
+
+        <EditableSection label="Riferimenti Turistici">
+          <div style={{ margin: '40px 0 30px' }}>
+            <h3 style={{ marginBottom: '16px' }}>Riferimenti Turistici Utili</h3>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={listItemStyle}>
+                <span style={dotStyle}>›</span>
+                <a href="https://www.in-lombardia.it/" target="_blank" rel="noopener noreferrer" style={linkStyle}>In Lombardia</a>
+                {' – portale turistico della Regione Lombardia'}
+              </li>
+              <li style={listItemStyle}>
+                <span style={dotStyle}>›</span>
+                <a href="https://www.varesedoyoulake.it/it/infopoint" target="_blank" rel="noopener noreferrer" style={linkStyle}>Varese DoYouLake Infopoint</a>
+                {' – informazioni turistiche su Varese e dintorni'}
+              </li>
+            </ul>
+          </div>
+        </EditableSection>
+
+        <EditableSection label="Posizione">
+          <div style={{ margin: '0 0 40px' }}>
+            <h3 style={{ marginBottom: '16px' }}>Nelle Vicinanze</h3>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={listItemStyle}><span style={dotStyle}>✓</span>A 60 mt dall'Ospedale Filippo Del Ponte</li>
+              <li style={listItemStyle}><span style={dotStyle}>✓</span>A 350 mt dall'Ospedale di Circolo e Fondazione Macchi</li>
+              <li style={listItemStyle}><span style={dotStyle}>✓</span>Università dell'Insubria a pochi minuti a piedi</li>
+              <li style={listItemStyle}><span style={dotStyle}>✓</span>250 mt dalle stazioni ferroviarie</li>
+              <li style={listItemStyle}><span style={dotStyle}>✓</span>4 minuti a piedi dal centro</li>
+              <li style={listItemStyle}><span style={dotStyle}>✓</span>20 mt dalla fermata autobus</li>
+            </ul>
           </div>
         </EditableSection>
 
