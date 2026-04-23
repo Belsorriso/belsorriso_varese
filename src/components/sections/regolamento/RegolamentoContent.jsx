@@ -10,12 +10,8 @@ const defaultRegole = [
     text: 'La colazione è disponibile in convenzione con il Bar della Corte con due opzioni: colazione italiana tradizionale (bevanda calda, cornetto, succo) oppure continentale (bevanda calda, toast, succo).'
   },
   {
-    title: 'Pulizia',
-    text: 'Nelle camere la pulizia viene effettuata ogni giorno. Negli appartamenti la pulizia viene effettuata una volta a settimana per soggiorni più lunghi di 1 settimana.'
-  },
-  {
     title: 'Camere e Servizi',
-    text: 'Le stanze includono bagno privato, asciugamani e biancheria rinnovati periodicamente, asciugacapelli e prodotti per la doccia. Ogni camera dispone di una cassaforte.'
+    text: 'Le stanze includono bagno privato, asciugamani e biancheria rinnovati ogni tre giorni, asciugacapelli e prodotti per la doccia. Ogni camera dispone di una cassaforte. Nelle camere la pulizia viene effettuata ogni giorno e negli appartamenti una volta a settimana per soggiorni più lunghi di 1 settimana.'
   },
   {
     title: 'Custodia Effetti Personali',
