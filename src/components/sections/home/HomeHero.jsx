@@ -5,7 +5,7 @@ function HomeHero() {
     <EditableSection label="Hero">
       <section
         className="hero"
-        style={{ backgroundImage: 'url(/images/Your-paragraph-text.png)' }}
+        style={{ backgroundImage: 'url(/images/hero-bg.png)' }}
       >
         <div className="hero-content">
           <EditableText
