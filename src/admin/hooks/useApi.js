@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react';
-
-const API_BASE = 'http://localhost:5001/api';
+import { API_URL as API_BASE } from '../../config/api';
 
 export function useApi() {
   const [loading, setLoading] = useState(false);

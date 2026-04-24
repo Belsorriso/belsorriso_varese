@@ -1,9 +1,8 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 import { useAuth } from '../admin/context/AuthContext';
+import { API_URL } from '../config/api';
 
 const EditModeContext = createContext(null);
-
-const API_URL = 'http://localhost:5001/api';
 
 export function EditModeProvider({ children }) {
   const { user, getToken } = useAuth();

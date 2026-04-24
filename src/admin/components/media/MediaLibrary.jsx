@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import useApi from '../../hooks/useApi';
+import { API_BASE_URL } from '../../../config/api';
 
 function MediaLibrary({ onSelect, selectionMode = false }) {
   const [media, setMedia] = useState([]);
@@ -162,7 +163,7 @@ function MediaLibrary({ onSelect, selectionMode = false }) {
               >
                 <div className="media-thumbnail">
                   <img
-                    src={`http://localhost:5001${item.url}`}
+                    src={`${API_BASE_URL}${item.url}`}
                     alt={item.alt || item.originalName}
                     loading="lazy"
                   />
@@ -177,7 +178,7 @@ function MediaLibrary({ onSelect, selectionMode = false }) {
           <div className="media-sidebar">
             <div className="media-preview">
               <img
-                src={`http://localhost:5001${selectedMedia.url}`}
+                src={`${API_BASE_URL}${selectedMedia.url}`}
                 alt={selectedMedia.alt || selectedMedia.originalName}
               />
             </div>
@@ -227,7 +228,7 @@ function MediaLibrary({ onSelect, selectionMode = false }) {
                 <label>URL</label>
                 <input
                   type="text"
-                  value={`http://localhost:5001${selectedMedia.url}`}
+                  value={`${API_BASE_URL}${selectedMedia.url}`}
                   readOnly
                   onClick={(e) => {
                     e.target.select();

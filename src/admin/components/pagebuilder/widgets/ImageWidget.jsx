@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import useApi from '../../../hooks/useApi';
+import { API_BASE_URL } from '../../../../config/api';
 
 function ImageWidget({ settings, onChange }) {
   const [uploading, setUploading] = useState(false);
@@ -19,7 +20,7 @@ function ImageWidget({ settings, onChange }) {
       const data = await api.upload('/media/upload', file);
       onChange({
         ...settings,
-        src: `http://localhost:5001${data.url}`,
+        src: `${API_BASE_URL}${data.url}`,
         alt: settings.alt || data.alt || file.name,
       });
     } catch (err) {

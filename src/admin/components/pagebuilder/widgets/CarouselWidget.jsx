@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import useApi from '../../../hooks/useApi';
+import { API_BASE_URL } from '../../../../config/api';
 
 function CarouselWidget({ settings, onChange }) {
   const [uploading, setUploading] = useState(false);
@@ -21,7 +22,7 @@ function CarouselWidget({ settings, onChange }) {
       const uploaded = [];
       for (const file of files) {
         const data = await api.upload('/media/upload', file);
-        uploaded.push({ url: `http://localhost:5001${data.url}`, alt: data.alt || file.name });
+        uploaded.push({ url: `${API_BASE_URL}${data.url}`, alt: data.alt || file.name });
       }
       onChange({ ...settings, images: [...images, ...uploaded] });
     } catch (err) {

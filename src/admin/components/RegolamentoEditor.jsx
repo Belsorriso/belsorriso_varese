@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import ArrayEditor from './common/ArrayEditor';
+import { API_URL } from '../../config/api';
 
 function RegolamentoEditor() {
   const [loading, setLoading] = useState(true);
@@ -19,7 +20,7 @@ function RegolamentoEditor() {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/content/regolamento');
+      const response = await fetch('${API_URL}/content/regolamento');
       if (response.ok) {
         const data = await response.json();
         setContent(prev => ({ ...prev, ...data }));
@@ -36,7 +37,7 @@ function RegolamentoEditor() {
     setMessage(null);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5001/api/content/regolamento/${section}`, {
+      const response = await fetch(`${API_URL}/content/regolamento/${section}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

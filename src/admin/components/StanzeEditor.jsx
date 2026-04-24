@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import ArrayEditor from './common/ArrayEditor';
+import { API_URL } from '../../config/api';
 
 function StanzeEditor() {
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ function StanzeEditor() {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/content/stanze');
+      const response = await fetch('${API_URL}/content/stanze');
       if (response.ok) {
         const data = await response.json();
         setContent(prev => ({ ...prev, ...data }));
@@ -35,7 +36,7 @@ function StanzeEditor() {
     setMessage(null);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5001/api/content/stanze/${section}`, {
+      const response = await fetch(`${API_URL}/content/stanze/${section}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

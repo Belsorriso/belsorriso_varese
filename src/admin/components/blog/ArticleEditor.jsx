@@ -3,6 +3,7 @@ import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import useApi from '../../hooks/useApi';
 import MediaLibrary from '../media/MediaLibrary';
+import { API_BASE_URL } from '../../../config/api';
 
 function ArticleEditor({ articleId, onSave, onCancel }) {
   const [article, setArticle] = useState({
@@ -201,7 +202,7 @@ function ArticleEditor({ articleId, onSave, onCancel }) {
             {article.featuredImage ? (
               <div className="featured-image-preview">
                 <img
-                  src={`http://localhost:5001${article.featuredImage}`}
+                  src={`${API_BASE_URL}${article.featuredImage}`}
                   alt="Immagine in evidenza"
                 />
                 <button

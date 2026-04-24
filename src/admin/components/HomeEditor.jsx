@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { API_URL } from '../../config/api';
 
 function HomeEditor() {
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,7 @@ function HomeEditor() {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/content/home');
+      const response = await fetch('${API_URL}/content/home');
       if (response.ok) {
         const data = await response.json();
         if (data.length > 0) {
@@ -39,7 +40,7 @@ function HomeEditor() {
     setMessage(null);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5001/api/content/home/${section}`, {
+      const response = await fetch(`${API_URL}/content/home/${section}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

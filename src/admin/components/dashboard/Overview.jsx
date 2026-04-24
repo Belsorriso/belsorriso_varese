@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import useApi from '../../hooks/useApi';
+import { API_BASE_URL } from '../../../config/api';
 
 function Overview() {
   const [stats, setStats] = useState(null);
@@ -101,7 +102,7 @@ function Overview() {
               {stats.recentMedia.map(item => (
                 <div key={item._id} className="recent-media-item">
                   <img
-                    src={`http://localhost:5001${item.url}`}
+                    src={`${API_BASE_URL}${item.url}`}
                     alt={item.originalName}
                     loading="lazy"
                   />

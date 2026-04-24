@@ -20,7 +20,7 @@ import RowEditor, { buildDefaultColumns } from './RowEditor';
 import { DEFAULT_BUILDER_DATA } from '../../../components/pagebuilder/defaultBuilderData';
 import './pagebuilder.css';
 
-const API_BASE = 'http://localhost:5001/api';
+import { API_URL as API_BASE } from '../../../config/api';
 
 const PAGES = [
   { id: 'home', label: 'Home Page' },

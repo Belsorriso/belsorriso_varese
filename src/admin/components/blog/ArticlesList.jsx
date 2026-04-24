@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import useApi from '../../hooks/useApi';
+import { API_BASE_URL } from '../../../config/api';
 
 function ArticlesList({ onEdit, onNew }) {
   const [articles, setArticles] = useState([]);
@@ -144,7 +145,7 @@ function ArticlesList({ onEdit, onNew }) {
                   <div className="article-title-cell">
                     {article.featuredImage && (
                       <img
-                        src={`http://localhost:5001${article.featuredImage}`}
+                        src={`${API_BASE_URL}${article.featuredImage}`}
                         alt=""
                         className="article-thumbnail"
                       />

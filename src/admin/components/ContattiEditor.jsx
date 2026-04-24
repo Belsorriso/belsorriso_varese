@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { API_URL } from '../../config/api';
 
 function ContattiEditor() {
   const [loading, setLoading] = useState(true);
@@ -35,7 +36,7 @@ function ContattiEditor() {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/content/contatti');
+      const response = await fetch('${API_URL}/content/contatti');
       if (response.ok) {
         const data = await response.json();
         setContent(prev => ({ ...prev, ...data }));
@@ -52,7 +53,7 @@ function ContattiEditor() {
     setMessage(null);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5001/api/content/contatti/${section}`, {
+      const response = await fetch(`${API_URL}/content/contatti/${section}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

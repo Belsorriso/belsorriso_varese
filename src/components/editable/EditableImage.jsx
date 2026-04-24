@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useEditMode } from '../../context/EditModeContext';
 import { useContent } from '../../hooks/useContent';
 import MediaLibrary from '../../admin/components/media/MediaLibrary';
+import { API_BASE_URL } from '../../config/api';
 
 function EditableImage({
   page,
@@ -20,7 +21,7 @@ function EditableImage({
   const currentValue = getField(section, field, defaultValue);
   const imageUrl = currentValue.startsWith('http') ? currentValue :
                    currentValue.startsWith('/') ? currentValue :
-                   `http://localhost:5001${currentValue}`;
+                   `${API_BASE_URL}${currentValue}`;
 
   const handleClick = (e) => {
     if (isEditMode && isAdmin) {
@@ -31,7 +32,7 @@ function EditableImage({
   };
 
   const handleSelect = (media) => {
-    const url = `http://localhost:5001${media.url}`;
+    const url = `${API_BASE_URL}${media.url}`;
     updateField(section, field, url);
     setShowMediaLibrary(false);
   };

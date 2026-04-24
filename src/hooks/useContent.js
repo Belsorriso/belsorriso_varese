@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useEditMode } from '../context/EditModeContext';
-
-const API_URL = 'http://localhost:5001/api';
+import { API_URL } from '../config/api';
 
 export function useContent(page) {
   const [content, setContent] = useState({});
