@@ -10,7 +10,8 @@ const stanzeData = {
     mq: '21 m²',
     piano: 'Primo piano',
     descrizione: 'La Bordeaux è una camera calda e avvolgente, perfetta per coppie che desiderano un soggiorno intimo e rilassante nel cuore di Varese. I suoi toni profondi creano un\'atmosfera accogliente, ideale per staccare dopo una giornata di lavoro o di scoperta della città.\n\nDispone di letto matrimoniale (convertibile in due letti singoli su richiesta), bagno privato con doccia e set di cortesia, Smart TV da 32", Wi-Fi ad alta velocità, aria condizionata e riscaldamento autonomo, piccolo frigorifero, cassaforte, macchina per caffè e tè con biscotti di cortesia.\n\nLa struttura è insonorizzata e pet friendly, per permettere a tutta la famiglia di viaggiare insieme.',
-    immagini: ['1-IMG_9562.jpg', '2-IMG_9572.jpg', '3-IMG_9574.jpg', '4-IMG_9577.jpg', '5-IMG_9583.jpg', '6-IMG_9584_jpg.jpg'],
+    immagini: ['1-IMG_9378.jpg', '2-IMG_9379.jpg', '3-IMG_9386.jpg', '4-IMG_9390.jpg', '5-IMG_9392.jpg', '6-IMG_9393.jpg', '7-IMG_9394.jpg', '8-IMG_9397.jpg', '9-IMG_9412.jpg'],
+    folder: 'lilla',
   },
   'azzurra': {
     nome: 'Azzurra',
@@ -60,7 +61,7 @@ const stanzeData = {
     mq: '21 m²',
     piano: 'Secondo piano',
     descrizione: 'Ampia e armoniosa, Avorio è una camera versatile e tranquilla, ideale per famiglie. Dispone di un letto matrimoniale e due letti singoli a castello, offrendo uno spazio comodo e ben distribuito.\n\nLa camera è dotata di bagno privato con doccia e set di cortesia, Smart TV da 32", Wi-Fi ad alta velocità, aria condizionata e riscaldamento autonomo, piccolo frigorifero, cassaforte, macchina per caffè e tè con biscotti di cortesia.\n\nL\'edificio è insonorizzato e pet friendly.',
-    immagini: ['1-IMG_0385.jpg', '2-IMG_0387.jpg', '3-IMG_0392.jpg', '4-IMG_0394.jpg', '5-IMG_0395.jpg', '6-IMG_0397.jpg'],
+    immagini: ['3-IMG_0392.jpg', '4-IMG_0394.jpg', '5-IMG_0395.jpg', '6-IMG_0397.jpg', '2-IMG_0387.jpg', '1-IMG_0385.jpg'],
   },
   // Camere Lilla
   'lilla-a': {
@@ -69,8 +70,8 @@ const stanzeData = {
     mq: '25 m²',
     piano: 'Primo piano',
     descrizione: 'La più spaziosa tra le camere, luminosa e versatile. Lilla A dispone di letto matrimoniale (convertibile in due letti singoli su richiesta) e può essere collegata internamente alla Lilla B tramite porta comunicante, diventando la soluzione ideale per famiglie o gruppi di amici.\n\nInclude bagno privato con doccia e set di cortesia, Smart TV da 32", Wi-Fi ad alta velocità, aria condizionata e riscaldamento autonomo, piccolo frigorifero, cassaforte, macchina per caffè e tè con biscotti di cortesia.\n\nStruttura insonorizzata e pet friendly.',
-    immagini: ['1-IMG_9378.jpg', '2-IMG_9379.jpg', '3-IMG_9386.jpg', '4-IMG_9390.jpg', '5-IMG_9392.jpg', '6-IMG_9393.jpg', '7-IMG_9394.jpg', '8-IMG_9397.jpg', '9-IMG_9412.jpg'],
-    folder: 'lilla',
+    immagini: ['1-IMG_9562.jpg', '2-IMG_9572.jpg', '3-IMG_9574.jpg', '4-IMG_9577.jpg', '5-IMG_9583.jpg', '6-IMG_9584_jpg.jpg'],
+    folder: 'bordeaux',
   },
   'lilla-b': {
     nome: 'Lilla B',
