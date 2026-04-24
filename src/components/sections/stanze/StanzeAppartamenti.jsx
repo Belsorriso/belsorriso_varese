@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { EditableText, EditableSection, EditableList } from '../../editable';
 import { RoomGallery, getSlug } from './stanzeHelpers';
 
-const DEFAULT_APT_FEATURES = 'Bagno privato\nAngolo cottura\nRiscaldamento (termosifoni + split condizionatore)\nTV Smart 32"\nLavatrice\nWi-Fi gratuito';
-const SUITE_MONO8_FEATURES = 'Bagno privato\nAngolo cottura\nRiscaldamento (termosifoni + split condizionatore)\nTV Smart 32"\nWi-Fi gratuito';
+const DEFAULT_APT_FEATURES = 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nLavatrice\nWi-Fi gratuito';
+const SUITE_MONO8_FEATURES = 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito';
 
 const defaultAppartamenti = [
   { nome: 'Bilo 1B Comfort', tipo: 'Bilocale', descrizione: 'Quarto piano', mq: '58 m²', features: DEFAULT_APT_FEATURES },
