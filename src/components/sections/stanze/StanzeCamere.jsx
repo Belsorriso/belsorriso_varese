@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { EditableText, EditableSection, EditableList } from '../../editable';
 import { RoomGallery, getSlug } from './stanzeHelpers';
 
-const DEFAULT_CAMERA_FEATURES = 'Bagno privato con doccia\nRiscaldamento (termosifoni + split condizionatore)\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero';
+const DEFAULT_CAMERA_FEATURES = 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero';
 
 const defaultCamere = [
   { nome: 'Bordeaux', tipo: 'Camera', capacita: 'Da 1 a 4 ospiti', codice: '012133-FOR-00015', features: DEFAULT_CAMERA_FEATURES },

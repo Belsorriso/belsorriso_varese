@@ -7,7 +7,7 @@ const defaultRegole = [
   },
   {
     title: 'Colazione',
-    text: 'La colazione è disponibile in convenzione con il Bar della Corte con due opzioni: colazione italiana tradizionale (bevanda calda, cornetto, succo) oppure continentale (bevanda calda, toast, succo).'
+    text: 'La colazione è disponibile a pagamento in convenzione con i bar situati nella piazza pedonale di fronte alla struttura, con opzione di colazione tipica italiana.'
   },
   {
     title: 'Camere e Servizi',

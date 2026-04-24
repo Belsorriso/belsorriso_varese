@@ -26,14 +26,14 @@ export function getSlug(nome) {
 }
 
 export const roomImageMap = {
-  'Bordeaux': { folder: 'bordeaux', count: 6 },
+  'Bordeaux': { folder: 'lilla', count: 9 },
   'Azzurra': { folder: 'azzura', count: 8 },
   'Rossa': { folder: 'rosso', count: 6 },
   'Arancio': { folder: 'arancio', count: 8 },
   'Blu': { folder: 'blu', count: 8 },
   'Avorio': { folder: 'avorio', count: 6 },
   'Verde': { folder: 'verde', count: 7 },
-  'Lilla A': { folder: 'lilla', count: 9 },
+  'Lilla A': { folder: 'bordeaux', count: 6 },
   'Lilla B': { folder: 'lillab', count: 7 },
   'Bilo 1B Comfort': { folder: 'bilo1b', count: 5 },
   'Bilo 2': { folder: 'bilo2', count: 7 },
@@ -53,7 +53,7 @@ export const imageFiles = {
   rosso: ['1-IMG_1016.jpg', '2-IMG_1019.jpg', '3-IMG_1022.jpg', '4-IMG_1025.jpg', '5-IMG_1030.jpg', '6-IMG_1035.jpg'],
   arancio: ['1-IMG_0496.jpg', '2-IMG_0507.jpg', '3-IMG_0517.jpg', '4-IMG_0519.jpg', '5-IMG_0523.jpg', '6-IMG_0526.jpg', '7-IMG_0530.jpg', '8-IMG_0532.jpg'],
   blu: ['1-IMG_0270.jpg', '2-IMG_0271.jpg', '3-IMG_0272.jpg', '4-IMG_0277.jpg', '5-IMG_0279.jpg', '6-IMG_0282.jpg', '7-IMG_0290.jpg', '8-IMG_0296.jpg'],
-  avorio: ['1-IMG_0385.jpg', '2-IMG_0387.jpg', '3-IMG_0392.jpg', '4-IMG_0394.jpg', '5-IMG_0395.jpg', '6-IMG_0397.jpg'],
+  avorio: ['3-IMG_0392.jpg', '4-IMG_0394.jpg', '5-IMG_0395.jpg', '6-IMG_0397.jpg', '2-IMG_0387.jpg', '1-IMG_0385.jpg'],
   verde: ['1-IMG_4012.jpg', '2-IMG_4017.jpg', '3-IMG_4045.jpg', '4-IMG_4049.jpg', '5-IMG_4053.jpg', '6-IMG_4059.jpg', '7-IMG_4063.jpg'],
   lilla: ['1-IMG_9378.jpg', '2-IMG_9379.jpg', '3-IMG_9386.jpg', '4-IMG_9390.jpg', '5-IMG_9392.jpg', '6-IMG_9393.jpg', '7-IMG_9394.jpg', '8-IMG_9397.jpg', '9-IMG_9412.jpg'],
   lillab: ['1-IMG_0831.jpg', '2-IMG_0833.jpg', '3-IMG_0836.jpg', '4-IMG_0838.jpg', '5-IMG_0839.jpg', '6-IMG_0841.jpg', '7-IMG_0850.jpg'],
