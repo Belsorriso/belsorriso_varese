@@ -54,7 +54,7 @@ export const imageFiles = {
   arancio: ['1-IMG_0496.jpg', '2-IMG_0507.jpg', '3-IMG_0517.jpg', '4-IMG_0519.jpg', '5-IMG_0523.jpg', '6-IMG_0526.jpg', '7-IMG_0530.jpg', '8-IMG_0532.jpg'],
   blu: ['1-IMG_0270.jpg', '2-IMG_0271.jpg', '3-IMG_0272.jpg', '4-IMG_0277.jpg', '5-IMG_0279.jpg', '6-IMG_0282.jpg', '7-IMG_0290.jpg', '8-IMG_0296.jpg'],
   avorio: ['3-IMG_0392.jpg', '4-IMG_0394.jpg', '5-IMG_0395.jpg', '6-IMG_0397.jpg', '2-IMG_0387.jpg', '1-IMG_0385.jpg'],
-  verde: ['1-IMG_4012.jpg', '2-IMG_4017.jpg', '3-IMG_4045.jpg', '4-IMG_4049.jpg', '5-IMG_4053.jpg', '6-IMG_4059.jpg', '7-IMG_4063.jpg'],
+  verde: ['2-IMG_4017.jpg', '3-IMG_4045.jpg', '4-IMG_4049.jpg', '5-IMG_4053.jpg', '6-IMG_4059.jpg', '7-IMG_4063.jpg', '1-IMG_4012.jpg'],
   lilla: ['1-IMG_9378.jpg', '2-IMG_9379.jpg', '3-IMG_9386.jpg', '4-IMG_9390.jpg', '5-IMG_9392.jpg', '6-IMG_9393.jpg', '7-IMG_9394.jpg', '8-IMG_9397.jpg', '9-IMG_9412.jpg'],
   lillab: ['1-IMG_0831.jpg', '2-IMG_0833.jpg', '3-IMG_0836.jpg', '4-IMG_0838.jpg', '5-IMG_0839.jpg', '6-IMG_0841.jpg', '7-IMG_0850.jpg'],
   bilo1b: ['592029793.jpg', '592029791.jpg', '592029794.jpg', 'bf9b3d58-e5e7-4fa4-a2ea-70470d047810.avif', 'e36bbf53-cc85-43be-8bec-a17a3c9d9983.avif'],
