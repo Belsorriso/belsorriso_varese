@@ -5,7 +5,7 @@ import { RoomGallery, getSlug } from './stanzeHelpers';
 const DEFAULT_CAMERA_FEATURES = 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero';
 
 const defaultCamere = [
-  { nome: 'Bordeaux', tipo: 'Camera', capacita: 'Da 1 a 4 ospiti', codice: '012133-FOR-00015', features: DEFAULT_CAMERA_FEATURES },
+  { nome: 'Bordeaux', tipo: 'Camera', capacita: 'Da 1 a 2 ospiti', codice: '012133-FOR-00015', features: DEFAULT_CAMERA_FEATURES },
   { nome: 'Azzurra', tipo: 'Camera', capacita: 'Da 1 a 4 ospiti', codice: '012133-FOR-00015', features: DEFAULT_CAMERA_FEATURES },
   { nome: 'Rossa', tipo: 'Camera', capacita: 'Da 1 a 2 ospiti', codice: '012133-FOR-00015', features: DEFAULT_CAMERA_FEATURES },
   { nome: 'Arancio', tipo: 'Camera', capacita: 'Da 1 a 3 ospiti', codice: '012133-FOR-00015', features: DEFAULT_CAMERA_FEATURES },
