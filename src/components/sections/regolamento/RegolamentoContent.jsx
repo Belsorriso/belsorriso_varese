@@ -75,7 +75,7 @@ function RegolamentoContent() {
               section="pagamenti"
               field="text"
               tag="p"
-              defaultValue="Contanti (entro i limiti di legge) - Bonifici bancari anticipati - Carte di credito - Satispay - PayPal"
+              defaultValue="Contanti (entro i limiti di legge) - Bonifici bancari anticipati - Carte di credito - Satispay"
             />
           </div>
         </EditableSection>

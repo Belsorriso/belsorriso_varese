@@ -12,7 +12,6 @@ const defaultPagamenti = [
   { text: 'Bonifico Bancario' },
   { text: 'Carte di Credito' },
   { text: 'Satispay' },
-  { text: 'PayPal' },
 ];
 
 function ContattiDetails() {

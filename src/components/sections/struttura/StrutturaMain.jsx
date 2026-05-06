@@ -54,7 +54,6 @@ const defaultPagamenti = [
   { text: 'Bonifico Bancario' },
   { text: 'Carte di Credito' },
   { text: 'Satispay' },
-  { text: 'PayPal' },
 ];
 
 const defaultContatti = [
