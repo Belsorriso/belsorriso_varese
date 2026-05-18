@@ -18,6 +18,8 @@ import { CSS } from '@dnd-kit/utilities';
 import { v4 as uuidv4 } from 'uuid';
 import { useEditMode } from '../../context/EditModeContext';
 import PageBuilderEditor from '../../admin/components/pagebuilder/PageBuilderEditor';
+import ElementPalette from '../../admin/components/pagebuilder/ElementPalette';
+import ElementSettings from '../../admin/components/pagebuilder/ElementSettings';
 import TextRenderer from './widgets/TextRenderer';
 import ImageRenderer from './widgets/ImageRenderer';
 import CodeRenderer from './widgets/CodeRenderer';
@@ -91,9 +93,86 @@ function RowContent({ row }) {
   );
 }
 
+/* ── live inline column editor ── */
+
+function LiveColumnEditor({ column, onUpdateColumn }) {
+  const [showPalette, setShowPalette] = useState(false);
+  const [editingElement, setEditingElement] = useState(null);
+
+  const handleAdd = (type) => {
+    const newEl = { id: uuidv4(), type, settings: {} };
+    const updated = { ...column, elements: [...(column.elements || []), newEl] };
+    onUpdateColumn(updated);
+    setShowPalette(false);
+    setEditingElement(newEl);
+  };
+
+  const handleDelete = (elId) => {
+    onUpdateColumn({ ...column, elements: (column.elements || []).filter(e => e.id !== elId) });
+    if (editingElement?.id === elId) setEditingElement(null);
+  };
+
+  const handleUpdateEl = (updated) => {
+    onUpdateColumn({ ...column, elements: (column.elements || []).map(e => e.id === updated.id ? updated : e) });
+    setEditingElement(updated);
+  };
+
+  return (
+    <div className="pbr-live-col-editor">
+      {(column.elements || []).map(el => (
+        <div key={el.id} className="pbr-live-el-wrapper">
+          <div className="pbr-live-el-actions">
+            <button className="pbr-live-el-btn" onClick={() => setEditingElement(el)} title="Modifica">✏️</button>
+            <button className="pbr-live-el-btn danger" onClick={() => handleDelete(el.id)} title="Elimina">🗑️</button>
+          </div>
+          <ElementRenderer element={el} />
+        </div>
+      ))}
+      <button className="pbr-live-add-el-btn" onClick={() => setShowPalette(true)}>
+        + Aggiungi Elemento
+      </button>
+      {showPalette && <ElementPalette onSelect={handleAdd} onClose={() => setShowPalette(false)} />}
+      {editingElement && (
+        <ElementSettings
+          element={editingElement}
+          onChange={handleUpdateEl}
+          onClose={() => setEditingElement(null)}
+        />
+      )}
+    </div>
+  );
+}
+
+function LiveCustomRowContent({ row, onUpdateRow }) {
+  const settings = row.settings || {};
+  const padding = PADDING_MAP[settings.padding] || PADDING_MAP.normal;
+  const rowStyle = { padding, background: settings.background || undefined };
+  const innerStyle = settings.fullWidth
+    ? {}
+    : { maxWidth: 1200, margin: '0 auto', padding: '0 20px' };
+
+  const handleUpdateColumn = (updatedCol) => {
+    onUpdateRow({ ...row, columns: (row.columns || []).map(c => c.id === updatedCol.id ? updatedCol : c) });
+  };
+
+  return (
+    <div className="pbr-row" style={rowStyle}>
+      <div className="pbr-row-inner" style={innerStyle}>
+        <div className="pbr-columns">
+          {(row.columns || []).map(col => (
+            <div key={col.id} className="pbr-column" style={{ flex: col.width }}>
+              <LiveColumnEditor column={col} onUpdateColumn={handleUpdateColumn} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── live-edit draggable row wrapper ── */
 
-function DraggableRow({ row, onDelete, onEdit }) {
+function DraggableRow({ row, onDelete, onUpdateRow }) {
   const {
     attributes,
     listeners,
@@ -113,7 +192,6 @@ function DraggableRow({ row, onDelete, onEdit }) {
   const sectionEntry = row.type === 'section' ? SECTION_REGISTRY[row.sectionId] : null;
   const label = sectionEntry ? sectionEntry.label : (row.layout ? `Riga — ${row.layout}` : 'Riga');
   const isCustomRow = row.type !== 'section';
-  const isEmpty = isCustomRow && (row.columns || []).every(col => !(col.elements || []).length);
 
   return (
     <div ref={setNodeRef} style={style} className={`pbr-live-row-wrapper ${isDragging ? 'dragging' : ''}`}>
@@ -122,15 +200,6 @@ function DraggableRow({ row, onDelete, onEdit }) {
           ⠿⠿
         </span>
         <span className="pbr-live-row-label">{label}</span>
-        {isCustomRow && (
-          <button
-            className="pbr-live-edit-btn pbr-live-row-edit-btn"
-            onClick={onEdit}
-            title="Modifica contenuto"
-          >
-            ✏️ Modifica
-          </button>
-        )}
         <button
           className="pbr-live-delete-btn"
           onClick={() => onDelete(row.id)}
@@ -139,13 +208,10 @@ function DraggableRow({ row, onDelete, onEdit }) {
           ✕
         </button>
       </div>
-      {isEmpty ? (
-        <div className="pbr-empty-custom-row" onClick={onEdit}>
-          <span>Riga vuota — clicca per aggiungere contenuto</span>
-        </div>
-      ) : (
-        <RowContent row={row} />
-      )}
+      {isCustomRow
+        ? <LiveCustomRowContent row={row} onUpdateRow={onUpdateRow} />
+        : <RowContent row={row} />
+      }
     </div>
   );
 }
@@ -209,8 +275,7 @@ function PageBuilderRenderer({ page }) {
   }, [savedData]);
 
   const isDirty = localRows && savedData
-    ? JSON.stringify(localRows.map(r => r.id)) !== JSON.stringify(savedData.rows.map(r => r.id))
-      || localRows.length !== savedData.rows.length
+    ? JSON.stringify(localRows) !== JSON.stringify(savedData.rows)
     : false;
 
   /* ─ handlers ─ */
@@ -241,6 +306,10 @@ function PageBuilderRenderer({ page }) {
 
   const handleDeleteRow = (rowId) => {
     setLocalRows(prev => prev.filter(r => r.id !== rowId));
+  };
+
+  const handleUpdateRow = (updatedRow) => {
+    setLocalRows(prev => prev.map(r => r.id === updatedRow.id ? updatedRow : r));
   };
 
   const handleSaveLayout = async () => {
@@ -306,7 +375,7 @@ function PageBuilderRenderer({ page }) {
                 onClick={handleSaveLayout}
                 disabled={saving}
               >
-                {saving ? 'Salvataggio...' : '✓ Salva Ordine'}
+                {saving ? 'Salvataggio...' : '✓ Salva'}
               </button>
               <button
                 className="pbr-live-edit-btn secondary"
@@ -337,7 +406,7 @@ function PageBuilderRenderer({ page }) {
               <InsertZone onInsert={() => handleInsertAt(0)} />
               {rows.map((row, index) => (
                 <div key={row.id}>
-                  <DraggableRow row={row} onDelete={handleDeleteRow} onEdit={() => setModalOpen(true)} />
+                  <DraggableRow row={row} onDelete={handleDeleteRow} onUpdateRow={handleUpdateRow} />
                   <InsertZone onInsert={() => handleInsertAt(index + 1)} />
                 </div>
               ))}

@@ -287,32 +287,77 @@
   color: #fef2f2;
 }
 
-.pbr-live-row-edit-btn {
-  padding: 3px 10px;
-  font-size: 12px;
-  margin-right: 4px;
+/* ===== LIVE INLINE COLUMN EDITOR ===== */
+.pbr-live-col-editor {
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-.pbr-empty-custom-row {
-  padding: 24px 20px;
-  text-align: center;
-  background: #f8fafc;
-  border: 2px dashed #cbd5e1;
-  margin: 8px 20px;
-  border-radius: 8px;
+.pbr-live-el-wrapper {
+  position: relative;
+  border: 2px dashed transparent;
+  border-radius: 6px;
+  transition: border-color 0.15s;
+  padding: 4px;
+}
+
+.pbr-live-el-wrapper:hover {
+  border-color: #6366f1;
+}
+
+.pbr-live-el-actions {
+  display: none;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  gap: 4px;
+  z-index: 10;
+}
+
+.pbr-live-el-wrapper:hover .pbr-live-el-actions {
+  display: flex;
+}
+
+.pbr-live-el-btn {
+  padding: 3px 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 4px;
+  font-size: 13px;
   cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   transition: all 0.15s;
 }
 
-.pbr-empty-custom-row:hover {
-  border-color: #ad172b;
-  background: #fff5f6;
+.pbr-live-el-btn:hover {
+  background: #f3f4f6;
 }
 
-.pbr-empty-custom-row span {
+.pbr-live-el-btn.danger:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.pbr-live-add-el-btn {
+  margin-top: 8px;
+  padding: 10px 16px;
+  width: 100%;
+  border: 2px dashed #c4b5fd;
+  border-radius: 8px;
+  background: #f5f3ff;
+  color: #7c3aed;
   font-size: 13px;
-  color: #94a3b8;
-  font-style: italic;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-sizing: border-box;
+}
+
+.pbr-live-add-el-btn:hover {
+  border-color: #7c3aed;
+  background: #ede9fe;
 }
 
 /* ===== INSERT ZONE ===== */
