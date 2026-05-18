@@ -175,9 +175,10 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  background: #f1f5f9 !important;
+  border-bottom: 1px solid #e2e8f0;
   user-select: none;
+  color: #374151 !important;
 }
 
 .pb-drag-handle {
@@ -196,7 +197,7 @@
 .pb-row-label {
   font-size: 12px;
   font-weight: 600;
-  color: #6b7280;
+  color: #374151 !important;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   flex: 1;
@@ -328,7 +329,7 @@
   flex: 1;
   padding: 12px;
   border-right: 1px dashed #e5e7eb;
-  min-height: 80px;
+  min-height: 120px;
   position: relative;
 }
 
@@ -337,12 +338,17 @@
 }
 
 .pb-column-drop-zone {
-  min-height: 50px;
-  border: 2px dashed transparent;
-  border-radius: 6px;
+  min-height: 80px;
+  border: 2px dashed #e5e7eb;
+  border-radius: 8px;
   transition: all 0.15s;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
+.pb-column-drop-zone:empty,
 .pb-column-drop-zone.over {
   border-color: #ad172b;
   background: #fff5f6;
@@ -415,23 +421,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px;
+  gap: 8px;
+  padding: 14px 12px;
   width: 100%;
-  border: 1px dashed #d1d5db;
-  border-radius: 6px;
-  background: transparent;
-  color: #9ca3af;
-  font-size: 12px;
+  border: 2px dashed #c4b5fd;
+  border-radius: 8px;
+  background: #f5f3ff;
+  color: #7c3aed;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
   margin-top: 8px;
+  box-sizing: border-box;
+}
+
+.pb-add-element-btn:first-child {
+  margin-top: 0;
 }
 
 .pb-add-element-btn:hover {
-  border-color: #ad172b;
-  color: #ad172b;
-  background: #fff5f6;
+  border-color: #7c3aed;
+  color: #5b21b6;
+  background: #ede9fe;
+  transform: none;
 }
 
 /* Element Palette Modal */
