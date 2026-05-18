@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { EditableText, EditableSection } from '../../editable';
-import { useEditMode } from '../../context/EditModeContext';
-import { useContent } from '../../hooks/useContent';
-import MediaLibrary from '../../admin/components/media/MediaLibrary';
+import { useEditMode } from '../../../context/EditModeContext';
+import { useContent } from '../../../hooks/useContent';
+import MediaLibrary from '../../../admin/components/media/MediaLibrary';
 
 function HomeHero() {
   const { isEditMode, isAdmin } = useEditMode();
