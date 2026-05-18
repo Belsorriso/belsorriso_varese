@@ -175,13 +175,10 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: #e2e8f0 !important;
-  border-bottom: 1px solid #cbd5e1 !important;
+  background: #e2e8f0;
+  border-bottom: 1px solid #cbd5e1;
   user-select: none;
-}
-
-.pb-row-header * {
-  color: #1e293b !important;
+  color: #1e293b;
 }
 
 .pb-drag-handle {

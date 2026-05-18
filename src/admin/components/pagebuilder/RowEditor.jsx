@@ -67,12 +67,12 @@ function SectionRow({ row, onDelete, setNodeRef, style, attributes, listeners, i
 
   return (
     <div ref={setNodeRef} style={style} className={`pb-row pb-section-row ${isDragging ? 'dragging' : ''}`}>
-      <div className="pb-row-header" style={{ background: '#ede9fe', color: '#1e293b' }}>
-        <span className="pb-drag-handle" {...attributes} {...listeners} title="Trascina per riordinare" style={{ color: '#5b21b6' }}>
+      <div className="pb-row-header">
+        <span className="pb-drag-handle" {...attributes} {...listeners} title="Trascina per riordinare">
           ⠿
         </span>
         <span className="pb-section-badge">SEZIONE</span>
-        <span className="pb-row-label" style={{ color: '#1e293b' }}>{label}</span>
+        <span className="pb-row-label">{label}</span>
         <div className="pb-row-actions">
           <button className="pb-icon-btn danger" onClick={() => onDelete(row.id)} title="Rimuovi sezione">
             🗑️
@@ -152,11 +152,11 @@ function RowEditor({ row, onUpdate, onDelete }) {
 
   return (
     <div ref={setNodeRef} style={style} className={`pb-row ${isDragging ? 'dragging' : ''}`}>
-      <div className="pb-row-header" style={{ background: '#e2e8f0', color: '#1e293b' }}>
-        <span className="pb-drag-handle" {...attributes} {...listeners} title="Trascina per riordinare" style={{ color: '#475569' }}>
+      <div className="pb-row-header">
+        <span className="pb-drag-handle" {...attributes} {...listeners} title="Trascina per riordinare">
           ⠿
         </span>
-        <span className="pb-row-label" style={{ color: '#1e293b' }}>Riga — {currentLayout.label}</span>
+        <span className="pb-row-label">Riga — {currentLayout.label}</span>
         <div className="pb-row-actions">
           <button
             className="pb-row-settings-toggle"
