@@ -49,9 +49,9 @@ function EditToolbar() {
               <button
                 className="edit-toolbar-btn edit-toolbar-btn-success"
                 onClick={saveChanges}
-                disabled={!isDirty || saving}
+                disabled={saving}
               >
-                {saving ? 'Salvando...' : '&#10003; Salva'}
+                {saving ? 'Salvando...' : '✓ Salva'}
               </button>
 
               <button
@@ -59,7 +59,7 @@ function EditToolbar() {
                 onClick={discardChanges}
                 disabled={!isDirty || saving}
               >
-                &#8634; Annulla
+                ↺ Annulla
               </button>
 
               <button
@@ -67,7 +67,7 @@ function EditToolbar() {
                 onClick={toggleEditMode}
                 disabled={saving}
               >
-                &#10005; Esci
+                ✕ Esci
               </button>
             </div>
           </>
