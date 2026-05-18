@@ -1,27 +1,20 @@
 import { useState, useEffect } from 'react';
-import ArrayEditor from './common/ArrayEditor';
 import { API_URL } from '../../config/api';
 
 function FooterEditor() {
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const [saving, setSaving] = useState(null);
   const [message, setMessage] = useState(null);
-  const [activeSection, setActiveSection] = useState('azienda');
+  const [activeSection, setActiveSection] = useState('company');
   const [content, setContent] = useState({
-    azienda: {
-      nome: '',
-      descrizione: '',
-      partitaIva: '',
-      codiceFiscale: ''
-    },
-    social: [],
-    links: [],
-    copyright: ''
+    company: { title: '' },
+    company1: { name: '', brand: '', address1: '', address2: '', city: '', piva: '' },
+    company2: { name: '', address1: '', address2: '', city: '', piva: '' },
+    cin: { cin1name: '', cin1: '', cin2name: '', cin2: '', cin3name: '', cin3: '' },
+    contactsIt: { title: '', email: '' }
   });
 
-  useEffect(() => {
-    fetchContent();
-  }, []);
+  useEffect(() => { fetchContent(); }, []);
 
   const fetchContent = async () => {
     try {
@@ -38,238 +31,112 @@ function FooterEditor() {
   };
 
   const handleSave = async (section, data) => {
-    setSaving(true);
+    setSaving(section);
     setMessage(null);
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`${API_URL}/content/footer/${section}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ content: data })
       });
-
-      if (response.ok) {
-        setMessage({ type: 'success', text: 'Salvato con successo!' });
-      } else {
-        throw new Error('Errore nel salvataggio');
-      }
+      if (response.ok) setMessage({ type: 'success', text: 'Salvato!' });
+      else throw new Error('Errore nel salvataggio');
     } catch (error) {
       setMessage({ type: 'error', text: error.message });
     } finally {
-      setSaving(false);
+      setSaving(null);
       setTimeout(() => setMessage(null), 3000);
     }
   };
 
-  const socialFields = [
-    {
-      name: 'piattaforma',
-      label: 'Piattaforma',
-      type: 'select',
-      options: [
-        { value: 'facebook', label: 'Facebook' },
-        { value: 'instagram', label: 'Instagram' },
-        { value: 'twitter', label: 'Twitter/X' },
-        { value: 'linkedin', label: 'LinkedIn' },
-        { value: 'youtube', label: 'YouTube' },
-        { value: 'tiktok', label: 'TikTok' },
-        { value: 'whatsapp', label: 'WhatsApp' },
-        { value: 'tripadvisor', label: 'TripAdvisor' }
-      ]
-    },
-    { name: 'url', label: 'URL', type: 'text', placeholder: 'https://...' },
-    { name: 'label', label: 'Etichetta (opzionale)', type: 'text', placeholder: 'Es: Seguici su Facebook' }
-  ];
+  const field = (section, key, label, placeholder = '') => (
+    <div className="form-group" key={key}>
+      <label>{label}</label>
+      <input type="text" value={content[section]?.[key] || ''}
+        onChange={e => setContent({ ...content, [section]: { ...content[section], [key]: e.target.value } })}
+        placeholder={placeholder} />
+    </div>
+  );
 
-  const linkFields = [
-    { name: 'label', label: 'Testo link', type: 'text', placeholder: 'Es: Privacy Policy' },
-    { name: 'url', label: 'URL', type: 'text', placeholder: '/privacy o https://...' },
-    { name: 'esterno', label: 'Link esterno', type: 'checkbox', checkboxLabel: 'Apri in nuova finestra' }
-  ];
+  const saveBtn = (section, label) => (
+    <button className="btn btn-primary" onClick={() => handleSave(section, content[section])} disabled={saving === section}>
+      {saving === section ? 'Salvataggio...' : label}
+    </button>
+  );
 
-  if (loading) {
-    return <div className="loading-spinner"><div className="spinner"></div></div>;
-  }
+  if (loading) return <div className="loading-spinner"><div className="spinner"></div></div>;
 
   return (
     <div className="editor-container">
-      {message && (
-        <div className={`status-message ${message.type}`}>{message.text}</div>
-      )}
+      {message && <div className={`status-message ${message.type}`}>{message.text}</div>}
 
       <div className="editor-tabs">
-        <button
-          className={`editor-tab ${activeSection === 'azienda' ? 'active' : ''}`}
-          onClick={() => setActiveSection('azienda')}
-        >
-          Dati Aziendali
-        </button>
-        <button
-          className={`editor-tab ${activeSection === 'social' ? 'active' : ''}`}
-          onClick={() => setActiveSection('social')}
-        >
-          Social ({content.social?.length || 0})
-        </button>
-        <button
-          className={`editor-tab ${activeSection === 'links' ? 'active' : ''}`}
-          onClick={() => setActiveSection('links')}
-        >
-          Links ({content.links?.length || 0})
-        </button>
-        <button
-          className={`editor-tab ${activeSection === 'copyright' ? 'active' : ''}`}
-          onClick={() => setActiveSection('copyright')}
-        >
-          Copyright
-        </button>
+        <button className={`editor-tab ${activeSection === 'company' ? 'active' : ''}`} onClick={() => setActiveSection('company')}>Brand</button>
+        <button className={`editor-tab ${activeSection === 'company1' ? 'active' : ''}`} onClick={() => setActiveSection('company1')}>Azienda 1</button>
+        <button className={`editor-tab ${activeSection === 'company2' ? 'active' : ''}`} onClick={() => setActiveSection('company2')}>Azienda 2</button>
+        <button className={`editor-tab ${activeSection === 'cin' ? 'active' : ''}`} onClick={() => setActiveSection('cin')}>CIN</button>
+        <button className={`editor-tab ${activeSection === 'contactsIt' ? 'active' : ''}`} onClick={() => setActiveSection('contactsIt')}>Contatti</button>
       </div>
 
-      {activeSection === 'azienda' && (
+      {activeSection === 'company' && (
         <div className="editor-section">
-          <h3>Dati Aziendali</h3>
+          <h3>Brand / Titolo Footer</h3>
+          {field('company', 'title', 'Titolo brand', 'Es: BelSorrisoVarese – Dormire Felice')}
+          {saveBtn('company', 'Salva Brand')}
+        </div>
+      )}
 
-          <div className="form-group">
-            <label>Nome azienda/struttura</label>
-            <input
-              type="text"
-              value={content.azienda?.nome || ''}
-              onChange={(e) => setContent({
-                ...content,
-                azienda: { ...content.azienda, nome: e.target.value }
-              })}
-              placeholder="Es: BelSorrisoVarese S.r.l."
-            />
-          </div>
+      {activeSection === 'company1' && (
+        <div className="editor-section">
+          <h3>Prima Azienda (Select di Pecchio Nicolò)</h3>
+          {field('company1', 'name', 'Ragione Sociale', 'Es: Select di Pecchio Nicolò')}
+          {field('company1', 'brand', 'Brand', 'Es: BelSorrisoVarese')}
+          {field('company1', 'address1', 'Sede Legale', 'Es: Sede Legale: Piazza Biroldi, 8')}
+          {field('company1', 'address2', 'Sede Operativa', 'Es: Sede Operativa: Piazza Biroldi, 20')}
+          {field('company1', 'city', 'Città', 'Es: 21100 Varese')}
+          {field('company1', 'piva', 'Partita IVA', 'Es: P.IVA 02087850125')}
+          {saveBtn('company1', 'Salva Azienda 1')}
+        </div>
+      )}
 
-          <div className="form-group">
-            <label>Descrizione breve</label>
-            <textarea
-              value={content.azienda?.descrizione || ''}
-              onChange={(e) => setContent({
-                ...content,
-                azienda: { ...content.azienda, descrizione: e.target.value }
-              })}
-              placeholder="Breve descrizione per il footer..."
-              rows={3}
-            />
-          </div>
+      {activeSection === 'company2' && (
+        <div className="editor-section">
+          <h3>Seconda Azienda (HAPPI DAY SRL)</h3>
+          {field('company2', 'name', 'Ragione Sociale', 'Es: HAPPI DAY SRL')}
+          {field('company2', 'address1', 'Sede Legale', 'Es: Sede Legale: P.za Motta, 6')}
+          {field('company2', 'address2', 'Sede Operativa', 'Es: Sede Operativa: P.za Biroldi, 7')}
+          {field('company2', 'city', 'Città', 'Es: 21100 Varese')}
+          {field('company2', 'piva', 'Partita IVA', 'Es: Partita IVA 03645460126')}
+          {saveBtn('company2', 'Salva Azienda 2')}
+        </div>
+      )}
 
+      {activeSection === 'cin' && (
+        <div className="editor-section">
+          <h3>Codici CIN (Codice Identificativo Nazionale)</h3>
           <div className="form-row">
-            <div className="form-group">
-              <label>Partita IVA</label>
-              <input
-                type="text"
-                value={content.azienda?.partitaIva || ''}
-                onChange={(e) => setContent({
-                  ...content,
-                  azienda: { ...content.azienda, partitaIva: e.target.value }
-                })}
-                placeholder="Es: IT12345678901"
-              />
-            </div>
-            <div className="form-group">
-              <label>Codice Fiscale</label>
-              <input
-                type="text"
-                value={content.azienda?.codiceFiscale || ''}
-                onChange={(e) => setContent({
-                  ...content,
-                  azienda: { ...content.azienda, codiceFiscale: e.target.value }
-                })}
-                placeholder="Es: 12345678901"
-              />
-            </div>
+            {field('cin', 'cin1name', 'Nome struttura 1', 'Es: • Foresteria Belsorriso Happi')}
+            {field('cin', 'cin1', 'CIN 1', 'Es: CIN: IT012133B4I9KHS63N')}
           </div>
-
-          <button
-            className="btn btn-primary"
-            onClick={() => handleSave('azienda', content.azienda)}
-            disabled={saving}
-          >
-            {saving ? 'Salvataggio...' : 'Salva Dati Aziendali'}
-          </button>
+          <div className="form-row">
+            {field('cin', 'cin2name', 'Nome struttura 2', 'Es: • Casa e Appartamenti per Vacanze Belsorriso')}
+            {field('cin', 'cin2', 'CIN 2', 'Es: CIN: IT012133B4ZUUYL2CK')}
+          </div>
+          <div className="form-row">
+            {field('cin', 'cin3name', 'Nome struttura 3', 'Es: • Belsorriso Foresteria Lombarda')}
+            {field('cin', 'cin3', 'CIN 3', 'Es: CIN: IT012133B45H2APG6U')}
+          </div>
+          {saveBtn('cin', 'Salva CIN')}
         </div>
       )}
 
-      {activeSection === 'social' && (
+      {activeSection === 'contactsIt' && (
         <div className="editor-section">
-          <h3>Social Network</h3>
-          <p className="section-description">
-            Aggiungi i link ai profili social della struttura.
-          </p>
-          <ArrayEditor
-            items={content.social || []}
-            onChange={(social) => setContent({ ...content, social })}
-            fields={socialFields}
-            itemLabel="Social"
-            maxItems={10}
-            renderPreview={(item) => item.piattaforma || 'Nuovo Social'}
-          />
-          <div className="form-actions">
-            <button
-              className="btn btn-primary"
-              onClick={() => handleSave('social', content.social)}
-              disabled={saving}
-            >
-              {saving ? 'Salvataggio...' : 'Salva Social'}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {activeSection === 'links' && (
-        <div className="editor-section">
-          <h3>Links Footer</h3>
-          <p className="section-description">
-            Links utili da mostrare nel footer (privacy, termini, etc.).
-          </p>
-          <ArrayEditor
-            items={content.links || []}
-            onChange={(links) => setContent({ ...content, links })}
-            fields={linkFields}
-            itemLabel="Link"
-            maxItems={10}
-            renderPreview={(item) => item.label || 'Nuovo Link'}
-          />
-          <div className="form-actions">
-            <button
-              className="btn btn-primary"
-              onClick={() => handleSave('links', content.links)}
-              disabled={saving}
-            >
-              {saving ? 'Salvataggio...' : 'Salva Links'}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {activeSection === 'copyright' && (
-        <div className="editor-section">
-          <h3>Testo Copyright</h3>
-
-          <div className="form-group">
-            <label>Copyright</label>
-            <input
-              type="text"
-              value={content.copyright || ''}
-              onChange={(e) => setContent({ ...content, copyright: e.target.value })}
-              placeholder="Es: © 2024 BelSorrisoVarese. Tutti i diritti riservati."
-            />
-            <small className="field-help">
-              Usa {'{year}'} per inserire l'anno corrente automaticamente.
-            </small>
-          </div>
-
-          <button
-            className="btn btn-primary"
-            onClick={() => handleSave('copyright', content.copyright)}
-            disabled={saving}
-          >
-            {saving ? 'Salvataggio...' : 'Salva Copyright'}
-          </button>
+          <h3>Contatti Footer</h3>
+          {field('contactsIt', 'title', 'Titolo sezione contatti', 'Es: Contatti')}
+          {field('contactsIt', 'email', 'Email', 'Es: belsorrisovarese@gmail.com')}
+          {saveBtn('contactsIt', 'Salva Contatti')}
         </div>
       )}
     </div>

@@ -4,20 +4,16 @@ import { API_URL } from '../../config/api';
 
 function TerritorioEditor() {
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const [saving, setSaving] = useState(null);
   const [message, setMessage] = useState(null);
-  const [activeSection, setActiveSection] = useState('intro');
+  const [activeSection, setActiveSection] = useState('header');
   const [content, setContent] = useState({
-    intro: { title: '', description: '' },
-    natura: [],
-    cultura: [],
-    sport: [],
-    gastronomia: []
+    header: { title: '', subtitle: '' },
+    intro: { title: '', subtitle: '' },
+    categorie: []
   });
 
-  useEffect(() => {
-    fetchContent();
-  }, []);
+  useEffect(() => { fetchContent(); }, []);
 
   const fetchContent = async () => {
     try {
@@ -34,208 +30,101 @@ function TerritorioEditor() {
   };
 
   const handleSave = async (section, data) => {
-    setSaving(true);
+    setSaving(section);
     setMessage(null);
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`${API_URL}/content/territorio/${section}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ content: data })
       });
-
-      if (response.ok) {
-        setMessage({ type: 'success', text: 'Salvato con successo!' });
-      } else {
-        throw new Error('Errore nel salvataggio');
-      }
+      if (response.ok) setMessage({ type: 'success', text: 'Salvato!' });
+      else throw new Error('Errore nel salvataggio');
     } catch (error) {
       setMessage({ type: 'error', text: error.message });
     } finally {
-      setSaving(false);
+      setSaving(null);
       setTimeout(() => setMessage(null), 3000);
     }
   };
 
-  const attrazioneFields = [
-    { name: 'nome', label: 'Nome', type: 'text', placeholder: 'Es: Sacro Monte' },
-    { name: 'descrizione', label: 'Descrizione', type: 'textarea', placeholder: 'Descrizione...', rows: 3 },
-    { name: 'distanza', label: 'Distanza', type: 'text', placeholder: 'Es: 5 km' },
-    { name: 'link', label: 'Link (opzionale)', type: 'text', placeholder: 'https://...' },
-    { name: 'immagine', label: 'Immagine', type: 'image' }
+  const categoriaFields = [
+    { name: 'title', label: 'Titolo Categoria', type: 'text', placeholder: 'Es: Natura e Spiritualità' },
+    { name: 'items', label: 'Attrazioni (una per riga)', type: 'textarea', placeholder: 'Sacro Monte di Varese\nParco Campo dei Fiori\nLago di Varese', rows: 6 }
   ];
 
-  const sections = [
-    { id: 'intro', label: 'Introduzione' },
-    { id: 'natura', label: 'Natura', icon: '🌳' },
-    { id: 'cultura', label: 'Cultura', icon: '🏛️' },
-    { id: 'sport', label: 'Sport', icon: '⛷️' },
-    { id: 'gastronomia', label: 'Gastronomia', icon: '🍷' }
-  ];
-
-  if (loading) {
-    return <div className="loading-spinner"><div className="spinner"></div></div>;
-  }
+  if (loading) return <div className="loading-spinner"><div className="spinner"></div></div>;
 
   return (
     <div className="editor-container">
-      {message && (
-        <div className={`status-message ${message.type}`}>{message.text}</div>
-      )}
+      {message && <div className={`status-message ${message.type}`}>{message.text}</div>}
 
       <div className="editor-tabs">
-        {sections.map(section => (
-          <button
-            key={section.id}
-            className={`editor-tab ${activeSection === section.id ? 'active' : ''}`}
-            onClick={() => setActiveSection(section.id)}
-          >
-            {section.icon && <span>{section.icon} </span>}
-            {section.label}
-            {section.id !== 'intro' && ` (${content[section.id]?.length || 0})`}
-          </button>
-        ))}
+        <button className={`editor-tab ${activeSection === 'header' ? 'active' : ''}`} onClick={() => setActiveSection('header')}>Header</button>
+        <button className={`editor-tab ${activeSection === 'intro' ? 'active' : ''}`} onClick={() => setActiveSection('intro')}>Intro Sezione</button>
+        <button className={`editor-tab ${activeSection === 'categorie' ? 'active' : ''}`} onClick={() => setActiveSection('categorie')}>Categorie ({content.categorie?.length || 0})</button>
       </div>
+
+      {activeSection === 'header' && (
+        <div className="editor-section">
+          <h3>Header Pagina</h3>
+          <div className="form-group">
+            <label>Titolo</label>
+            <input type="text" value={content.header?.title || ''}
+              onChange={e => setContent({ ...content, header: { ...content.header, title: e.target.value } })}
+              placeholder="Es: Il Territorio" />
+          </div>
+          <div className="form-group">
+            <label>Sottotitolo</label>
+            <input type="text" value={content.header?.subtitle || ''}
+              onChange={e => setContent({ ...content, header: { ...content.header, subtitle: e.target.value } })}
+              placeholder="Es: Scopri le attrazioni di Varese e dintorni" />
+          </div>
+          <button className="btn btn-primary" onClick={() => handleSave('header', content.header)} disabled={saving === 'header'}>
+            {saving === 'header' ? 'Salvataggio...' : 'Salva Header'}
+          </button>
+        </div>
+      )}
 
       {activeSection === 'intro' && (
         <div className="editor-section">
-          <h3>Introduzione Territorio</h3>
+          <h3>Titoli Sezione Attrazioni</h3>
           <div className="form-group">
-            <label>Titolo pagina</label>
-            <input
-              type="text"
-              value={content.intro?.title || ''}
-              onChange={(e) => setContent({
-                ...content,
-                intro: { ...content.intro, title: e.target.value }
-              })}
-              placeholder="Es: Scopri il Territorio"
-            />
+            <label>Titolo</label>
+            <input type="text" value={content.intro?.title || ''}
+              onChange={e => setContent({ ...content, intro: { ...content.intro, title: e.target.value } })}
+              placeholder="Es: Attrazioni nelle Vicinanze" />
           </div>
           <div className="form-group">
-            <label>Descrizione</label>
-            <textarea
-              value={content.intro?.description || ''}
-              onChange={(e) => setContent({
-                ...content,
-                intro: { ...content.intro, description: e.target.value }
-              })}
-              placeholder="Introduzione al territorio..."
-              rows={5}
-            />
+            <label>Sottotitolo</label>
+            <input type="text" value={content.intro?.subtitle || ''}
+              onChange={e => setContent({ ...content, intro: { ...content.intro, subtitle: e.target.value } })}
+              placeholder="Es: Varese offre numerose opportunità per cultura, natura e sport" />
           </div>
-          <button
-            className="btn btn-primary"
-            onClick={() => handleSave('intro', content.intro)}
-            disabled={saving}
-          >
-            {saving ? 'Salvataggio...' : 'Salva Introduzione'}
+          <button className="btn btn-primary" onClick={() => handleSave('intro', content.intro)} disabled={saving === 'intro'}>
+            {saving === 'intro' ? 'Salvataggio...' : 'Salva Intro'}
           </button>
         </div>
       )}
 
-      {activeSection === 'natura' && (
+      {activeSection === 'categorie' && (
         <div className="editor-section">
-          <h3>Natura e Paesaggi</h3>
+          <h3>Categorie di Attrazioni</h3>
           <p className="section-description">
-            Parchi, laghi, montagne e percorsi naturalistici nelle vicinanze.
+            Ogni categoria ha un titolo e una lista di attrazioni (una per riga nel campo testo).
           </p>
           <ArrayEditor
-            items={content.natura || []}
-            onChange={(natura) => setContent({ ...content, natura })}
-            fields={attrazioneFields}
-            itemLabel="Attrazione"
-            maxItems={15}
-            renderPreview={(item) => `${item.nome || 'Nuova Attrazione'} - ${item.distanza || '?'}`}
+            items={content.categorie || []}
+            onChange={categorie => setContent({ ...content, categorie })}
+            fields={categoriaFields}
+            itemLabel="Categoria"
+            maxItems={10}
+            renderPreview={item => `${item.title || 'Nuova Categoria'} (${(item.items || []).length} attrazioni)`}
           />
           <div className="form-actions">
-            <button
-              className="btn btn-primary"
-              onClick={() => handleSave('natura', content.natura)}
-              disabled={saving}
-            >
-              {saving ? 'Salvataggio...' : 'Salva Natura'}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {activeSection === 'cultura' && (
-        <div className="editor-section">
-          <h3>Arte e Cultura</h3>
-          <p className="section-description">
-            Musei, monumenti, chiese e siti storici da visitare.
-          </p>
-          <ArrayEditor
-            items={content.cultura || []}
-            onChange={(cultura) => setContent({ ...content, cultura })}
-            fields={attrazioneFields}
-            itemLabel="Attrazione"
-            maxItems={15}
-            renderPreview={(item) => `${item.nome || 'Nuova Attrazione'} - ${item.distanza || '?'}`}
-          />
-          <div className="form-actions">
-            <button
-              className="btn btn-primary"
-              onClick={() => handleSave('cultura', content.cultura)}
-              disabled={saving}
-            >
-              {saving ? 'Salvataggio...' : 'Salva Cultura'}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {activeSection === 'sport' && (
-        <div className="editor-section">
-          <h3>Sport e Attivita</h3>
-          <p className="section-description">
-            Attivita sportive, escursioni e divertimenti disponibili in zona.
-          </p>
-          <ArrayEditor
-            items={content.sport || []}
-            onChange={(sport) => setContent({ ...content, sport })}
-            fields={attrazioneFields}
-            itemLabel="Attivita"
-            maxItems={15}
-            renderPreview={(item) => `${item.nome || 'Nuova Attivita'} - ${item.distanza || '?'}`}
-          />
-          <div className="form-actions">
-            <button
-              className="btn btn-primary"
-              onClick={() => handleSave('sport', content.sport)}
-              disabled={saving}
-            >
-              {saving ? 'Salvataggio...' : 'Salva Sport'}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {activeSection === 'gastronomia' && (
-        <div className="editor-section">
-          <h3>Enogastronomia</h3>
-          <p className="section-description">
-            Ristoranti, cantine, prodotti tipici e esperienze culinarie.
-          </p>
-          <ArrayEditor
-            items={content.gastronomia || []}
-            onChange={(gastronomia) => setContent({ ...content, gastronomia })}
-            fields={attrazioneFields}
-            itemLabel="Punto"
-            maxItems={15}
-            renderPreview={(item) => `${item.nome || 'Nuovo Punto'} - ${item.distanza || '?'}`}
-          />
-          <div className="form-actions">
-            <button
-              className="btn btn-primary"
-              onClick={() => handleSave('gastronomia', content.gastronomia)}
-              disabled={saving}
-            >
-              {saving ? 'Salvataggio...' : 'Salva Gastronomia'}
+            <button className="btn btn-primary" onClick={() => handleSave('categorie', content.categorie)} disabled={saving === 'categorie'}>
+              {saving === 'categorie' ? 'Salvataggio...' : 'Salva Categorie'}
             </button>
           </div>
         </div>

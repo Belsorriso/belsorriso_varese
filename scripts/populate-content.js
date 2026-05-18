@@ -106,18 +106,74 @@ const CONTENT = {
       title: 'Le Nostre Camere',
       intro: 'La struttura offre camere completamente ristrutturate in un ambiente informale con entrata autonoma in una corte. Le camere dispongono di materasso e cuscini ignifughi in memory e bagno privato con doccia, direttamente comunicante con la camera.'
     },
-    dotazioni: {
-      title: 'Dotazioni delle Camere'
+    dotazioni: [
+      { text: 'Riscaldamento autonomo (termosifoni + split condizionatore)' },
+      { text: 'TV Smart 32" a parete' },
+      { text: 'Connessione wireless ADSL gratuita' },
+      { text: 'Cassaforte e frigorifero' },
+      { text: 'Bagno privato con set asciugamani, asciugacapelli, bagno schiuma e shampoo' },
+      { text: 'Angolo colazione con macchinetta elettrica per caffe, te, tisane' },
+      { text: 'Insonorizzazione garantita' }
+    ],
+    serviziAggiuntivi: [
+      { text: 'Accoglienza animali' }
+    ],
+    supplementi: {
+      bambini: 'Bambini fino a 3 anni: soggiorno gratuito con lettini e culle disponibili',
+      tassa: 'Tassa di soggiorno: 1 euro a notte per adulti',
+      soggiorni: 'Soggiorni lunghi: offerte speciali disponibili su richiesta'
     },
-    serviziAggiuntivi: {
-      title: 'Servizi Aggiuntivi'
-    }
+    pagamenti: [
+      { text: 'Contanti' },
+      { text: 'Bonifico Bancario' },
+      { text: 'Carte di Credito' },
+      { text: 'Satispay' }
+    ],
+    sidebar: {
+      contattiTitle: 'Contatti Rapidi',
+      posizioneTitle: 'Posizione Strategica'
+    },
+    sidebarContatti: [
+      { label: 'Email', value: 'belsorrisovarese@gmail.com' },
+      { label: 'Tel', value: '+39 0332 830744' },
+      { label: 'Cell', value: '+39 342 18 95 829' },
+      { label: 'Indirizzo', value: 'Piazza Biroldi, 8 - 21100 Varese' }
+    ],
+    sidebarPosizione: [
+      { text: '250m dalle stazioni ferroviarie' },
+      { text: "60m dall'Ospedale Filippo del Ponte" },
+      { text: '4 minuti a piedi dal centro' },
+      { text: '20m dalla fermata autobus' }
+    ]
   },
 
   regolamento: {
     header: {
       title: 'Regolamento ed Informazioni',
       subtitle: 'Tutto quello che devi sapere per il tuo soggiorno'
+    },
+    regole: [
+      { title: 'Divieto di Fumo', text: "È vietato fumare in tutte le camere e negli spazi comuni interni. È consentito fumare nel cortile o sui balconi delle camere e degli appartamenti." },
+      { title: 'Colazione', text: 'La colazione è disponibile a pagamento in convenzione con i bar situati nella piazza pedonale di fronte alla struttura, con opzione di colazione tipica italiana.' },
+      { title: 'Camere e Servizi', text: 'Le stanze includono bagno privato, asciugamani e biancheria rinnovati ogni tre giorni, asciugacapelli e prodotti per la doccia. Ogni camera dispone di una cassaforte. Nelle camere la pulizia viene effettuata ogni giorno e negli appartamenti una volta a settimana per soggiorni più lunghi di 1 settimana.' },
+      { title: 'Custodia Effetti Personali', text: 'Gli ospiti sono responsabili dei propri oggetti. In caso di smarrimento delle chiavi, viene addebitato un costo di 30 euro per la sostituzione.' },
+      { title: 'Check-in', text: "Il check-in è previsto dalle 14:00 alle 19:00. È possibile eseguire il check-in fuori dagli orari previsti, fino alla mezzanotte, contattandoci preventivamente." },
+      { title: 'Check-out', text: 'Il check-out deve essere effettuato entro le 10:30. Per la pulizia, la camera deve restare libera entro le 11:00.' }
+    ],
+    pagamenti: {
+      title: 'Metodi di Pagamento Accettati',
+      text: 'Contanti (entro i limiti di legge) - Bonifici bancari anticipati - Carte di credito - Satispay'
+    },
+    contattiSection: {
+      title: 'Contatti per Informazioni',
+      icon1: '📞', label1: 'Telefono Fisso',
+      icon2: '📱', label2: 'Cellulari',
+      icon3: '📧', label3: 'Email'
+    },
+    contatti: {
+      telefonoFisso: '+39 0332 830744',
+      cell1: '+39 342 1895829',
+      email: 'belsorrisovarese@gmail.com'
     }
   },
 
@@ -125,7 +181,19 @@ const CONTENT = {
     header: {
       title: 'Il Territorio',
       subtitle: 'Scopri le attrazioni di Varese e dintorni'
-    }
+    },
+    intro: {
+      title: 'Attrazioni nelle Vicinanze',
+      subtitle: 'Varese offre numerose opportunità per cultura, natura e sport'
+    },
+    categorie: [
+      { title: 'Natura e Spiritualità', items: ['Sacro Monte di Varese', 'Parco Campo dei Fiori', 'Osservatorio Astronomico', 'Lago di Varese', 'Lago di Monate (con pista ciclabile)', 'Isolino Virginia', 'Palude Brabbia'] },
+      { title: 'Laghi della Zona', items: ['Lago di Como', 'Lago di Lugano', 'Lago Maggiore', 'Isole Borromee'] },
+      { title: 'Cultura e Storia', items: ['Palazzo e Giardini Estensi', 'Villa Ponti', 'Museo Villa Panza', 'Parco Villa Toeplitz', 'Museo Pogliaghi', 'Civico Museo Archeologico'] },
+      { title: 'Arte Religiosa', items: ['Basilica di S. Vittore', 'Battistero S. Giovanni', 'Centro Storico'] },
+      { title: 'Sport e Tempo Libero', items: ['Stadio "F. Ossola"', 'Ippodromo', 'Palaa2a (basket)', 'Golf Club Luvinate', 'Golf Panorama', 'Volo a vela'] },
+      { title: 'Business e Eventi', items: ['Centro Congressi Ville Ponti'] }
+    ]
   },
 
   contatti: {
@@ -147,9 +215,22 @@ const CONTENT = {
       indirizzo1: 'Piazza Biroldi, 8',
       indirizzo2: '21100 Varese (VA) - Italia'
     },
-    posizione: {
-      title: 'Posizione Strategica'
-    }
+    posizione: [
+      { distance: '20 metri', description: 'dalla fermata autobus per le stazioni ferroviarie' },
+      { distance: '250 metri', description: 'dalle due stazioni ferroviarie della città' },
+      { distance: '60 metri', description: "dall'Ospedale Filippo del Ponte" },
+      { distance: '4 minuti', description: 'a piedi dal cuore della città' }
+    ],
+    servizi: {
+      title: 'Servizi nelle Vicinanze',
+      text: 'Nella zona sono disponibili numerosi servizi come bar, farmacia, supermercato e banca.'
+    },
+    pagamenti: [
+      { text: 'Contanti' },
+      { text: 'Bonifico Bancario' },
+      { text: 'Carte di Credito' },
+      { text: 'Satispay' }
+    ]
   },
 
   footer: {
