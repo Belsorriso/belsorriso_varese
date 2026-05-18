@@ -46,6 +46,7 @@ function ColumnEditor({ column, rowId, onUpdate }) {
     <div
       ref={setNodeRef}
       className={`pb-column-drop-zone ${isOver ? 'over' : ''}`}
+      style={{ minHeight: 90, border: '2px dashed #c4b5fd', borderRadius: 8, background: '#faf5ff', padding: 8 }}
     >
       <SortableContext items={elements.map(el => el.id)} strategy={verticalListSortingStrategy}>
         {elements.map(el => (
@@ -58,7 +59,18 @@ function ColumnEditor({ column, rowId, onUpdate }) {
         ))}
       </SortableContext>
 
-      <button className="pb-add-element-btn" onClick={() => setShowPalette(true)}>
+      <button
+        className="pb-add-element-btn"
+        onClick={() => setShowPalette(true)}
+        style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          gap: 8, padding: '12px 16px', width: '100%', boxSizing: 'border-box',
+          border: '2px dashed #7c3aed', borderRadius: 8,
+          background: '#ede9fe', color: '#5b21b6',
+          fontSize: 14, fontWeight: 700, cursor: 'pointer',
+          marginTop: elements.length > 0 ? 8 : 0,
+        }}
+      >
         + Aggiungi Elemento
       </button>
 
