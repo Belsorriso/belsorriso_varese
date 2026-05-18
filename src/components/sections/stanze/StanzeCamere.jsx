@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { EditableText, EditableSection, EditableList } from '../../editable';
-import { RoomGallery, getSlug } from './stanzeHelpers';
+import { RoomGallery, RoomPhotoEditor, getSlug } from './stanzeHelpers';
 
 const DEFAULT_CAMERA_FEATURES = 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero';
 
@@ -72,7 +72,7 @@ function StanzeCamere() {
               <>
                 <div className="form-group">
                   <label>Foto</label>
-                  <RoomGallery roomName={item.nome} forceManage={true} />
+                  <RoomPhotoEditor roomName={item.nome} />
                 </div>
                 <div className="form-group">
                   <label>Nome Camera</label>

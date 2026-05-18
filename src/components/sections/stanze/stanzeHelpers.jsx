@@ -1,4 +1,8 @@
+import { useState } from 'react';
 import EditableGallery from '../../editable/EditableGallery';
+import { useContent } from '../../../hooks/useContent';
+import MediaLibrary from '../../../admin/components/media/MediaLibrary';
+import { API_BASE_URL } from '../../../config/api';
 
 export function getSlug(nome) {
   const slugMap = {
@@ -71,6 +75,106 @@ function getRoomDefaultImages(roomName) {
   const info = roomImageMap[roomName];
   if (!info) return [];
   return (imageFiles[info.folder] || []).map(f => `/images/stanze/${info.folder}/${f}`);
+}
+
+function resolveUrl(url) {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('/')) return url;
+  return `${API_BASE_URL}${url}`;
+}
+
+export function RoomPhotoEditor({ roomName }) {
+  const slug = getSlug(roomName);
+  const defaultImages = getRoomDefaultImages(roomName);
+  const { getArray, updateSection } = useContent('stanze');
+  const [current, setCurrent] = useState(0);
+  const [showManager, setShowManager] = useState(false);
+  const [showMediaLib, setShowMediaLib] = useState(false);
+
+  const raw = getArray(`gallery-${slug}`, defaultImages);
+  const images = Array.isArray(raw) && raw.length > 0 ? raw : defaultImages;
+
+  const handleSelectMedia = (media) => {
+    const url = resolveUrl(media.url);
+    updateSection(`gallery-${slug}`, [...images, url]);
+    setShowMediaLib(false);
+  };
+
+  const handleRemove = (idx) => {
+    const updated = images.filter((_, i) => i !== idx);
+    updateSection(`gallery-${slug}`, updated);
+    setCurrent(c => Math.min(c, Math.max(0, updated.length - 1)));
+  };
+
+  return (
+    <div>
+      {images.length > 0 && (
+        <div style={{ position: 'relative', borderRadius: 8, overflow: 'hidden', marginBottom: 8 }}>
+          <img
+            src={resolveUrl(images[current])}
+            alt={`${roomName} ${current + 1}`}
+            style={{ width: '100%', height: 200, objectFit: 'cover', display: 'block' }}
+          />
+          {images.length > 1 && (
+            <>
+              <button onClick={() => setCurrent(p => (p - 1 + images.length) % images.length)}
+                style={{ position: 'absolute', left: 8, top: '50%', transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.4)', color: '#fff', border: 'none', borderRadius: '50%', width: 32, height: 32, cursor: 'pointer', fontSize: 16 }}>‹</button>
+              <button onClick={() => setCurrent(p => (p + 1) % images.length)}
+                style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.4)', color: '#fff', border: 'none', borderRadius: '50%', width: 32, height: 32, cursor: 'pointer', fontSize: 16 }}>›</button>
+            </>
+          )}
+        </div>
+      )}
+      <button
+        type="button"
+        onClick={() => setShowManager(true)}
+        style={{ display: 'block', width: '100%', padding: '10px', background: '#f5f3ff', border: '2px dashed #c4b5fd', borderRadius: 8, color: '#7c3aed', fontSize: 14, fontWeight: 700, cursor: 'pointer', marginBottom: 8 }}
+      >
+        🖼️ Gestisci foto ({images.length})
+      </button>
+
+      {showManager && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowManager(false)}>
+          <div style={{ background: '#fff', borderRadius: 12, maxWidth: 640, width: '90%', maxHeight: '80vh', overflow: 'auto' }} onClick={e => e.stopPropagation()}>
+            <div style={{ padding: '16px 20px', borderBottom: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <h3 style={{ margin: 0, fontSize: 16 }}>Foto — {roomName}</h3>
+              <button onClick={() => setShowManager(false)} style={{ background: 'none', border: 'none', fontSize: 20, cursor: 'pointer' }}>×</button>
+            </div>
+            <div style={{ padding: 16 }}>
+              {images.length === 0 && <p style={{ color: '#9ca3af', fontSize: 13, textAlign: 'center' }}>Nessuna foto.</p>}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginBottom: 12 }}>
+                {images.map((url, i) => (
+                  <div key={i} style={{ position: 'relative' }}>
+                    <img src={resolveUrl(url)} alt={`Foto ${i + 1}`} style={{ width: '100%', height: 100, objectFit: 'cover', borderRadius: 6 }} />
+                    <button type="button" onClick={() => handleRemove(i)}
+                      style={{ position: 'absolute', top: 4, right: 4, background: '#dc2626', color: '#fff', border: 'none', borderRadius: 4, padding: '2px 6px', cursor: 'pointer', fontSize: 12 }}>✕</button>
+                  </div>
+                ))}
+              </div>
+              <button type="button" onClick={() => setShowMediaLib(true)}
+                style={{ width: '100%', padding: '10px', background: '#f5f3ff', border: '2px dashed #c4b5fd', borderRadius: 8, color: '#7c3aed', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+                + Aggiungi dalla libreria media
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showMediaLib && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowMediaLib(false)}>
+          <div className="media-modal" onClick={e => e.stopPropagation()}>
+            <div className="media-modal-header">
+              <h3>Seleziona Immagine</h3>
+              <button className="media-modal-close" onClick={() => setShowMediaLib(false)}>×</button>
+            </div>
+            <div className="media-modal-content">
+              <MediaLibrary onSelect={handleSelectMedia} selectionMode={true} />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export function RoomGallery({ roomName, forceManage = false }) {
