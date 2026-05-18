@@ -17,9 +17,11 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { v4 as uuidv4 } from 'uuid';
 import { useEditMode } from '../../context/EditModeContext';
+import { useAuth } from '../../admin/context/AuthContext';
 import PageBuilderEditor from '../../admin/components/pagebuilder/PageBuilderEditor';
 import ElementPalette from '../../admin/components/pagebuilder/ElementPalette';
 import ElementSettings from '../../admin/components/pagebuilder/ElementSettings';
+import { LAYOUTS, buildDefaultColumns } from '../../admin/components/pagebuilder/RowEditor';
 import TextRenderer from './widgets/TextRenderer';
 import ImageRenderer from './widgets/ImageRenderer';
 import CodeRenderer from './widgets/CodeRenderer';
@@ -216,6 +218,33 @@ function DraggableRow({ row, onDelete, onUpdateRow }) {
   );
 }
 
+/* ── layout picker modal (shown before inserting a new row) ── */
+
+function LiveLayoutPicker({ onSelect, onClose }) {
+  return (
+    <div className="pbr-palette-overlay" onClick={onClose}>
+      <div className="pbr-palette pbr-layout-picker-modal" onClick={e => e.stopPropagation()}>
+        <div className="pbr-palette-header">
+          <h3>Scegli il Layout</h3>
+          <button className="pbr-palette-close" onClick={onClose}>✕</button>
+        </div>
+        <div className="pbr-layout-picker-grid">
+          {LAYOUTS.map(l => (
+            <button key={l.key} className="pbr-layout-picker-item" onClick={() => onSelect(l.key)}>
+              <div className="pbr-layout-bars">
+                {l.bars.map((bar, i) => (
+                  <span key={i} className="pbr-layout-bar-preview" style={{ flex: parseFloat(bar.width) }} />
+                ))}
+              </div>
+              <span className="pbr-layout-picker-label">{l.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── insert zone (visible on hover) ── */
 
 function InsertZone({ onInsert }) {
@@ -239,7 +268,9 @@ function PageBuilderRenderer({ page }) {
   const [saving, setSaving]         = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
   const [modalOpen, setModalOpen]   = useState(false);
-  const { isEditMode, isAdmin, getToken } = useEditMode();
+  const [insertIndex, setInsertIndex] = useState(null);
+  const { isEditMode, isAdmin } = useEditMode();
+  const { getToken } = useAuth();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -291,17 +322,22 @@ function PageBuilderRenderer({ page }) {
   };
 
   const handleInsertAt = (index) => {
+    setInsertIndex(index);
+  };
+
+  const handleLayoutSelected = (layoutKey) => {
     const newRow = {
       id: uuidv4(),
-      layout: 'full',
+      layout: layoutKey,
       settings: { padding: 'normal', background: '', fullWidth: false },
-      columns: [{ id: uuidv4(), width: 100, elements: [] }],
+      columns: buildDefaultColumns(layoutKey),
     };
     setLocalRows(prev => {
       const updated = [...prev];
-      updated.splice(index, 0, newRow);
+      updated.splice(insertIndex, 0, newRow);
       return updated;
     });
+    setInsertIndex(null);
   };
 
   const handleDeleteRow = (rowId) => {
@@ -414,6 +450,14 @@ function PageBuilderRenderer({ page }) {
           </DndContext>
         )}
       </div>
+
+      {/* Layout picker modal */}
+      {insertIndex !== null && (
+        <LiveLayoutPicker
+          onSelect={handleLayoutSelected}
+          onClose={() => setInsertIndex(null)}
+        />
+      )}
 
       {/* Full editor modal (for element editing) */}
       {modalOpen && (

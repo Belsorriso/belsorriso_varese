@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import ColumnEditor from './ColumnEditor';
 import { SECTION_REGISTRY } from '../../../components/sections/sectionRegistry';
 
-const LAYOUTS = [
+export const LAYOUTS = [
   {
     key: 'full',
     label: 'Pieno',
