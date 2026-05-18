@@ -66,7 +66,7 @@ function EditableGallery({ page, section, defaultImages = [], altPrefix = 'Foto'
         </div>
       )}
 
-      {isEditMode && isAdmin && (
+      {isEditMode && (
         <button
           onClick={() => setShowManager(true)}
           style={{ display: 'block', width: '100%', padding: '8px', background: '#f5f3ff', border: '2px dashed #c4b5fd', borderRadius: 8, color: '#7c3aed', fontSize: 13, fontWeight: 600, cursor: 'pointer', marginBottom: 8 }}
