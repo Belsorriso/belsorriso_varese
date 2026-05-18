@@ -93,7 +93,7 @@ function RowContent({ row }) {
 
 /* ── live-edit draggable row wrapper ── */
 
-function DraggableRow({ row, onDelete, editMode }) {
+function DraggableRow({ row, onDelete, onEdit }) {
   const {
     attributes,
     listeners,
@@ -112,15 +112,25 @@ function DraggableRow({ row, onDelete, editMode }) {
 
   const sectionEntry = row.type === 'section' ? SECTION_REGISTRY[row.sectionId] : null;
   const label = sectionEntry ? sectionEntry.label : (row.layout ? `Riga — ${row.layout}` : 'Riga');
+  const isCustomRow = row.type !== 'section';
+  const isEmpty = isCustomRow && (row.columns || []).every(col => !(col.elements || []).length);
 
   return (
     <div ref={setNodeRef} style={style} className={`pbr-live-row-wrapper ${isDragging ? 'dragging' : ''}`}>
-      {/* drag handle bar — always visible in edit mode */}
       <div className="pbr-live-row-handle">
         <span className="pbr-live-drag-icon" {...attributes} {...listeners} title="Trascina per riordinare">
           ⠿⠿
         </span>
         <span className="pbr-live-row-label">{label}</span>
+        {isCustomRow && (
+          <button
+            className="pbr-live-edit-btn pbr-live-row-edit-btn"
+            onClick={onEdit}
+            title="Modifica contenuto"
+          >
+            ✏️ Modifica
+          </button>
+        )}
         <button
           className="pbr-live-delete-btn"
           onClick={() => onDelete(row.id)}
@@ -129,7 +139,13 @@ function DraggableRow({ row, onDelete, editMode }) {
           ✕
         </button>
       </div>
-      <RowContent row={row} />
+      {isEmpty ? (
+        <div className="pbr-empty-custom-row" onClick={onEdit}>
+          <span>Riga vuota — clicca per aggiungere contenuto</span>
+        </div>
+      ) : (
+        <RowContent row={row} />
+      )}
     </div>
   );
 }
@@ -321,7 +337,7 @@ function PageBuilderRenderer({ page }) {
               <InsertZone onInsert={() => handleInsertAt(0)} />
               {rows.map((row, index) => (
                 <div key={row.id}>
-                  <DraggableRow row={row} onDelete={handleDeleteRow} />
+                  <DraggableRow row={row} onDelete={handleDeleteRow} onEdit={() => setModalOpen(true)} />
                   <InsertZone onInsert={() => handleInsertAt(index + 1)} />
                 </div>
               ))}

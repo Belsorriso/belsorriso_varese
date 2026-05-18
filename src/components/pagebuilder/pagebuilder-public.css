@@ -287,6 +287,34 @@
   color: #fef2f2;
 }
 
+.pbr-live-row-edit-btn {
+  padding: 3px 10px;
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.pbr-empty-custom-row {
+  padding: 24px 20px;
+  text-align: center;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  margin: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.pbr-empty-custom-row:hover {
+  border-color: #ad172b;
+  background: #fff5f6;
+}
+
+.pbr-empty-custom-row span {
+  font-size: 13px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
 /* ===== INSERT ZONE ===== */
 .pbr-insert-zone {
   padding: 0 20px;
