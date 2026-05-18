@@ -6,7 +6,7 @@ export function useContent(page) {
   const [content, setContent] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { getPendingSection, updateContent, updateSectionContent } = useEditMode();
+  const { getPendingSection, updateContent, updateSectionContent, contentVersion } = useEditMode();
 
   const fetchContent = useCallback(async () => {
     setLoading(true);
@@ -40,7 +40,7 @@ export function useContent(page) {
 
   useEffect(() => {
     fetchContent();
-  }, [fetchContent]);
+  }, [fetchContent, contentVersion]);
 
   const getField = useCallback((section, field, defaultValue = '') => {
     const pendingSection = getPendingSection(page, section);

@@ -11,6 +11,7 @@ export function EditModeProvider({ children }) {
   const [pendingChanges, setPendingChanges] = useState({});
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState(null);
+  const [contentVersion, setContentVersion] = useState(0);
 
   const isAdmin = user?.role === 'admin' || user?.role === 'editor';
 
@@ -92,6 +93,7 @@ export function EditModeProvider({ children }) {
       await Promise.all(savePromises);
       setPendingChanges({});
       setIsDirty(false);
+      setContentVersion(v => v + 1);
       showMessage('success', 'Modifiche salvate con successo!');
     } catch (error) {
       showMessage('error', error.message || 'Errore nel salvare le modifiche');
@@ -135,7 +137,8 @@ export function EditModeProvider({ children }) {
       discardChanges,
       getPendingValue,
       getPendingSection,
-      showMessage
+      showMessage,
+      contentVersion
     }}>
       {children}
     </EditModeContext.Provider>
