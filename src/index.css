@@ -1256,6 +1256,22 @@ img {
   border-radius: 4px;
 }
 
+.editable-bg-overlay {
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 16px;
+  background: transparent;
+}
+
+.editable-bg-overlay span {
+  background: rgba(0,0,0,0.75);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
 .editable-element:hover .editable-image-overlay,
 .editable-image:hover .editable-image-overlay {
   opacity: 1;

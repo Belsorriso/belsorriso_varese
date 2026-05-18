@@ -1,11 +1,15 @@
-import { EditableText, EditableSection } from '../../editable';
+import { EditableText, EditableSection, EditableImage } from '../../editable';
 
 function HomeHero() {
   return (
     <EditableSection label="Hero">
-      <section
+      <EditableImage
+        page="home"
+        section="hero"
+        field="background"
         className="hero"
-        style={{ backgroundImage: 'url(/images/hero-bg.png)' }}
+        asBackground={true}
+        defaultValue="/images/hero-bg.webp"
       >
         <div className="hero-content">
           <EditableText
@@ -31,7 +35,7 @@ function HomeHero() {
             Controlla Disponibilita
           </a>
         </div>
-      </section>
+      </EditableImage>
     </EditableSection>
   );
 }

@@ -12,7 +12,8 @@ function EditableImage({
   alt = '',
   style = {},
   defaultValue = '',
-  asBackground = false
+  asBackground = false,
+  children
 }) {
   const { isEditMode, isAdmin } = useEditMode();
   const { getField, updateField } = useContent(page);
@@ -50,13 +51,18 @@ function EditableImage({
             ...style,
             backgroundImage: currentValue ? `url(${imageUrl})` : 'none'
           }}
-          onClick={handleClick}
-          title={isEditMode && isAdmin ? 'Clicca per cambiare immagine' : ''}
+          onClick={undefined}
+          title={isEditMode && isAdmin ? 'Clicca per cambiare immagine di sfondo' : ''}
         >
+          {children}
           {isEditMode && isAdmin && (
-            <div className="editable-image-overlay">
-              <span className="editable-image-icon">&#128247;</span>
-              <span>Cambia immagine</span>
+            <div
+              className="editable-image-overlay editable-bg-overlay"
+              onClick={e => { e.stopPropagation(); handleClick(e); }}
+              style={{ pointerEvents: 'auto', cursor: 'pointer' }}
+            >
+              <span className="editable-image-icon">🖼️</span>
+              <span>Cambia sfondo</span>
             </div>
           )}
         </div>
