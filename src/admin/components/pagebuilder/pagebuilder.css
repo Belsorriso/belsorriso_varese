@@ -153,8 +153,8 @@
 
 /* Row Editor */
 .pb-row {
-  background: #fff;
-  border: 1px solid #e5e7eb;
+  background: #fff !important;
+  border: 1px solid #e5e7eb !important;
   border-radius: 10px;
   margin-bottom: 16px;
   overflow: hidden;
@@ -175,10 +175,13 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: #f1f5f9 !important;
-  border-bottom: 1px solid #e2e8f0;
+  background: #e2e8f0 !important;
+  border-bottom: 1px solid #cbd5e1 !important;
   user-select: none;
-  color: #374151 !important;
+}
+
+.pb-row-header * {
+  color: #1e293b !important;
 }
 
 .pb-drag-handle {
@@ -196,10 +199,10 @@
 
 .pb-row-label {
   font-size: 12px;
-  font-weight: 600;
-  color: #374151 !important;
+  font-weight: 700;
+  color: #1e293b !important;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   flex: 1;
 }
 
