@@ -1272,6 +1272,30 @@ img {
   backdrop-filter: blur(4px);
 }
 
+.hero-change-bg-btn {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.hero-change-bg-btn:hover {
+  background: rgba(0, 115, 170, 0.85);
+  border-color: #0073aa;
+  transform: translateY(-1px);
+}
+
 .editable-element:hover .editable-image-overlay,
 .editable-image:hover .editable-image-overlay {
   opacity: 1;

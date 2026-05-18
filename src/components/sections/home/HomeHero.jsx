@@ -1,15 +1,26 @@
-import { EditableText, EditableSection, EditableImage } from '../../editable';
+import { useState } from 'react';
+import { EditableText, EditableSection } from '../../editable';
+import { useEditMode } from '../../context/EditModeContext';
+import { useContent } from '../../hooks/useContent';
+import MediaLibrary from '../../admin/components/media/MediaLibrary';
 
 function HomeHero() {
+  const { isEditMode, isAdmin } = useEditMode();
+  const { getField, updateField } = useContent('home');
+  const [showMedia, setShowMedia] = useState(false);
+
+  const bgImage = getField('hero', 'background', '/images/hero-bg.webp');
+
+  const handleSelect = (media) => {
+    updateField('hero', 'background', media.url);
+    setShowMedia(false);
+  };
+
   return (
     <EditableSection label="Hero">
-      <EditableImage
-        page="home"
-        section="hero"
-        field="background"
+      <section
         className="hero"
-        asBackground={true}
-        defaultValue="/images/hero-bg.webp"
+        style={{ backgroundImage: `url(${bgImage})` }}
       >
         <div className="hero-content">
           <EditableText
@@ -35,7 +46,30 @@ function HomeHero() {
             Controlla Disponibilita
           </a>
         </div>
-      </EditableImage>
+
+        {isEditMode && isAdmin && (
+          <button
+            className="hero-change-bg-btn"
+            onClick={() => setShowMedia(true)}
+          >
+            🖼️ Cambia sfondo
+          </button>
+        )}
+      </section>
+
+      {showMedia && (
+        <div className="media-modal-overlay" onClick={() => setShowMedia(false)}>
+          <div className="media-modal" onClick={e => e.stopPropagation()}>
+            <div className="media-modal-header">
+              <h3>Seleziona immagine di sfondo</h3>
+              <button className="media-modal-close" onClick={() => setShowMedia(false)}>&times;</button>
+            </div>
+            <div className="media-modal-content">
+              <MediaLibrary onSelect={handleSelect} selectionMode={true} />
+            </div>
+          </div>
+        </div>
+      )}
     </EditableSection>
   );
 }
