@@ -63,7 +63,38 @@ const CONTENT = {
     header: {
       title: 'Le Stanze',
       subtitle: 'Per prenotare scegli una camera o un appartamento!'
-    }
+    },
+    camereIntro: {
+      title: 'Camere',
+      subtitle: 'Le nostre camere, tutte con bagno privato e servizi inclusi'
+    },
+    appartamentiIntro: {
+      title: 'Appartamenti',
+      subtitle: 'Soluzioni più ampie per soggiorni prolungati o famiglie'
+    },
+    camere: [
+      { nome: 'Bordeaux', tipo: 'Camera', capacita: 'Da 1 a 2 ospiti', codice: '012133-FOR-00015', features: 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero' },
+      { nome: 'Azzurra', tipo: 'Camera', capacita: 'Da 1 a 4 ospiti', codice: '012133-FOR-00015', features: 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero' },
+      { nome: 'Rossa', tipo: 'Camera', capacita: 'Da 1 a 2 ospiti', codice: '012133-FOR-00015', features: 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero' },
+      { nome: 'Arancio', tipo: 'Camera', capacita: 'Da 1 a 3 ospiti', codice: '012133-FOR-00015', features: 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero' },
+      { nome: 'Blu', tipo: 'Camera', capacita: 'Da 1 a 2 ospiti', codice: '012133-FOR-00012', features: 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero' },
+      { nome: 'Avorio', tipo: 'Camera', capacita: 'Da 1 a 4 ospiti', codice: '012133-FOR-00012', features: 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero' },
+      { nome: 'Verde', tipo: 'Camera', capacita: 'Da 1 a 2 ospiti', codice: '012133-FOR-00012', features: 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero' },
+      { nome: 'Lilla A', tipo: 'Camera', capacita: 'Da 1 a 2 ospiti', codice: '', features: 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero' },
+      { nome: 'Lilla B', tipo: 'Camera', capacita: 'Da 1 a 2 ospiti', codice: '', features: 'Bagno privato con doccia\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito\nCassaforte\nFrigorifero' }
+    ],
+    appartamenti: [
+      { nome: 'Bilo 1B Comfort', tipo: 'Bilocale', descrizione: 'Quarto piano', mq: '58 m²', features: 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nLavatrice\nWi-Fi gratuito' },
+      { nome: 'Bilo 2', tipo: 'Bilocale', descrizione: 'Primo piano', mq: '60 m²', features: 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nLavatrice\nWi-Fi gratuito' },
+      { nome: 'Bilo 5', tipo: 'Bilocale', descrizione: 'Primo piano – due livelli', mq: '70 m²', features: 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nLavatrice\nWi-Fi gratuito' },
+      { nome: 'Bilo 6', tipo: 'Bilocale', descrizione: 'Primo piano', mq: '65 m²', features: 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nLavatrice\nWi-Fi gratuito' },
+      { nome: 'Bilo 8', tipo: 'Bilocale', descrizione: 'Secondo piano', mq: '75 m²', features: 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nLavatrice\nWi-Fi gratuito' },
+      { nome: 'Mono 3', tipo: 'Monolocale', descrizione: 'Piano terra', mq: '45 m²', features: 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nLavatrice\nWi-Fi gratuito' },
+      { nome: 'Mono 4', tipo: 'Monolocale', descrizione: 'Primo piano', mq: '45 m²', features: 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nLavatrice\nWi-Fi gratuito' },
+      { nome: 'Mono 7', tipo: 'Monolocale', descrizione: 'Secondo piano', mq: '45 m²', features: 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nLavatrice\nWi-Fi gratuito' },
+      { nome: 'Suite Mono 8', tipo: 'Monolocale', descrizione: 'Primo piano', mq: '33 m²', features: 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nWi-Fi gratuito' },
+      { nome: 'Trilocale Superior 9', tipo: 'Trilocale', descrizione: 'Secondo piano', mq: '', features: 'Bagno privato\nAngolo cottura\nRiscaldamento\nAria condizionata\nTV Smart 32"\nLavatrice\nWi-Fi gratuito' }
+    ]
   },
 
   struttura: {

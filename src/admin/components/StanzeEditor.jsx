@@ -59,24 +59,19 @@ function StanzeEditor() {
   };
 
   const cameraFields = [
-    { name: 'nome', label: 'Nome Camera', type: 'text', placeholder: 'Es: Camera Deluxe' },
-    { name: 'descrizione', label: 'Descrizione', type: 'textarea', placeholder: 'Descrizione della camera...', rows: 3 },
-    { name: 'capacita', label: 'Capacita (persone)', type: 'number', min: 1, max: 10 },
-    { name: 'superficie', label: 'Superficie (mq)', type: 'text', placeholder: 'Es: 25' },
-    { name: 'prezzo', label: 'Prezzo (da)', type: 'text', placeholder: 'Es: 80' },
-    { name: 'immagine', label: 'Immagine', type: 'image' },
-    { name: 'servizi', label: 'Servizi inclusi', type: 'array', itemLabel: 'servizio', itemPlaceholder: 'Es: Wi-Fi gratuito' }
+    { name: 'nome', label: 'Nome Camera', type: 'text', placeholder: 'Es: Bordeaux' },
+    { name: 'tipo', label: 'Tipo', type: 'text', placeholder: 'Es: Camera' },
+    { name: 'capacita', label: 'Capacità ospiti', type: 'text', placeholder: 'Es: Da 1 a 2 ospiti' },
+    { name: 'codice', label: 'Codice struttura', type: 'text', placeholder: 'Es: 012133-FOR-00015' },
+    { name: 'features', label: 'Dotazioni (una per riga)', type: 'textarea', placeholder: 'Bagno privato con doccia\nRiscaldamento\nAria condizionata', rows: 7 }
   ];
 
   const appartamentoFields = [
-    { name: 'nome', label: 'Nome Appartamento', type: 'text', placeholder: 'Es: Suite Family' },
-    { name: 'descrizione', label: 'Descrizione', type: 'textarea', placeholder: 'Descrizione dell\'appartamento...', rows: 3 },
-    { name: 'capacita', label: 'Capacita (persone)', type: 'number', min: 1, max: 10 },
-    { name: 'superficie', label: 'Superficie (mq)', type: 'text', placeholder: 'Es: 45' },
-    { name: 'locali', label: 'Numero Locali', type: 'text', placeholder: 'Es: 2+1' },
-    { name: 'prezzo', label: 'Prezzo (da)', type: 'text', placeholder: 'Es: 120' },
-    { name: 'immagine', label: 'Immagine', type: 'image' },
-    { name: 'servizi', label: 'Servizi inclusi', type: 'array', itemLabel: 'servizio', itemPlaceholder: 'Es: Cucina attrezzata' }
+    { name: 'nome', label: 'Nome Appartamento', type: 'text', placeholder: 'Es: Bilo 1B Comfort' },
+    { name: 'tipo', label: 'Tipo', type: 'text', placeholder: 'Es: Bilocale' },
+    { name: 'descrizione', label: 'Piano / Note', type: 'text', placeholder: 'Es: Primo piano' },
+    { name: 'mq', label: 'Superficie', type: 'text', placeholder: 'Es: 60 m²' },
+    { name: 'features', label: 'Dotazioni (una per riga)', type: 'textarea', placeholder: 'Bagno privato\nAngolo cottura\nLavatrice', rows: 7 }
   ];
 
   if (loading) {
@@ -159,7 +154,7 @@ function StanzeEditor() {
             fields={cameraFields}
             itemLabel="Camera"
             maxItems={10}
-            renderPreview={(item) => `${item.nome || 'Nuova Camera'} - ${item.capacita || '?'} posti`}
+            renderPreview={(item) => `${item.nome || 'Nuova Camera'} — ${item.capacita || ''} ${item.tipo ? '· ' + item.tipo : ''}`}
           />
           <div className="form-actions">
             <button
@@ -185,7 +180,7 @@ function StanzeEditor() {
             fields={appartamentoFields}
             itemLabel="Appartamento"
             maxItems={15}
-            renderPreview={(item) => `${item.nome || 'Nuovo Appartamento'} - ${item.locali || '?'} locali`}
+            renderPreview={(item) => `${item.nome || 'Nuovo Appartamento'} — ${item.tipo || ''} ${item.mq ? '· ' + item.mq : ''} ${item.descrizione ? '· ' + item.descrizione : ''}`}
           />
           <div className="form-actions">
             <button
