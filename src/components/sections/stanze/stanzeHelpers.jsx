@@ -73,7 +73,7 @@ function getRoomDefaultImages(roomName) {
   return (imageFiles[info.folder] || []).map(f => `/images/stanze/${info.folder}/${f}`);
 }
 
-export function RoomGallery({ roomName }) {
+export function RoomGallery({ roomName, forceManage = false }) {
   const defaultImages = getRoomDefaultImages(roomName);
   const slug = getSlug(roomName);
   return (
@@ -85,6 +85,7 @@ export function RoomGallery({ roomName }) {
           defaultImages={defaultImages}
           altPrefix={roomName}
           imgStyle={{ width: '100%', height: '220px', objectFit: 'cover' }}
+          forceManage={forceManage}
         />
       </div>
     </div>

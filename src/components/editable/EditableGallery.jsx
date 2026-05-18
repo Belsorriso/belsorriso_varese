@@ -10,9 +10,10 @@ function resolveUrl(url) {
   return `${API_BASE_URL}${url}`;
 }
 
-function EditableGallery({ page, section, defaultImages = [], altPrefix = 'Foto', imgStyle = {} }) {
+function EditableGallery({ page, section, defaultImages = [], altPrefix = 'Foto', imgStyle = {}, forceManage = false }) {
   const { isEditMode, isAdmin } = useEditMode();
   const { getArray, updateSection } = useContent(page);
+  const canManage = forceManage || isEditMode;
   const [current, setCurrent] = useState(0);
   const [showManager, setShowManager] = useState(false);
   const [showMediaLib, setShowMediaLib] = useState(false);
@@ -66,7 +67,7 @@ function EditableGallery({ page, section, defaultImages = [], altPrefix = 'Foto'
         </div>
       )}
 
-      {isEditMode && (
+      {canManage && (
         <button
           onClick={() => setShowManager(true)}
           style={{ display: 'block', width: '100%', padding: '8px', background: '#f5f3ff', border: '2px dashed #c4b5fd', borderRadius: 8, color: '#7c3aed', fontSize: 13, fontWeight: 600, cursor: 'pointer', marginBottom: 8 }}

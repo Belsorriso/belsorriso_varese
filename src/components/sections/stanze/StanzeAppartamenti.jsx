@@ -76,7 +76,7 @@ function StanzeAppartamenti() {
               <>
                 <div className="form-group">
                   <label>Foto</label>
-                  <RoomGallery roomName={item.nome} />
+                  <RoomGallery roomName={item.nome} forceManage={true} />
                 </div>
                 <div className="form-group">
                   <label>Nome</label>
