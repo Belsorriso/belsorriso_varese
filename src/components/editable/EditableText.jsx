@@ -68,45 +68,40 @@ function EditableText({
   }
 
   if (isEditing) {
-    if (multiline) {
-      return (
-        <textarea
-          ref={inputRef}
-          className={`editable-input editable-textarea ${className}`}
-          value={localValue}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
-          style={{
-            ...style,
-            fontFamily: 'inherit',
-            fontSize: 'inherit',
-            fontWeight: 'inherit',
-            lineHeight: 'inherit',
-            color: 'inherit'
-          }}
-        />
-      );
-    }
+    const inputStyle = {
+      fontFamily: 'inherit',
+      fontSize: 'inherit',
+      fontWeight: 'inherit',
+      lineHeight: 'inherit',
+    };
 
     return (
-      <input
-        ref={inputRef}
-        type="text"
-        className={`editable-input ${className}`}
-        value={localValue}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        onKeyDown={handleKeyDown}
-        style={{
-          ...style,
-          fontFamily: 'inherit',
-          fontSize: 'inherit',
-          fontWeight: 'inherit',
-          lineHeight: 'inherit',
-          color: 'inherit'
-        }}
-      />
+      <div className="editable-input-wrapper">
+        <span className="editable-input-label">✎ Modifica testo</span>
+        {multiline ? (
+          <textarea
+            ref={inputRef}
+            className={`editable-input editable-textarea ${className}`}
+            value={localValue}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onKeyDown={handleKeyDown}
+            style={inputStyle}
+          />
+        ) : (
+          <input
+            ref={inputRef}
+            type="text"
+            className={`editable-input ${className}`}
+            value={localValue}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onKeyDown={handleKeyDown}
+            style={inputStyle}
+          />
+        )}
+        <span className="editable-input-hint">Invio per confermare · Esc per annullare</span>
+      </div>
     );
   }
 
