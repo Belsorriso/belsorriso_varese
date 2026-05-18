@@ -20,7 +20,7 @@ function RegolamentoEditor() {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('${API_URL}/content/regolamento');
+      const response = await fetch(`${API_URL}/content/regolamento`);
       if (response.ok) {
         const data = await response.json();
         setContent(prev => ({ ...prev, ...data }));

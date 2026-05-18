@@ -21,7 +21,7 @@ function TerritorioEditor() {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('${API_URL}/content/territorio');
+      const response = await fetch(`${API_URL}/content/territorio`);
       if (response.ok) {
         const data = await response.json();
         setContent(prev => ({ ...prev, ...data }));

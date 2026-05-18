@@ -25,7 +25,7 @@ function FooterEditor() {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('${API_URL}/content/footer');
+      const response = await fetch(`${API_URL}/content/footer`);
       if (response.ok) {
         const data = await response.json();
         setContent(prev => ({ ...prev, ...data }));

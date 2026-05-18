@@ -17,15 +17,11 @@ function HomeEditor() {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('${API_URL}/content/home');
+      const response = await fetch(`${API_URL}/content/home`);
       if (response.ok) {
         const data = await response.json();
-        if (data.length > 0) {
-          const contentObj = {};
-          data.forEach(item => {
-            contentObj[item.section] = item.content;
-          });
-          setContent(prev => ({ ...prev, ...contentObj }));
+        if (data && typeof data === 'object') {
+          setContent(prev => ({ ...prev, ...data }));
         }
       }
     } catch (error) {

@@ -15,7 +15,7 @@ function UsersManager() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('${API_URL}/auth/users', {
+      const response = await fetch(`${API_URL}/auth/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) {
@@ -34,7 +34,7 @@ function UsersManager() {
     setMessage(null);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('${API_URL}/auth/users', {
+      const response = await fetch(`${API_URL}/auth/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

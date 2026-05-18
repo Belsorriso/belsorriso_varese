@@ -20,7 +20,7 @@ function StrutturaEditor() {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('${API_URL}/content/struttura');
+      const response = await fetch(`${API_URL}/content/struttura`);
       if (response.ok) {
         const data = await response.json();
         setContent(prev => ({ ...prev, ...data }));

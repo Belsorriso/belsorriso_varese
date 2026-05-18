@@ -36,7 +36,7 @@ function ContattiEditor() {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('${API_URL}/content/contatti');
+      const response = await fetch(`${API_URL}/content/contatti`);
       if (response.ok) {
         const data = await response.json();
         setContent(prev => ({ ...prev, ...data }));
