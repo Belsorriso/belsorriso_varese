@@ -1,9 +1,17 @@
-import { EditableText, EditableSection } from '../../editable';
+import { EditableText, EditableSection, EditableImage } from '../../editable';
 
 function StanzeHeader() {
   return (
     <EditableSection label="Header">
-      <section className="page-header">
+      <EditableImage
+        page="stanze"
+        section="header"
+        field="bgImage"
+        defaultValue=""
+        asBackground
+        className="page-header"
+        style={{ backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}
+      >
         <div className="container">
           <EditableText
             page="stanze"
@@ -20,7 +28,7 @@ function StanzeHeader() {
             defaultValue="Per prenotare scegli una camera o un appartamento!"
           />
         </div>
-      </section>
+      </EditableImage>
     </EditableSection>
   );
 }

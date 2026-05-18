@@ -1,9 +1,17 @@
-import { EditableText, EditableSection } from '../../editable';
+import { EditableText, EditableSection, EditableImage } from '../../editable';
 
 function RegolamentoHeader() {
   return (
     <EditableSection label="Header">
-      <section className="page-header">
+      <EditableImage
+        page="regolamento"
+        section="header"
+        field="bgImage"
+        defaultValue=""
+        asBackground
+        className="page-header"
+        style={{ backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}
+      >
         <div className="container">
           <EditableText
             page="regolamento"
@@ -20,7 +28,7 @@ function RegolamentoHeader() {
             defaultValue="Tutto quello che devi sapere per il tuo soggiorno"
           />
         </div>
-      </section>
+      </EditableImage>
     </EditableSection>
   );
 }

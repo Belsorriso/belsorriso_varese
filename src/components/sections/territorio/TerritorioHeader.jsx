@@ -1,9 +1,17 @@
-import { EditableText, EditableSection } from '../../editable';
+import { EditableText, EditableSection, EditableImage } from '../../editable';
 
 function TerritorioHeader() {
   return (
     <EditableSection label="Header">
-      <section className="page-header">
+      <EditableImage
+        page="territorio"
+        section="header"
+        field="bgImage"
+        defaultValue=""
+        asBackground
+        className="page-header"
+        style={{ backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}
+      >
         <div className="container">
           <EditableText
             page="territorio"
@@ -20,7 +28,7 @@ function TerritorioHeader() {
             defaultValue="Scopri le attrazioni di Varese e dintorni"
           />
         </div>
-      </section>
+      </EditableImage>
     </EditableSection>
   );
 }

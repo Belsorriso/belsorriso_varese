@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import EditableGallery from '../../editable/EditableGallery';
 
 export function getSlug(nome) {
   const slugMap = {
@@ -48,59 +48,44 @@ export const roomImageMap = {
 };
 
 export const imageFiles = {
-  bordeaux: ['1-IMG_9562.jpg', '2-IMG_9572.jpg', '3-IMG_9574.jpg', '4-IMG_9577.jpg', '5-IMG_9583.jpg', '6-IMG_9584_jpg.jpg'],
-  azzura: ['1-IMG_9640.jpg', '2-IMG_9647.jpg', '3-IMG_9648.jpg', '4-IMG_9651.jpg', '5-IMG_9659.jpg', '6-IMG_9660.jpg', '7-IMG_9661.jpg', '8-IMG_9662.jpg'],
-  rosso: ['1-IMG_1016.jpg', '2-IMG_1019.jpg', '3-IMG_1022.jpg', '4-IMG_1025.jpg', '5-IMG_1030.jpg', '6-IMG_1035.jpg'],
-  arancio: ['1-IMG_0496.jpg', '2-IMG_0507.jpg', '3-IMG_0517.jpg', '4-IMG_0519.jpg', '5-IMG_0523.jpg', '6-IMG_0526.jpg', '7-IMG_0530.jpg', '8-IMG_0532.jpg'],
-  blu: ['1-IMG_0270.jpg', '2-IMG_0271.jpg', '3-IMG_0272.jpg', '4-IMG_0277.jpg', '5-IMG_0279.jpg', '6-IMG_0282.jpg', '7-IMG_0290.jpg', '8-IMG_0296.jpg'],
-  avorio: ['3-IMG_0392.jpg', '4-IMG_0394.jpg', '5-IMG_0395.jpg', '6-IMG_0397.jpg', '2-IMG_0387.jpg', '1-IMG_0385.jpg'],
-  verde: ['2-IMG_4017.jpg', '3-IMG_4045.jpg', '4-IMG_4049.jpg', '5-IMG_4053.jpg', '6-IMG_4059.jpg', '7-IMG_4063.jpg', '1-IMG_4012.jpg'],
-  lilla: ['1-IMG_9378.jpg', '2-IMG_9379.jpg', '3-IMG_9386.jpg', '4-IMG_9390.jpg', '5-IMG_9392.jpg', '6-IMG_9393.jpg', '7-IMG_9394.jpg', '8-IMG_9397.jpg', '9-IMG_9412.jpg'],
-  lillab: ['1-IMG_0831.jpg', '2-IMG_0833.jpg', '3-IMG_0836.jpg', '4-IMG_0838.jpg', '5-IMG_0839.jpg', '6-IMG_0841.jpg', '7-IMG_0850.jpg'],
-  bilo1b: ['592029793.jpg', '592029791.jpg', '592029794.jpg', 'bf9b3d58-e5e7-4fa4-a2ea-70470d047810.avif', 'e36bbf53-cc85-43be-8bec-a17a3c9d9983.avif'],
-  mono4e7: ['3-IMG_0175.jpg', '1-IMG_0167.jpg', '2-IMG_0171.jpg', '4-IMG_0176.jpg', '5-IMG_0178.jpg', '6-IMG_0180.jpg', '7-IMG_0182.jpg', '8-IMG_0184.jpg'],
-  suitemono8: ['1-IMG_5169.jpg', '2-IMG_5172.jpg', '3-IMG_5174.jpg', '4-IMG_5175.jpg', '5-IMG_5190.jpg', '6-IMG_5192.jpg', '7-IMG_5193.jpg', '8-IMG_5199.jpg'],
-  bilo2: ['3-IMG_0745.jpg', '1-IMG_0739.jpg', '2-IMG_0740.jpg', '4-IMG_0749.jpg', '5-IMG_0750.jpg', '6-IMG_0753.jpg', '7-IMG_0754.jpg'],
-  bilo5: ['1-IMG_4739.jpg', '2-IMG_4752.jpg', '3-IMG_5230.jpg', '4-IMG_5232.jpg', '5-IMG_5235.jpg', '6-IMG_5240.jpg', '7-IMG_5241.jpg', '8-IMG_5243.jpg'],
-  bilo6: ['2-IMG_1937.jpg', '1-IMG_1935.jpg', '3-IMG_1943.jpg', '4-IMG_1944.jpg', '5-IMG_1948.jpg', '6-IMG_1949.jpg'],
-  bilo8: ['3-IMG_0787.jpg', '1-IMG_0784.jpg', '2-IMG_0786.jpg', '4-IMG_0788.jpg', '5-IMG_0790.jpg', '6-IMG_0792.jpg', '7-IMG_0794.jpg', '8-IMG_0802.jpg', '9-IMG_0803.jpg', '10-IMG_0809.jpg'],
-  trilo9: ['1-IMG_5150.jpg', '2-IMG_5154.jpg', '3-IMG_5156.jpg', '4-IMG_5158.jpg', '5-IMG_5160.jpg', '6-IMG_5163.jpg', '7-IMG_5164.jpg', '8-IMG_5165.jpg', '9-IMG_5166.jpg'],
+  bordeaux: ['1-IMG_9562.webp', '2-IMG_9572.webp', '3-IMG_9574.webp', '4-IMG_9577.webp', '5-IMG_9583.webp', '6-IMG_9584_jpg.webp'],
+  azzura: ['1-IMG_9640.webp', '2-IMG_9647.webp', '3-IMG_9648.webp', '4-IMG_9651.webp', '5-IMG_9659.webp', '6-IMG_9660.webp', '7-IMG_9661.webp', '8-IMG_9662.webp'],
+  rosso: ['1-IMG_1016.webp', '2-IMG_1019.webp', '3-IMG_1022.webp', '4-IMG_1025.webp', '5-IMG_1030.webp', '6-IMG_1035.webp'],
+  arancio: ['1-IMG_0496.webp', '2-IMG_0507.webp', '3-IMG_0517.webp', '4-IMG_0519.webp', '5-IMG_0523.webp', '6-IMG_0526.webp', '7-IMG_0530.webp', '8-IMG_0532.webp'],
+  blu: ['1-IMG_0270.webp', '2-IMG_0271.webp', '3-IMG_0272.webp', '4-IMG_0277.webp', '5-IMG_0279.webp', '6-IMG_0282.webp', '7-IMG_0290.webp', '8-IMG_0296.webp'],
+  avorio: ['3-IMG_0392.webp', '4-IMG_0394.webp', '5-IMG_0395.webp', '6-IMG_0397.webp', '2-IMG_0387.webp', '1-IMG_0385.webp'],
+  verde: ['2-IMG_4017.webp', '3-IMG_4045.webp', '4-IMG_4049.webp', '5-IMG_4053.webp', '6-IMG_4059.webp', '7-IMG_4063.webp', '1-IMG_4012.webp'],
+  lilla: ['1-IMG_9378.webp', '2-IMG_9379.webp', '3-IMG_9386.webp', '4-IMG_9390.webp', '5-IMG_9392.webp', '6-IMG_9393.webp', '7-IMG_9394.webp', '8-IMG_9397.webp', '9-IMG_9412.webp'],
+  lillab: ['1-IMG_0831.webp', '2-IMG_0833.webp', '3-IMG_0836.webp', '4-IMG_0838.webp', '5-IMG_0839.webp', '6-IMG_0841.webp', '7-IMG_0850.webp'],
+  bilo1b: ['592029793.webp', '592029791.webp', '592029794.webp', 'bf9b3d58-e5e7-4fa4-a2ea-70470d047810.avif', 'e36bbf53-cc85-43be-8bec-a17a3c9d9983.avif'],
+  mono4e7: ['3-IMG_0175.webp', '1-IMG_0167.webp', '2-IMG_0171.webp', '4-IMG_0176.webp', '5-IMG_0178.webp', '6-IMG_0180.webp', '7-IMG_0182.webp', '8-IMG_0184.webp'],
+  suitemono8: ['1-IMG_5169.webp', '2-IMG_5172.webp', '3-IMG_5174.webp', '4-IMG_5175.webp', '5-IMG_5190.webp', '6-IMG_5192.webp', '7-IMG_5193.webp', '8-IMG_5199.webp'],
+  bilo2: ['3-IMG_0745.webp', '1-IMG_0739.webp', '2-IMG_0740.webp', '4-IMG_0749.webp', '5-IMG_0750.webp', '6-IMG_0753.webp', '7-IMG_0754.webp'],
+  bilo5: ['1-IMG_4739.webp', '2-IMG_4752.webp', '3-IMG_5230.webp', '4-IMG_5232.webp', '5-IMG_5235.webp', '6-IMG_5240.webp', '7-IMG_5241.webp', '8-IMG_5243.webp'],
+  bilo6: ['2-IMG_1937.webp', '1-IMG_1935.webp', '3-IMG_1943.webp', '4-IMG_1944.webp', '5-IMG_1948.webp', '6-IMG_1949.webp'],
+  bilo8: ['3-IMG_0787.webp', '1-IMG_0784.webp', '2-IMG_0786.webp', '4-IMG_0788.webp', '5-IMG_0790.webp', '6-IMG_0792.webp', '7-IMG_0794.webp', '8-IMG_0802.webp', '9-IMG_0803.webp', '10-IMG_0809.webp'],
+  trilo9: ['1-IMG_5150.webp', '2-IMG_5154.webp', '3-IMG_5156.webp', '4-IMG_5158.webp', '5-IMG_5160.webp', '6-IMG_5163.webp', '7-IMG_5164.webp', '8-IMG_5165.webp', '9-IMG_5166.webp'],
 };
 
+function getRoomDefaultImages(roomName) {
+  const info = roomImageMap[roomName];
+  if (!info) return [];
+  return (imageFiles[info.folder] || []).map(f => `/images/stanze/${info.folder}/${f}`);
+}
+
 export function RoomGallery({ roomName }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const roomInfo = roomImageMap[roomName];
-
-  if (!roomInfo) return null;
-
-  const images = imageFiles[roomInfo.folder] || [];
-  if (images.length === 0) return null;
-
-  const nextImage = () => setCurrentIndex((prev) => (prev + 1) % images.length);
-  const prevImage = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-
+  const defaultImages = getRoomDefaultImages(roomName);
+  const slug = getSlug(roomName);
   return (
     <div className="room-gallery">
       <div className="room-gallery-main">
-        <img
-          src={`/images/stanze/${roomInfo.folder}/${images[currentIndex]}`}
-          alt={`${roomName} - Foto ${currentIndex + 1}`}
+        <EditableGallery
+          page="stanze"
+          section={`gallery-${slug}`}
+          defaultImages={defaultImages}
+          altPrefix={roomName}
+          imgStyle={{ width: '100%', height: '220px', objectFit: 'cover' }}
         />
-        {images.length > 1 && (
-          <>
-            <button className="gallery-nav gallery-prev" onClick={prevImage}>&lt;</button>
-            <button className="gallery-nav gallery-next" onClick={nextImage}>&gt;</button>
-            <div className="gallery-dots">
-              {images.map((_, idx) => (
-                <span
-                  key={idx}
-                  className={`gallery-dot ${idx === currentIndex ? 'active' : ''}`}
-                  onClick={() => setCurrentIndex(idx)}
-                />
-              ))}
-            </div>
-          </>
-        )}
       </div>
     </div>
   );

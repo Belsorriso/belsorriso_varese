@@ -1,9 +1,17 @@
-import { EditableText, EditableSection } from '../../editable';
+import { EditableText, EditableSection, EditableImage } from '../../editable';
 
 function StrutturaHeader() {
   return (
     <EditableSection label="Header">
-      <section className="page-header">
+      <EditableImage
+        page="struttura"
+        section="header"
+        field="bgImage"
+        defaultValue=""
+        asBackground
+        className="page-header"
+        style={{ backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}
+      >
         <div className="container">
           <EditableText
             page="struttura"
@@ -20,7 +28,7 @@ function StrutturaHeader() {
             defaultValue="Ambiente accogliente ed informale - Ingresso indipendente - Pulito, comodo, pratico"
           />
         </div>
-      </section>
+      </EditableImage>
     </EditableSection>
   );
 }

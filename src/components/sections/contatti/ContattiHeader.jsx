@@ -1,9 +1,17 @@
-import { EditableText, EditableSection } from '../../editable';
+import { EditableText, EditableSection, EditableImage } from '../../editable';
 
 function ContattiHeader() {
   return (
     <EditableSection label="Header">
-      <section className="page-header">
+      <EditableImage
+        page="contatti"
+        section="header"
+        field="bgImage"
+        defaultValue=""
+        asBackground
+        className="page-header"
+        style={{ backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}
+      >
         <div className="container">
           <EditableText
             page="contatti"
@@ -20,7 +28,7 @@ function ContattiHeader() {
             defaultValue="Raggiungerci e facilissimo"
           />
         </div>
-      </section>
+      </EditableImage>
     </EditableSection>
   );
 }
