@@ -71,6 +71,10 @@ function StanzeCamere() {
             renderEditItem={(item, updateField) => (
               <>
                 <div className="form-group">
+                  <label>Foto</label>
+                  <RoomGallery roomName={item.nome} />
+                </div>
+                <div className="form-group">
                   <label>Nome Camera</label>
                   <input type="text" value={item.nome || ''} onChange={(e) => updateField('nome', e.target.value)} />
                 </div>
