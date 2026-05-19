@@ -32,6 +32,19 @@ const defaultServizi = [
   { text: 'Accoglienza animali' },
 ];
 
+const defaultAreaRelaxItems = [
+  { text: 'Microonde' },
+  { text: 'Macchine del caffè' },
+  { text: 'Bollitore con selezione di tè' },
+  { text: 'Scaldalatte per bambini' },
+  { text: 'Angolo lavaggio con acqua e sapone per la pulizia di piccoli oggetti' },
+  { text: 'Scrivanie utilizzabili sia per lavorare che per mangiare' },
+  { text: 'Cavi per la ricarica dei dispositivi' },
+  { text: 'Giochi, giocattoli e libri da colorare per bambini' },
+  { text: 'Divano per rilassarsi' },
+  { text: 'Connessione internet disponibile' },
+];
+
 const defaultPagamenti = [
   { text: 'Contanti' },
   { text: 'Bonifico Bancario' },
@@ -181,29 +194,45 @@ function StrutturaMain() {
 
           <div className="content-relax">
             <EditableSection label="Area Relax">
-              <h2>Area Relax</h2>
-              <p style={{ color: 'var(--text-light)', marginBottom: '12px' }}>
-                Area comune a disposizione degli ospiti delle camere, pensata per offrire comfort e praticità durante il soggiorno. L'area dispone di:
-              </p>
-              <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                {[
-                  'Microonde',
-                  'Macchine del caffè',
-                  'Bollitore con selezione di tè',
-                  'Scaldalatte per bambini',
-                  'Angolo lavaggio con acqua e sapone per la pulizia di piccoli oggetti',
-                  'Scrivanie utilizzabili sia per lavorare che per mangiare',
-                  'Cavi per la ricarica dei dispositivi',
-                  'Giochi, giocattoli e libri da colorare per bambini',
-                  'Divano per rilassarsi',
-                  'Connessione internet disponibile',
-                ].map((item, i) => (
-                  <li key={i} style={{ padding: '4px 0', paddingLeft: '20px', position: 'relative', color: 'var(--text-light)' }}>
-                    <span style={{ position: 'absolute', left: 0, color: 'var(--primary-color)', fontWeight: 'bold' }}>✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <EditableText
+                page="struttura"
+                section="areaRelax"
+                field="title"
+                tag="h2"
+                defaultValue="Area Relax"
+              />
+              <EditableText
+                page="struttura"
+                section="areaRelax"
+                field="intro"
+                tag="p"
+                multiline
+                style={{ color: 'var(--text-light)', marginBottom: '12px' }}
+                defaultValue="Area comune a disposizione degli ospiti delle camere, pensata per offrire comfort e praticità durante il soggiorno. L'area dispone di:"
+              />
+              <EditableList
+                page="struttura"
+                section="areaRelaxItems"
+                className=""
+                addLabel="Aggiungi voce"
+                emptyMessage="Nessuna voce"
+                itemTemplate={{ text: 'Nuova voce' }}
+                defaultItems={defaultAreaRelaxItems}
+                renderItem={(item) => (
+                  <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                    <li style={{ padding: '4px 0', paddingLeft: '20px', position: 'relative', color: 'var(--text-light)' }}>
+                      <span style={{ position: 'absolute', left: 0, color: 'var(--primary-color)', fontWeight: 'bold' }}>✓</span>
+                      {item.text}
+                    </li>
+                  </ul>
+                )}
+                renderEditItem={(item, updateField) => (
+                  <div className="form-group">
+                    <label>Voce</label>
+                    <input type="text" value={item.text || ''} onChange={(e) => updateField('text', e.target.value)} />
+                  </div>
+                )}
+              />
               <AreaRelaxGallery />
             </EditableSection>
           </div>
