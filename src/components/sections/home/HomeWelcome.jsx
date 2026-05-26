@@ -12,7 +12,7 @@ function HomeWelcome() {
                 section="welcome"
                 field="image"
                 alt="BelSorrisoVarese - La struttura"
-                defaultValue="/images/belsorriso_house_1.png"
+                defaultValue="/images/belsorriso_house_1.webp"
               />
             </div>
             <div className="welcome-content">
@@ -40,7 +40,7 @@ function HomeWelcome() {
                 defaultValue="Ambiente accogliente ed informale con entrata autonoma in una corte dal fascino d'altri tempi. Le nostre camere sono completamente ristrutturate e dotate di ogni comfort per garantirvi un soggiorno piacevole."
               />
               <div className="signature">
-                <img src="/images/Firma_trasparente-294x300.png" alt="Firma" />
+                <img src="/images/Firma_trasparente-294x300.webp" alt="Firma" />
               </div>
             </div>
           </div>

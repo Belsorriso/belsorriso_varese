@@ -280,9 +280,20 @@ function PageBuilderRenderer({ page }) {
   const loadBuilderData = useCallback(() => {
     if (!page) return;
     setLoading(true);
+
+    let timedOut = false;
+    const timeoutId = setTimeout(() => {
+      timedOut = true;
+      const def = DEFAULT_BUILDER_DATA[page] || null;
+      setSavedData(def);
+      setLocalRows(def ? [...def.rows] : null);
+      setLoading(false);
+    }, 6000);
+
     fetch(`${API_BASE}/content/${page}`)
       .then(r => r.json())
       .then(data => {
+        clearTimeout(timeoutId);
         const builder = data.builder;
         const resolved = (builder && builder.rows && builder.rows.length > 0)
           ? builder
@@ -291,11 +302,16 @@ function PageBuilderRenderer({ page }) {
         setLocalRows(resolved ? [...resolved.rows] : null);
       })
       .catch(() => {
-        const def = DEFAULT_BUILDER_DATA[page] || null;
-        setSavedData(def);
-        setLocalRows(def ? [...def.rows] : null);
+        clearTimeout(timeoutId);
+        if (!timedOut) {
+          const def = DEFAULT_BUILDER_DATA[page] || null;
+          setSavedData(def);
+          setLocalRows(def ? [...def.rows] : null);
+        }
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        if (!timedOut) setLoading(false);
+      });
   }, [page]);
 
   useEffect(() => { loadBuilderData(); }, [loadBuilderData]);

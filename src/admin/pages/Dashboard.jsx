@@ -159,7 +159,7 @@ function Dashboard() {
     <div className="admin-layout">
       <aside className="admin-sidebar">
         <div className="admin-logo">
-          <img src="/images/main_logo-178x100.png" alt="BelSorriso" />
+          <img src="/images/main_logo-178x100.webp" alt="BelSorriso" />
           <span className="admin-title">Admin</span>
         </div>
 

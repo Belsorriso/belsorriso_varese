@@ -30,15 +30,23 @@ function CarouselRenderer({ settings }) {
           transform: `translateX(-${current * 100}%)`,
         }}
       >
-        {images.map((img, idx) => (
-          <div key={idx} style={{ flex: '0 0 100%' }}>
-            <img
-              src={img.url}
-              alt={img.alt || ''}
-              style={{ width: '100%', height: 'auto', display: 'block', maxHeight: 500, objectFit: 'cover' }}
-            />
-          </div>
-        ))}
+        {images.map((img, idx) => {
+          const distance = Math.abs(idx - current);
+          const shouldLoad = distance <= 1;
+          return (
+            <div key={idx} style={{ flex: '0 0 100%' }}>
+              {shouldLoad && (
+                <img
+                  src={img.url}
+                  alt={img.alt || ''}
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  style={{ width: '100%', height: 'auto', display: 'block', maxHeight: 500, objectFit: 'cover' }}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {images.length > 1 && (

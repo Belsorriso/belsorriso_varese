@@ -30,7 +30,7 @@ function Login() {
     <div className="login-page">
       <div className="login-container">
         <div className="login-header">
-          <img src="/images/main_logo-178x100.png" alt="BelSorriso" className="login-logo" />
+          <img src="/images/main_logo-178x100.webp" alt="BelSorriso" className="login-logo" />
           <h1>Pannello di Controllo</h1>
           <p>Accedi per gestire i contenuti del sito</p>
         </div>
