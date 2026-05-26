@@ -279,39 +279,24 @@ function PageBuilderRenderer({ page }) {
 
   const loadBuilderData = useCallback(() => {
     if (!page) return;
-    setLoading(true);
 
-    let timedOut = false;
-    const timeoutId = setTimeout(() => {
-      timedOut = true;
-      const def = DEFAULT_BUILDER_DATA[page] || null;
-      setSavedData(def);
-      setLocalRows(def ? [...def.rows] : null);
-      setLoading(false);
-    }, 6000);
+    // Show defaults immediately — no spinner for public users
+    const def = DEFAULT_BUILDER_DATA[page] || null;
+    setSavedData(def);
+    setLocalRows(def ? [...def.rows] : null);
+    setLoading(false);
 
+    // Fetch real data in background, update silently when ready
     fetch(`${API_BASE}/content/${page}`)
       .then(r => r.json())
       .then(data => {
-        clearTimeout(timeoutId);
         const builder = data.builder;
-        const resolved = (builder && builder.rows && builder.rows.length > 0)
-          ? builder
-          : (DEFAULT_BUILDER_DATA[page] || null);
-        setSavedData(resolved);
-        setLocalRows(resolved ? [...resolved.rows] : null);
-      })
-      .catch(() => {
-        clearTimeout(timeoutId);
-        if (!timedOut) {
-          const def = DEFAULT_BUILDER_DATA[page] || null;
-          setSavedData(def);
-          setLocalRows(def ? [...def.rows] : null);
+        if (builder && builder.rows && builder.rows.length > 0) {
+          setSavedData(builder);
+          setLocalRows([...builder.rows]);
         }
       })
-      .finally(() => {
-        if (!timedOut) setLoading(false);
-      });
+      .catch(() => {/* keep defaults */});
   }, [page]);
 
   useEffect(() => { loadBuilderData(); }, [loadBuilderData]);
