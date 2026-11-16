@@ -28,6 +28,7 @@ import CodeRenderer from './widgets/CodeRenderer';
 import ShortcodeRenderer from './widgets/ShortcodeRenderer';
 import CarouselRenderer from './widgets/CarouselRenderer';
 import { SECTION_REGISTRY } from '../sections/sectionRegistry';
+import { DEFAULT_BUILDER_DATA } from './defaultBuilderData';
 import './pagebuilder-public.css';
 import { API_URL as API_BASE } from '../../config/api';
 
@@ -276,13 +277,16 @@ function PageBuilderRenderer({ page }) {
           setSavedData(builder);
           setLocalRows([...builder.rows]);
         } else {
-          setSavedData({ rows: [] });
-          setLocalRows([]);
+          // Fallback to default builder data if backend has no rows saved yet
+          const def = DEFAULT_BUILDER_DATA[page] || null;
+          setSavedData(def);
+          setLocalRows(def ? [...def.rows] : []);
         }
       })
       .catch(() => {
-        setSavedData({ rows: [] });
-        setLocalRows([]);
+        const def = DEFAULT_BUILDER_DATA[page] || null;
+        setSavedData(def);
+        setLocalRows(def ? [...def.rows] : []);
       })
       .finally(() => {
         setLoading(false);
@@ -328,7 +332,7 @@ function PageBuilderRenderer({ page }) {
     setInsertIndex(null);
   };
 
-    const handleDeleteRow = (rowId) => {
+  const handleDeleteRow = (rowId) => {
     setLocalRows(prev => prev.filter(r => r.id !== rowId));
   };
 
