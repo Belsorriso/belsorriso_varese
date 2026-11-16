@@ -436,4 +436,28 @@ function PageBuilderRenderer({ page }) {
 
       {insertIndex !== null && (
         <LiveLayoutPicker
-          onSelect={handle
+          onSelect={handleLayoutSelected}
+          onClose={() => setInsertIndex(null)}
+        />
+      )}
+
+      {modalOpen && (
+        <div className="pbr-modal-overlay">
+          <div className="pbr-modal">
+            <div className="pbr-modal-header">
+              <span />
+              <button className="pbr-modal-close" onClick={() => setModalOpen(false)}>
+                ✕ Chiudi
+              </button>
+            </div>
+            <div className="pbr-modal-body">
+              <PageBuilderEditor defaultPage={page} lockPage onSaved={handleModalSaved} />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default PageBuilderRenderer;
