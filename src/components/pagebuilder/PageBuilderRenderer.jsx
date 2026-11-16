@@ -39,9 +39,15 @@ const PADDING_MAP = {
   large: '60px 0',
 };
 
-// Dedicated Hero Banner that syncs directly with your Admin Panel Hero Form
+// Modern, robust Hero Banner that checks all possible database keys for the image
 function HeroBanner({ hero }) {
-  if (!hero || (!hero.title && !hero.subtitle && !hero.backgroundImage)) return null;
+  if (!hero) return null;
+
+  const bgImage = hero.backgroundImage || hero.immagine || hero.url || hero.image || hero.bgImage;
+  const title = hero.title || hero.titolo;
+  const subtitle = hero.subtitle || hero.sottotitolo;
+
+  if (!title && !subtitle && !bgImage) return null;
 
   return (
     <div
@@ -54,41 +60,43 @@ function HeroBanner({ hero }) {
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        padding: '60px 20px',
+        padding: '80px 20px',
         color: '#ffffff',
-        backgroundColor: '#2c1e16',
-        backgroundImage: hero.backgroundImage
-          ? `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('${hero.backgroundImage}')`
+        backgroundColor: '#1a1a1a',
+        backgroundImage: bgImage
+          ? `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('${bgImage}')`
           : undefined,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      <div style={{ maxWidth: '800px', zIndex: 1 }}>
-        {hero.title && (
+      <div style={{ maxWidth: '850px', zIndex: 1 }}>
+        {title && (
           <h1
             style={{
-              fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
+              fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
               fontWeight: '700',
               marginBottom: '16px',
-              textShadow: '0 2px 10px rgba(0,0,0,0.5)',
-              lineHeight: 1.2,
+              textShadow: '0 2px 12px rgba(0,0,0,0.6)',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.15,
             }}
           >
-            {hero.title}
+            {title}
           </h1>
         )}
-        {hero.subtitle && (
+        {subtitle && (
           <p
             style={{
-              fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
+              fontSize: 'clamp(1.15rem, 2.5vw, 1.45rem)',
               fontWeight: '400',
               margin: 0,
-              textShadow: '0 1px 6px rgba(0,0,0,0.5)',
+              textShadow: '0 1px 8px rgba(0,0,0,0.6)',
               lineHeight: 1.5,
+              opacity: 0.95,
             }}
           >
-            {hero.subtitle}
+            {subtitle}
           </p>
         )}
       </div>
@@ -330,7 +338,6 @@ function PageBuilderRenderer({ page }) {
     fetch(`${API_BASE}/content/${page}`)
       .then(r => r.json())
       .then(data => {
-        // Grab the Hero Section fields saved in your Admin Panel
         setHeroData(data?.hero || null);
 
         const builder = data?.builder;
@@ -474,7 +481,6 @@ function PageBuilderRenderer({ page }) {
         </div>
       </div>
 
-      {/* Live preview of your Hero Banner */}
       <HeroBanner hero={heroData} />
 
       <div className="pbr-live-canvas">
