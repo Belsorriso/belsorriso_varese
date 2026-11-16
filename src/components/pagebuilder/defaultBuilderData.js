@@ -15,10 +15,10 @@ export const DEFAULT_BUILDER_DATA = {
   stanze: {
     version: '1.0',
     rows: [
-      { id: 'default-stanze-header',       type: 'section', sectionId: 'stanze-header' },
-      { id: 'default-stanze-camere',       type: 'section', sectionId: 'stanze-camere' },
+      { id: 'default-stanze-header',        type: 'section', sectionId: 'stanze-header' },
+      { id: 'default-stanze-camere',        type: 'section', sectionId: 'stanze-camere' },
       { id: 'default-stanze-appartamenti', type: 'section', sectionId: 'stanze-appartamenti' },
-      { id: 'default-stanze-infobox',      type: 'section', sectionId: 'stanze-infobox' },
+      { id: 'default-stanze-infobox',       type: 'section', sectionId: 'stanze-infobox' },
     ],
   },
   struttura: {
@@ -31,22 +31,40 @@ export const DEFAULT_BUILDER_DATA = {
   regolamento: {
     version: '1.0',
     rows: [
-      { id: 'default-regolamento-header',  type: 'section', sectionId: 'regolamento-header' },
+      { id: 'default-regolamento-header',   type: 'section', sectionId: 'regolamento-header' },
       { id: 'default-regolamento-content', type: 'section', sectionId: 'regolamento-content' },
     ],
   },
   territorio: {
     version: '1.0',
     rows: [
-      { id: 'default-territorio-header',  type: 'section', sectionId: 'territorio-header' },
+      { id: 'default-territorio-header',   type: 'section', sectionId: 'territorio-header' },
       { id: 'default-territorio-content', type: 'section', sectionId: 'territorio-content' },
     ],
   },
   contatti: {
     version: '1.0',
     rows: [
-      { id: 'default-contatti-header',  type: 'section', sectionId: 'contatti-header' },
+      { id: 'default-contatti-header',   type: 'section', sectionId: 'contatti-header' },
       { id: 'default-contatti-details', type: 'section', sectionId: 'contatti-details' },
     ],
   },
+  // --- NEW TEMPLATE OPTION ---
+  'template-boutique': {
+    version: '1.0',
+    rows: [
+      {
+        id: 'boutique-hero',
+        layout: '1',
+        settings: { padding: 'large', background: '#2c2c2c', fullWidth: true },
+        columns: [{
+          id: 'col-b1',
+          width: '100%',
+          elements: [
+            { id: 'el-b1', type: 'text', settings: { content: '<h1 style="color:white; text-align:center; font-family:Georgia;">Welcome to BelSorriso Varese</h1>' } }
+          ]
+        }]
+      }
+    ]
+  }
 };
