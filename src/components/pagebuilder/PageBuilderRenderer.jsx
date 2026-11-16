@@ -323,4 +323,186 @@ function PageBuilderRenderer({ page }) {
   };
 
   const handleLayoutSelected = (layoutKey) => {
-    const newRow =
+    const newRow = {
+      id: uuidv4(),
+      layout: layoutKey,
+      settings: { padding: 'normal', background: '', fullWidth: false },
+      columns: buildDefaultColumns(layoutKey),
+    };
+    setLocalRows(prev => {
+      const updated = [...prev];
+      updated.splice(insertIndex, 0, newRow);
+      return updated;
+    });
+    setInsertIndex(null);
+  };
+
+  const handleDeleteRow = (rowId) => {
+    setLocalRows(prev => prev.filter(r => r.id !== rowId));
+  };
+
+  const handleUpdateRow = (updatedRow) => {
+    setLocalRows(prev => prev.map(r => r.id === updatedRow.id ? updatedRow : r));
+  };
+
+  const handleSaveLayout = async () => {
+    setSaving(true);
+    setSaveStatus('');
+    try {
+      const payload = { ...(savedData || { version: '1.0' }), rows: localRows };
+      const res = await fetch(`${API_BASE}/content/${page}/builder`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify({ content: payload }),
+      });
+      if (!res.ok) throw new Error();
+      setSavedData(payload);
+      setSaveStatus('ok');
+    } catch {
+      setSaveStatus('err');
+    } finally {
+      setSaving(false);
+      setTimeout(() => setSaveStatus(''), 3000);
+    }
+  };
+
+  const handleModalSaved = () => {
+    setModalOpen(false);
+    loadBuilderData();
+  };
+
+  if (loading || localRows === null) {
+    return <div className="loading-spinner"><div className="spinner"></div></div>;
+  }
+
+  const showEditBar = isEditMode && isAdmin;
+  const rows = localRows || [];
+
+  if (!rows.length && !showEditBar) return null;
+
+  if (!showEditBar) {
+    return (
+      <div className="pbr-wrapper">
+        {rows.map(row => <RowContent key={row.id} row={row} />)}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div className="pbr-live-edit-bar">
+        <span className="pbr-live-edit-label">🧩 Page Builder</span>
+        <div className="pbr-live-edit-actions">
+          {isDirty && (
+            <>
+              {saveStatus === 'ok'  && <span className="pbr-save-msg ok">Salvato!</span>}
+              {saveStatus === 'err' && <span className="pbr-save-msg err">Errore</span>}
+              <button
+                className="pbr-live-edit-btn success"
+                onClick={handleSaveLayout}
+                disabled={saving}
+              >
+                {saving ? 'Salvataggio...' : '✓ Salva'}
+              </button>
+              <button
+                className="pbr-live-edit-btn secondary"
+                onClick={() => setLocalRows(savedData ? [...savedData.rows] : [])}
+              >
+                ↩ Annulla
+              </button>
+            </>
+          )}
+          <button 
+            className="pbr-live-edit-btn" 
+            onClick={() => setTemplateModalOpen(true)}
+            style={{ backgroundColor: '#2563eb', color: '#fff' }}
+          >
+            🎨 Scegli Template
+          </button>
+          <button className="pbr-live-edit-btn" onClick={() => setModalOpen(true)}>
+            ✏️ Editor Avanzato
+          </button>
+        </div>
+      </div>
+
+      <div className="pbr-live-canvas">
+        {rows.length === 0 ? (
+          <div className="pbr-empty-live">
+            <p>Nessuna riga. Aggiungi contenuto dall'Editor Avanzato o scegli un template.</p>
+            <button className="pbr-live-edit-btn" onClick={() => setTemplateModalOpen(true)}>
+              🎨 Scegli Template
+            </button>
+          </div>
+        ) : (
+          <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+            <SortableContext items={rows.map(r => r.id)} strategy={verticalListSortingStrategy}>
+              <InsertZone onInsert={() => handleInsertAt(0)} />
+              {rows.map((row, index) => (
+                <div key={row.id}>
+                  <DraggableRow row={row} onDelete={handleDeleteRow} onUpdateRow={handleUpdateRow} />
+                  <InsertZone onInsert={() => handleInsertAt(index + 1)} />
+                </div>
+              ))}
+            </SortableContext>
+          </DndContext>
+        )}
+      </div>
+
+      {insertIndex !== null && (
+        <LiveLayoutPicker
+          onSelect={handleLayoutSelected}
+          onClose={() => setInsertIndex(null)}
+        />
+      )}
+
+      {modalOpen && (
+        <div className="pbr-modal-overlay">
+          <div className="pbr-modal">
+            <div className="pbr-modal-header">
+              <span />
+              <button className="pbr-modal-close" onClick={() => setModalOpen(false)}>
+                ✕ Chiudi
+              </button>
+            </div>
+            <div className="pbr-modal-body">
+              <PageBuilderEditor defaultPage={page} lockPage onSaved={handleModalSaved} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {templateModalOpen && (
+        <div className="pbr-modal-overlay" onClick={() => setTemplateModalOpen(false)}>
+          <div className="pbr-modal" onClick={e => e.stopPropagation()} style={{ padding: '24px', background: 'white', borderRadius: '8px', maxWidth: '500px' }}>
+            <h3 style={{ marginBottom: '16px', color: '#000' }}>Scegli un Template</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <button 
+                onClick={() => handleApplyTemplate('home')}
+                style={{ padding: '12px', border: '1px solid #ddd', borderRadius: '6px', textAlign: 'left', background: '#f9f9f9', cursor: 'pointer', color: '#000' }}
+              >
+                <strong>Standard Home</strong> — Layout predefinito con sezioni
+              </button>
+              <button 
+                onClick={() => handleApplyTemplate('template-boutique')}
+                style={{ padding: '12px', border: '1px solid #ddd', borderRadius: '6px', textAlign: 'left', background: '#f9f9f9', cursor: 'pointer', color: '#000' }}
+              >
+                <strong>Boutique Hotel Style</strong> — Stile elegante con banner scuro
+              </button>
+            </div>
+            <button 
+              onClick={() => setTemplateModalOpen(false)}
+              style={{ marginTop: '16px', padding: '8px 16px', background: '#e11d48', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            >
+              Chiudi
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default PageBuilderRenderer;
