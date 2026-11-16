@@ -321,14 +321,25 @@ function InsertZone({ onInsert }) {
 }
 
 function PageBuilderRenderer({ page }) {
-  const [heroData, setHeroData]     = useState(null);
-  const [savedData, setSavedData]   = useState(null);
-  const [localRows, setLocalRows]   = useState(null);
-  const [loading, setLoading]       = useState(true);
-  const [saving, setSaving]         = useState(false);
+  const [heroData, setHeroData]       = useState(null);
+  const [savedData, setSavedData]     = useState(null);
+  const [localRows, setLocalRows]     = useState(null);
+  const [loading, setLoading]         = useState(true);
+  const [saving, setSaving]           = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
-  const [modalOpen, setModalOpen]   = useState(false);
+  const [modalOpen, setModalOpen]     = useState(false);
   const [insertIndex, setInsertIndex] = useState(null);
+  
+  // New template selection states & handler
+  const [templateModalOpen, setTemplateModalOpen] = useState(false);
+  const handleApplyTemplate = (templateKey) => {
+    const templateData = DEFAULT_BUILDER_DATA[templateKey];
+    if (templateData) {
+      setLocalRows([...templateData.rows]);
+      setTemplateModalOpen(false);
+    }
+  };
+
   const { isEditMode, isAdmin } = useEditMode();
   const { getToken } = useAuth();
 
@@ -481,6 +492,13 @@ function PageBuilderRenderer({ page }) {
               </button>
             </>
           )}
+          <button 
+            className="pbr-live-edit-btn" 
+            onClick={() => setTemplateModalOpen(true)}
+            style={{ backgroundColor: '#2563eb', color: '#fff' }}
+          >
+            🎨 Scegli Template
+          </button>
           <button className="pbr-live-edit-btn" onClick={() => setModalOpen(true)}>
             ✏️ Editor Avanzato
           </button>
@@ -492,9 +510,9 @@ function PageBuilderRenderer({ page }) {
       <div className="pbr-live-canvas">
         {rows.length === 0 ? (
           <div className="pbr-empty-live">
-            <p>Nessuna riga. Aggiungi contenuto dall'Editor Avanzato.</p>
-            <button className="pbr-live-edit-btn" onClick={() => setModalOpen(true)}>
-              + Aggiungi Layout
+            <p>Nessuna riga. Aggiungi contenuto dall'Editor Avanzato o scegli un template.</p>
+            <button className="pbr-live-edit-btn" onClick={() => setTemplateModalOpen(true)}>
+              🎨 Scegli Template
             </button>
           </div>
         ) : (
@@ -512,12 +530,12 @@ function PageBuilderRenderer({ page }) {
         )}
       </div>
 
-    {insertIndex !== null && (
-      <LiveLayoutPicker
-        onSelect={handleLayoutSelected}
-        onClose={() => setInsertIndex(null)}
-      />
-    )}
+      {insertIndex !== null && (
+        <LiveLayoutPicker
+          onSelect={handleLayoutSelected}
+          onClose={() => setInsertIndex(null)}
+        />
+      )}
 
       {modalOpen && (
         <div className="pbr-modal-overlay">
@@ -531,6 +549,34 @@ function PageBuilderRenderer({ page }) {
             <div className="pbr-modal-body">
               <PageBuilderEditor defaultPage={page} lockPage onSaved={handleModalSaved} />
             </div>
+          </div>
+        </div>
+      )}
+
+      {templateModalOpen && (
+        <div className="pbr-modal-overlay" onClick={() => setTemplateModalOpen(false)}>
+          <div className="pbr-modal" onClick={e => e.stopPropagation()} style={{ padding: '24px', background: 'white', borderRadius: '8px', maxWidth: '500px' }}>
+            <h3 style={{ marginBottom: '16px', color: '#000' }}>Scegli un Template</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <button 
+                onClick={() => handleApplyTemplate('home')}
+                style={{ padding: '12px', border: '1px solid #ddd', borderRadius: '6px', textAlign: 'left', background: '#f9f9f9', cursor: 'pointer', color: '#000' }}
+              >
+                <strong>Standard Home</strong> — Layout predefinito con sezioni
+              </button>
+              <button 
+                onClick={() => handleApplyTemplate('template-boutique')}
+                style={{ padding: '12px', border: '1px solid #ddd', borderRadius: '6px', textAlign: 'left', background: '#f9f9f9', cursor: 'pointer', color: '#000' }}
+              >
+                <strong>Boutique Hotel Style</strong> — Stile elegante con banner scuro
+              </button>
+            </div>
+            <button 
+              onClick={() => setTemplateModalOpen(false)}
+              style={{ marginTop: '16px', padding: '8px 16px', background: '#e11d48', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            >
+              Chiudi
+            </button>
           </div>
         </div>
       )}
