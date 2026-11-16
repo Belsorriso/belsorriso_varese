@@ -53,18 +53,10 @@ export const DEFAULT_BUILDER_DATA = {
   'template-boutique': {
     version: '1.0',
     rows: [
-      {
-        id: 'boutique-hero',
-        layout: '1',
-        settings: { padding: 'large', background: '#2c2c2c', fullWidth: true },
-        columns: [{
-          id: 'col-b1',
-          width: '100%',
-          elements: [
-            { id: 'el-b1', type: 'text', settings: { content: '<h1 style="color:white; text-align:center; font-family:Georgia;">Welcome to BelSorriso Varese</h1>' } }
-          ]
-        }]
-      }
-    ]
+      { id: 'boutique-hero',     type: 'section', sectionId: 'home-hero' },
+      { id: 'boutique-welcome',  type: 'section', sectionId: 'home-welcome' },
+      { id: 'boutique-features', type: 'section', sectionId: 'home-features' },
+      { id: 'boutique-contact',  type: 'section', sectionId: 'home-contact' },
+    ],
   }
 };
