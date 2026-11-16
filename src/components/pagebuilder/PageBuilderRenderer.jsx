@@ -39,8 +39,6 @@ const PADDING_MAP = {
   large: '60px 0',
 };
 
-/* ── element / column / row renderers (read-only) ── */
-
 function SectionRowRenderer({ row }) {
   const entry = SECTION_REGISTRY[row.sectionId];
   if (!entry) return null;
@@ -94,8 +92,6 @@ function RowContent({ row }) {
     </div>
   );
 }
-
-/* ── live inline column editor ── */
 
 function LiveColumnEditor({ column, onUpdateColumn }) {
   const [showPalette, setShowPalette] = useState(false);
@@ -172,8 +168,6 @@ function LiveCustomRowContent({ row, onUpdateRow }) {
   );
 }
 
-/* ── live-edit draggable row wrapper ── */
-
 function DraggableRow({ row, onDelete, onUpdateRow }) {
   const {
     attributes,
@@ -218,8 +212,6 @@ function DraggableRow({ row, onDelete, onUpdateRow }) {
   );
 }
 
-/* ── layout picker modal (shown before inserting a new row) ── */
-
 function LiveLayoutPicker({ onSelect, onClose }) {
   return (
     <div className="pbr-palette-overlay" onClick={onClose}>
@@ -245,8 +237,6 @@ function LiveLayoutPicker({ onSelect, onClose }) {
   );
 }
 
-/* ── insert zone (visible on hover) ── */
-
 function InsertZone({ onInsert }) {
   return (
     <div className="pbr-insert-zone">
@@ -259,11 +249,9 @@ function InsertZone({ onInsert }) {
   );
 }
 
-/* ── main component ── */
-
 function PageBuilderRenderer({ page }) {
   const [savedData, setSavedData]   = useState(null);
-  const [localRows, setLocalRows]   = useState(null); // working copy
+  const [localRows, setLocalRows]   = useState(null);
   const [loading, setLoading]       = useState(true);
   const [saving, setSaving]         = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
@@ -289,14 +277,12 @@ function PageBuilderRenderer({ page }) {
           setSavedData(builder);
           setLocalRows([...builder.rows]);
         } else {
-          // Fallback to defaults only if backend has no rows
           const def = DEFAULT_BUILDER_DATA[page] || null;
           setSavedData(def);
           setLocalRows(def ? [...def.rows] : null);
         }
       })
       .catch(() => {
-        // Fallback on error
         const def = DEFAULT_BUILDER_DATA[page] || null;
         setSavedData(def);
         setLocalRows(def ? [...def.rows] : null);
@@ -308,7 +294,6 @@ function PageBuilderRenderer({ page }) {
 
   useEffect(() => { loadBuilderData(); }, [loadBuilderData]);
 
-  // reset working copy when saved data changes
   useEffect(() => {
     if (savedData) setLocalRows([...savedData.rows]);
   }, [savedData]);
@@ -316,8 +301,6 @@ function PageBuilderRenderer({ page }) {
   const isDirty = localRows && savedData
     ? JSON.stringify(localRows) !== JSON.stringify(savedData.rows)
     : false;
-
-  /* ─ handlers ─ */
 
   const handleDragEnd = ({ active, over }) => {
     if (!over || active.id === over.id) return;
@@ -385,8 +368,6 @@ function PageBuilderRenderer({ page }) {
     loadBuilderData();
   };
 
-  /* ─ render ─ */
-
   if (loading) return <div className="loading-spinner"><div className="spinner"></div></div>;
 
   const showEditBar = isEditMode && isAdmin;
@@ -394,7 +375,6 @@ function PageBuilderRenderer({ page }) {
 
   if (!rows.length && !showEditBar) return null;
 
-  /* READ-ONLY mode (not in edit mode) */
   if (!showEditBar) {
     return (
       <div className="pbr-wrapper">
@@ -403,10 +383,8 @@ function PageBuilderRenderer({ page }) {
     );
   }
 
-  /* EDIT MODE — show live drag handles + insert zones */
   return (
     <>
-      {/* Toolbar */}
       <div className="pbr-live-edit-bar">
         <span className="pbr-live-edit-label">🧩 Page Builder</span>
         <div className="pbr-live-edit-actions">
@@ -435,7 +413,6 @@ function PageBuilderRenderer({ page }) {
         </div>
       </div>
 
-      {/* Draggable rows with insert zones */}
       <div className="pbr-live-canvas">
         {rows.length === 0 ? (
           <div className="pbr-empty-live">
@@ -459,7 +436,6 @@ function PageBuilderRenderer({ page }) {
         )}
       </div>
 
-      {/* Layout picker modal */}
       {insertIndex !== null && (
         <LiveLayoutPicker
           onSelect={handleLayoutSelected}
@@ -467,7 +443,6 @@ function PageBuilderRenderer({ page }) {
         />
       )}
 
-      {/* Full editor modal (for element editing) */}
       {modalOpen && (
         <div className="pbr-modal-overlay">
           <div className="pbr-modal">
@@ -487,5 +462,4 @@ function PageBuilderRenderer({ page }) {
   );
 }
 
-export_default = PageBuilderRenderer; // Note: standard export is below
 export default PageBuilderRenderer;
