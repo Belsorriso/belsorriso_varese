@@ -6,7 +6,6 @@ export const DEFAULT_BUILDER_DATA = {
   home: {
     version: '1.0',
     rows: [
-      { id: 'default-home-hero',     type: 'section', sectionId: 'home-hero' },
       { id: 'default-home-welcome',  type: 'section', sectionId: 'home-welcome' },
       { id: 'default-home-features', type: 'section', sectionId: 'home-features' },
       { id: 'default-home-contact',  type: 'section', sectionId: 'home-contact' },
@@ -49,11 +48,10 @@ export const DEFAULT_BUILDER_DATA = {
       { id: 'default-contatti-details', type: 'section', sectionId: 'contatti-details' },
     ],
   },
-  // --- NEW TEMPLATE OPTION ---
+  // --- TEMPLATE OPTION ---
   'template-boutique': {
     version: '1.0',
     rows: [
-      { id: 'boutique-hero',     type: 'section', sectionId: 'home-hero' },
       { id: 'boutique-welcome',  type: 'section', sectionId: 'home-welcome' },
       { id: 'boutique-features', type: 'section', sectionId: 'home-features' },
       { id: 'boutique-contact',  type: 'section', sectionId: 'home-contact' },
