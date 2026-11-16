@@ -279,24 +279,31 @@ function PageBuilderRenderer({ page }) {
 
   const loadBuilderData = useCallback(() => {
     if (!page) return;
+    setLoading(true);
 
-    // Show defaults immediately — no spinner for public users
-    const def = DEFAULT_BUILDER_DATA[page] || null;
-    setSavedData(def);
-    setLocalRows(def ? [...def.rows] : null);
-    setLoading(false);
-
-    // Fetch real data in background, update silently when ready
     fetch(`${API_BASE}/content/${page}`)
       .then(r => r.json())
       .then(data => {
-        const builder = data.builder;
+        const builder = data?.builder;
         if (builder && builder.rows && builder.rows.length > 0) {
           setSavedData(builder);
           setLocalRows([...builder.rows]);
+        } else {
+          // Fallback to defaults only if backend has no rows
+          const def = DEFAULT_BUILDER_DATA[page] || null;
+          setSavedData(def);
+          setLocalRows(def ? [...def.rows] : null);
         }
       })
-      .catch(() => {/* keep defaults */});
+      .catch(() => {
+        // Fallback on error
+        const def = DEFAULT_BUILDER_DATA[page] || null;
+        setSavedData(def);
+        setLocalRows(def ? [...def.rows] : null);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [page]);
 
   useEffect(() => { loadBuilderData(); }, [loadBuilderData]);
@@ -480,4 +487,5 @@ function PageBuilderRenderer({ page }) {
   );
 }
 
+export_default = PageBuilderRenderer; // Note: standard export is below
 export default PageBuilderRenderer;
