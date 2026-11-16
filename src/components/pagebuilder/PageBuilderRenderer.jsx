@@ -39,6 +39,63 @@ const PADDING_MAP = {
   large: '60px 0',
 };
 
+// Dedicated Hero Banner that syncs directly with your Admin Panel Hero Form
+function HeroBanner({ hero }) {
+  if (!hero || (!hero.title && !hero.subtitle && !hero.backgroundImage)) return null;
+
+  return (
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        minHeight: '520px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '60px 20px',
+        color: '#ffffff',
+        backgroundColor: '#2c1e16',
+        backgroundImage: hero.backgroundImage
+          ? `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('${hero.backgroundImage}')`
+          : undefined,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div style={{ maxWidth: '800px', zIndex: 1 }}>
+        {hero.title && (
+          <h1
+            style={{
+              fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
+              fontWeight: '700',
+              marginBottom: '16px',
+              textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+              lineHeight: 1.2,
+            }}
+          >
+            {hero.title}
+          </h1>
+        )}
+        {hero.subtitle && (
+          <p
+            style={{
+              fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
+              fontWeight: '400',
+              margin: 0,
+              textShadow: '0 1px 6px rgba(0,0,0,0.5)',
+              lineHeight: 1.5,
+            }}
+          >
+            {hero.subtitle}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function SectionRowRenderer({ row }) {
   const entry = SECTION_REGISTRY[row.sectionId];
   if (!entry) return null;
@@ -250,6 +307,7 @@ function InsertZone({ onInsert }) {
 }
 
 function PageBuilderRenderer({ page }) {
+  const [heroData, setHeroData]     = useState(null);
   const [savedData, setSavedData]   = useState(null);
   const [localRows, setLocalRows]   = useState(null);
   const [loading, setLoading]       = useState(true);
@@ -272,6 +330,9 @@ function PageBuilderRenderer({ page }) {
     fetch(`${API_BASE}/content/${page}`)
       .then(r => r.json())
       .then(data => {
+        // Grab the Hero Section fields saved in your Admin Panel
+        setHeroData(data?.hero || null);
+
         const builder = data?.builder;
         if (builder && builder.rows && builder.rows.length > 0) {
           setSavedData(builder);
@@ -283,6 +344,7 @@ function PageBuilderRenderer({ page }) {
         }
       })
       .catch(() => {
+        setHeroData(null);
         const def = DEFAULT_BUILDER_DATA[page] || null;
         setSavedData(def);
         setLocalRows(def ? [...def.rows] : []);
@@ -364,7 +426,6 @@ function PageBuilderRenderer({ page }) {
     loadBuilderData();
   };
 
-  // Keep loading spinner active during fetch so no stale/flash render occurs
   if (loading || localRows === null) {
     return <div className="loading-spinner"><div className="spinner"></div></div>;
   }
@@ -372,11 +433,12 @@ function PageBuilderRenderer({ page }) {
   const showEditBar = isEditMode && isAdmin;
   const rows = localRows || [];
 
-  if (!rows.length && !showEditBar) return null;
+  if (!rows.length && !heroData && !showEditBar) return null;
 
   if (!showEditBar) {
     return (
       <div className="pbr-wrapper">
+        <HeroBanner hero={heroData} />
         {rows.map(row => <RowContent key={row.id} row={row} />)}
       </div>
     );
@@ -411,6 +473,9 @@ function PageBuilderRenderer({ page }) {
           </button>
         </div>
       </div>
+
+      {/* Live preview of your Hero Banner */}
+      <HeroBanner hero={heroData} />
 
       <div className="pbr-live-canvas">
         {rows.length === 0 ? (
