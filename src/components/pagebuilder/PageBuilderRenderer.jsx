@@ -28,6 +28,7 @@ import CodeRenderer from './widgets/CodeRenderer';
 import ShortcodeRenderer from './widgets/ShortcodeRenderer';
 import CarouselRenderer from './widgets/CarouselRenderer';
 import { SECTION_REGISTRY } from '../sections/sectionRegistry';
+import { DEFAULT_BUILDER_DATA } from './defaultBuilderData';
 import './pagebuilder-public.css';
 import { API_URL as API_BASE } from '../../config/api';
 
@@ -276,14 +277,15 @@ function PageBuilderRenderer({ page }) {
           setSavedData(builder);
           setLocalRows([...builder.rows]);
         } else {
-          // If no builder rows are saved in the database, fetch your desired sections or keep it empty
-          setSavedData({ rows: [] });
-          setLocalRows([]);
+          const def = DEFAULT_BUILDER_DATA[page] || null;
+          setSavedData(def);
+          setLocalRows(def ? [...def.rows] : []);
         }
       })
       .catch(() => {
-        setSavedData({ rows: [] });
-        setLocalRows([]);
+        const def = DEFAULT_BUILDER_DATA[page] || null;
+        setSavedData(def);
+        setLocalRows(def ? [...def.rows] : []);
       })
       .finally(() => {
         setLoading(false);
@@ -291,10 +293,6 @@ function PageBuilderRenderer({ page }) {
   }, [page]);
 
   useEffect(() => { loadBuilderData(); }, [loadBuilderData]);
-
-  useEffect(() => {
-    if (savedData) setLocalRows([...savedData.rows]);
-  }, [savedData]);
 
   const isDirty = localRows && savedData
     ? JSON.stringify(localRows) !== JSON.stringify(savedData.rows)
@@ -366,7 +364,10 @@ function PageBuilderRenderer({ page }) {
     loadBuilderData();
   };
 
-  if (loading) return <div className="loading-spinner"><div className="spinner"></div></div>;
+  // Keep loading spinner active during fetch so no stale/flash render occurs
+  if (loading || localRows === null) {
+    return <div className="loading-spinner"><div className="spinner"></div></div>;
+  }
 
   const showEditBar = isEditMode && isAdmin;
   const rows = localRows || [];
