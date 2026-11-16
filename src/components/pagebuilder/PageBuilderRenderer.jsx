@@ -28,7 +28,6 @@ import CodeRenderer from './widgets/CodeRenderer';
 import ShortcodeRenderer from './widgets/ShortcodeRenderer';
 import CarouselRenderer from './widgets/CarouselRenderer';
 import { SECTION_REGISTRY } from '../sections/sectionRegistry';
-import { DEFAULT_BUILDER_DATA } from './defaultBuilderData';
 import './pagebuilder-public.css';
 import { API_URL as API_BASE } from '../../config/api';
 
@@ -277,16 +276,14 @@ function PageBuilderRenderer({ page }) {
           setSavedData(builder);
           setLocalRows([...builder.rows]);
         } else {
-          // Fallback to default builder data if backend has no rows saved yet
-          const def = DEFAULT_BUILDER_DATA[page] || null;
-          setSavedData(def);
-          setLocalRows(def ? [...def.rows] : []);
+          // If no builder rows are saved in the database, fetch your desired sections or keep it empty
+          setSavedData({ rows: [] });
+          setLocalRows([]);
         }
       })
       .catch(() => {
-        const def = DEFAULT_BUILDER_DATA[page] || null;
-        setSavedData(def);
-        setLocalRows(def ? [...def.rows] : []);
+        setSavedData({ rows: [] });
+        setLocalRows([]);
       })
       .finally(() => {
         setLoading(false);
