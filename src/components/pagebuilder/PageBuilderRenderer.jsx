@@ -39,78 +39,6 @@ const PADDING_MAP = {
   large: '60px 0',
 };
 
-// Bulletproof Hero Banner supporting all image formats and keys
-function HeroBanner({ hero }) {
-  if (!hero) return null;
-
-  // Check all possible database property keys (English & Italian)
-  let rawImg = hero.backgroundImage || hero.immagine || hero.url || hero.image || hero.bgImage || '';
-  
-  // Handle relative image paths automatically
-  const bgImage = rawImg.startsWith('/') 
-    ? `${API_BASE.replace(/\/api$/, '')}${rawImg}` 
-    : rawImg;
-
-  const title = hero.title || hero.titolo;
-  const subtitle = hero.subtitle || hero.sottotitolo;
-
-  if (!title && !subtitle && !bgImage) return null;
-
-  return (
-    <div
-      style={{
-        position: 'relative',
-        width: '100%',
-        minHeight: '520px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        padding: '80px 20px',
-        color: '#ffffff',
-        backgroundColor: '#1a1a1a',
-        backgroundImage: bgImage
-          ? `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('${bgImage}')`
-          : undefined,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      <div style={{ maxWidth: '850px', zIndex: 1 }}>
-        {title && (
-          <h1
-            style={{
-              fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
-              fontWeight: '700',
-              marginBottom: '16px',
-              textShadow: '0 2px 12px rgba(0,0,0,0.6)',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.15,
-            }}
-          >
-            {title}
-          </h1>
-        )}
-        {subtitle && (
-          <p
-            style={{
-              fontSize: 'clamp(1.15rem, 2.5vw, 1.45rem)',
-              fontWeight: '400',
-              margin: 0,
-              textShadow: '0 1px 8px rgba(0,0,0,0.6)',
-              lineHeight: 1.5,
-              opacity: 0.95,
-            }}
-          >
-            {subtitle}
-          </p>
-        )}
-      </div>
-    </div>
-  );
-}
-
 function SectionRowRenderer({ row }) {
   const entry = SECTION_REGISTRY[row.sectionId];
   if (!entry) return null;
@@ -322,7 +250,6 @@ function InsertZone({ onInsert }) {
 }
 
 function PageBuilderRenderer({ page }) {
-  const [heroData, setHeroData]     = useState(null);
   const [savedData, setSavedData]   = useState(null);
   const [localRows, setLocalRows]   = useState(null);
   const [loading, setLoading]       = useState(true);
@@ -345,8 +272,6 @@ function PageBuilderRenderer({ page }) {
     fetch(`${API_BASE}/content/${page}`)
       .then(r => r.json())
       .then(data => {
-        setHeroData(data?.hero || null);
-
         const builder = data?.builder;
         if (builder && builder.rows && builder.rows.length > 0) {
           setSavedData(builder);
@@ -358,7 +283,6 @@ function PageBuilderRenderer({ page }) {
         }
       })
       .catch(() => {
-        setHeroData(null);
         const def = DEFAULT_BUILDER_DATA[page] || null;
         setSavedData(def);
         setLocalRows(def ? [...def.rows] : []);
@@ -447,12 +371,11 @@ function PageBuilderRenderer({ page }) {
   const showEditBar = isEditMode && isAdmin;
   const rows = localRows || [];
 
-  if (!rows.length && !heroData && !showEditBar) return null;
+  if (!rows.length && !showEditBar) return null;
 
   if (!showEditBar) {
     return (
       <div className="pbr-wrapper">
-        <HeroBanner hero={heroData} />
         {rows.map(row => <RowContent key={row.id} row={row} />)}
       </div>
     );
@@ -488,8 +411,6 @@ function PageBuilderRenderer({ page }) {
         </div>
       </div>
 
-      <HeroBanner hero={heroData} />
-
       <div className="pbr-live-canvas">
         {rows.length === 0 ? (
           <div className="pbr-empty-live">
@@ -515,28 +436,4 @@ function PageBuilderRenderer({ page }) {
 
       {insertIndex !== null && (
         <LiveLayoutPicker
-          onSelect={handleLayoutSelected}
-          onClose={() => setInsertIndex(null)}
-        />
-      )}
-
-      {modalOpen && (
-        <div className="pbr-modal-overlay">
-          <div className="pbr-modal">
-            <div className="pbr-modal-header">
-              <span />
-              <button className="pbr-modal-close" onClick={() => setModalOpen(false)}>
-                ✕ Chiudi
-              </button>
-            </div>
-            <div className="pbr-modal-body">
-              <PageBuilderEditor defaultPage={page} lockPage onSaved={handleModalSaved} />
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
-
-export default PageBuilderRenderer;
+          onSelect={handle
