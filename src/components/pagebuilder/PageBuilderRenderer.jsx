@@ -39,11 +39,18 @@ const PADDING_MAP = {
   large: '60px 0',
 };
 
-// Modern, robust Hero Banner that checks all possible database keys for the image
+// Bulletproof Hero Banner supporting all image formats and keys
 function HeroBanner({ hero }) {
   if (!hero) return null;
 
-  const bgImage = hero.backgroundImage || hero.immagine || hero.url || hero.image || hero.bgImage;
+  // Check all possible database property keys (English & Italian)
+  let rawImg = hero.backgroundImage || hero.immagine || hero.url || hero.image || hero.bgImage || '';
+  
+  // Handle relative image paths automatically
+  const bgImage = rawImg.startsWith('/') 
+    ? `${API_BASE.replace(/\/api$/, '')}${rawImg}` 
+    : rawImg;
+
   const title = hero.title || hero.titolo;
   const subtitle = hero.subtitle || hero.sottotitolo;
 
